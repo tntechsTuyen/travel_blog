@@ -49,6 +49,8 @@ public class JwtUserDetailsService implements UserDetailsService {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
 				.getPrincipal();
 		String username = userDetails.getUsername();
-		return userRepository.findByUsername(username);
+		User userLogin = userRepository.findByUsername(username);
+		userLogin.setPassword("");
+		return userLogin;
 	}
 }
