@@ -1,4 +1,25 @@
 <resources>
-    <string name="app_name">app</string>
     <string name="ico_user">&#xf007;</string>
+    <string name="ico_lock">&#xf023;</string>
+    <string name="ico_id_card">&#xf2c2;</string>
+    <string name="ico_phone">&#xf095;</string>
+    <string name="ico_mail">&#xf0e0;</string>
+    <string name="ico_birth">&#xf1fd;</string>
+    <string name="ico_bookmark">&#xf02e;</string>
+    <string name="ico_eye">&#xf06e;</string>
+    <string name="ico_heart">&#xf004;</string>
+    <string name="ico_comment">&#xf075;</string>
+    <string name="ico_star">&#xf5c0;</string>
+
+    <string name="app_name">Travel Blog</string>
+    <string name="txt_sign_up">Sign Up</string>
+    <string name="txt_sign_in">Sign In</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_username">Username</string>
+    <string name="txt_re_password">Password Confirm</string>
+    <string name="txt_full_name">Full name</string>
+    <string name="txt_phone">Your phone</string>
+    <string name="txt_mail">Your mail</string>
+    <string name="txt_birth_day">Birth day</string>
+    <string name="txt_submit">Submit</string>
 </resources>

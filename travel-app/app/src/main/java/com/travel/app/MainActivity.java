@@ -1,19 +1,20 @@
-package com.travel.app.view;
+package com.travel.app;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.location.Location;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebChromeClient;
+import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.travel.app.R;
-import com.travel.app.data.model.Travel;
 import com.travel.app.data.model.User;
+import com.travel.app.view.fragment.FragmentMainHome;
+import com.travel.app.view.fragment.FragmentSignIn;
 import com.travel.app.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -21,23 +22,32 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-
-    private ArrayList<User> lstUser = new ArrayList<>();
     private MainViewModel mainViewModel;
-
-    private WebView wvMain;
-    private TextView tvTitle;
+    private Button btnLogin;
+    private FragmentMainHome fragmentMainHome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
+        this.init();
+        this.actionView();
+        this.setFragmentMainHome();
     }
 
     private void init(){
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        this.btnLogin = findViewById(R.id.btn_login);
         getTravel();
+    }
+
+    private void actionView(){
+        this.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AuthActivity.class));
+            }
+        });
     }
 
     private void getTravel(){
@@ -48,5 +58,13 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(TAG, data.get(i).toString());
             }
         });
+    }
+
+    private void setFragmentMainHome(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if(fragmentMainHome == null){
+            fragmentMainHome = new FragmentMainHome(MainActivity.this);
+        }
+        transaction.replace(R.id.layout_content, fragmentMainHome).commitAllowingStateLoss();
     }
 }
