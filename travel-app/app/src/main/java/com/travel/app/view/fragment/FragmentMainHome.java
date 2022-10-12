@@ -20,6 +20,7 @@ import com.travel.app.R;
 import com.travel.app.data.model.Travel;
 import com.travel.app.view.adapter.AdapterTravel;
 import com.travel.app.view.adapter.AdapterTravelAds;
+import com.travel.app.view.adapter.AdapterTravelCity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +31,13 @@ public class FragmentMainHome extends Fragment {
     private static final Integer RES_ID = R.layout.fragment_main_home;
     private MainActivity context;
     private View view;
-    private RecyclerView rvTravelAds, rvTravelTop;
+    private RecyclerView rvTravelAds, rvTravelTop, rvTravelHobbies, rvTravelCity;
 
     private AdapterTravelAds adapterTravelAds;
-    private AdapterTravel adapterTravel;
-    private List<Travel> listTravelAds, listTravelTop;
+    private AdapterTravel adapterTravelTop, adapterTravelHobbies;
+    private AdapterTravelCity adapterTravelCity;
+    private List<Travel> listTravelAds, listTravelTop, listTravelHobbies;
+    private List<String> listTravelCity;
 
     @SuppressLint("ValidFragment")
     public FragmentMainHome(MainActivity mContext){
@@ -60,9 +63,21 @@ public class FragmentMainHome extends Fragment {
 
         this.rvTravelTop = this.view.findViewById(R.id.rv_travel_top);
         loadTravelTop();
-        this.adapterTravel = new AdapterTravel(this.context, this.listTravelTop);
-        this.rvTravelTop.setAdapter(this.adapterTravel);
+        this.adapterTravelTop = new AdapterTravel(this.context, this.listTravelTop);
+        this.rvTravelTop.setAdapter(this.adapterTravelTop);
         this.rvTravelTop.setLayoutManager(new LinearLayoutManager(context));
+
+        this.rvTravelHobbies = this.view.findViewById(R.id.rv_travel_hobbies);
+        loadTravelHobbies();
+        this.adapterTravelHobbies = new AdapterTravel(this.context, this.listTravelHobbies);
+        this.rvTravelHobbies.setAdapter(this.adapterTravelHobbies);
+        this.rvTravelHobbies.setLayoutManager(new LinearLayoutManager(context));
+
+        this.rvTravelCity = this.view.findViewById(R.id.rv_travel_city);
+        loadTravelCity();
+        this.adapterTravelCity = new AdapterTravelCity(this.context, this.listTravelCity);
+        this.rvTravelCity.setAdapter(this.adapterTravelCity);
+        this.rvTravelCity.setLayoutManager(new LinearLayoutManager(context));
     }
 
     public void loadTravelAds(){
@@ -82,6 +97,29 @@ public class FragmentMainHome extends Fragment {
         this.listTravelTop.add(new Travel());
         this.listTravelTop.add(new Travel());
         this.listTravelTop.add(new Travel());
+    }
+
+    public void loadTravelHobbies(){
+        this.listTravelHobbies = new ArrayList<>();
+        this.listTravelHobbies.add(new Travel());
+        this.listTravelHobbies.add(new Travel());
+        this.listTravelHobbies.add(new Travel());
+        this.listTravelHobbies.add(new Travel());
+        this.listTravelHobbies.add(new Travel());
+        this.listTravelHobbies.add(new Travel());
+        this.listTravelHobbies.add(new Travel());
+    }
+
+    public void loadTravelCity(){
+        this.listTravelCity = new ArrayList<>();
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
+        this.listTravelCity.add("");
     }
 
     public void actionView(){

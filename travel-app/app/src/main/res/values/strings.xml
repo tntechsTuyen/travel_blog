@@ -1,6 +1,8 @@
 <resources>
     <string name="ico_user">&#xf007;</string>
+    <string name="ico_ellipsis_v">&#xf142;</string>
     <string name="ico_lock">&#xf023;</string>
+    <string name="ico_clock">&#xf017;</string>
     <string name="ico_id_card">&#xf2c2;</string>
     <string name="ico_phone">&#xf095;</string>
     <string name="ico_mail">&#xf0e0;</string>
@@ -9,7 +11,16 @@
     <string name="ico_eye">&#xf06e;</string>
     <string name="ico_heart">&#xf004;</string>
     <string name="ico_comment">&#xf075;</string>
-    <string name="ico_star">&#xf5c0;</string>
+    <string name="ico_star">&#xf005;</string>
+    <string name="ico_star_half">&#xf5c0;</string>
+    <string name="ico_marker">&#xf3c5;</string>
+    <string name="ico_street_view">&#xf21d;</string>
+    <string name="ico_business_time">&#xf64a;</string>
+    <string name="ico_road">&#xf018;</string>
+    <string name="ico_paper">&#xf1d8;</string>
+    <string name="ico_dot_circle">&#xf192;</string>
+    <string name="ico_caret_down">&#xf0d7;</string>
+    <string name="ico_caret_up">&#xf0d8;</string>
 
     <string name="app_name">Travel Blog</string>
     <string name="txt_sign_up">Sign Up</string>
@@ -22,4 +33,5 @@
     <string name="txt_mail">Your mail</string>
     <string name="txt_birth_day">Birth day</string>
     <string name="txt_submit">Submit</string>
+    <string name="txt_rate_ex">(4.5/5)</string>
 </resources>

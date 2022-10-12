@@ -1,6 +1,5 @@
 package com.travel.app.view.adapter;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +9,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
+import com.travel.app.data.model.Comment;
+import com.travel.app.data.model.Hotel;
 import com.travel.app.data.model.Travel;
 
 import java.util.List;
 
-public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder> {
+public class AdapterComment extends RecyclerView.Adapter<AdapterComment.ViewHolder> {
 
     private MainActivity context;
-    private List<Travel> travels;
-    private static final Integer RES_ID = R.layout.item_travel;
+    private List<Comment> hotels;
+    private static final Integer RES_ID = R.layout.item_comment;
 
-    public AdapterTravel(MainActivity context, List<Travel> travels) {
+    public AdapterComment(MainActivity context, List<Comment> hotels) {
         this.context = context;
-        this.travels = travels;
+        this.hotels = hotels;
     }
 
     @NonNull
@@ -42,13 +43,11 @@ public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Travel travel = travels.get(position);
-        holder.loadDataToView(travel);
     }
 
     @Override
     public int getItemCount() {
-        return travels.size();
+        return hotels.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

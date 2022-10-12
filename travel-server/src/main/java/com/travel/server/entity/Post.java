@@ -34,6 +34,9 @@ public class Post {
     @Column(name = "total_like")
     private Integer totalLike;
 
+    @Column(name = "total_comment")
+    private Integer totalComment;
+
     @Column(name = "rate_point")
     private Integer ratePoint;
 

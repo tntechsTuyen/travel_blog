@@ -12,11 +12,14 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorTextToolbar">#fff</color>
     <color name="buttonSelector">#434643</color>
-    <color name="bg_toolbar">#38485e</color>
+    <color name="bg_toolbar">#fff</color>
     <color name="bg_line">#cec9c9c9</color>
-
     <color name="bg_list">#f7f7ff</color>
-
+    <color name="bg_app">#f7f7ff</color>
+    <color name="color_orange">#E42F08</color>
+    <color name="color_yellow">#ffaf00</color>
+    <color name="color_green">#00B894</color>
+    <color name="color_blue">#007BFF</color>
     <color name="color_like">#FF8585</color>
     <color name="color_unlike">#797979</color>
 </resources>

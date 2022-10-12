@@ -14,13 +14,13 @@ import com.travel.app.data.model.Travel;
 
 import java.util.List;
 
-public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder> {
+public class AdapterTravelCity extends RecyclerView.Adapter<AdapterTravelCity.ViewHolder> {
 
     private MainActivity context;
-    private List<Travel> travels;
-    private static final Integer RES_ID = R.layout.item_travel;
+    private List<String> travels;
+    private static final Integer RES_ID = R.layout.item_travel_city;
 
-    public AdapterTravel(MainActivity context, List<Travel> travels) {
+    public AdapterTravelCity(MainActivity context, List<String> travels) {
         this.context = context;
         this.travels = travels;
     }
@@ -34,7 +34,7 @@ public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.setFragmentMainTravelDetail();
+                context.setFragmentMainTravelCity();
             }
         });
         return viewHolder;
@@ -42,8 +42,7 @@ public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Travel travel = travels.get(position);
-        holder.loadDataToView(travel);
+
     }
 
     @Override
@@ -59,7 +58,7 @@ public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder
 
         public void init(){}
 
-        public void loadDataToView(Travel travel){
+        public void loadDataToView(){
 
         }
     }

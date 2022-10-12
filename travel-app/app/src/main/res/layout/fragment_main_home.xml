@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_travel_ads"
@@ -18,13 +19,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Top 5"
+        android:text="Top 20"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/rv_travel_ads" />
 
     <TextView
+        android:id="@+id/btn_view_all_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View all"
@@ -33,6 +35,7 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="2dp"
         android:textSize="13sp"
+        android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
         app:layout_constraintEnd_toStartOf="@+id/guideline2" />
 
@@ -40,10 +43,64 @@
         android:id="@+id/rv_travel_top"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="My Hobbies"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/rv_travel_top" />
+
+    <TextView
+        android:id="@+id/btn_view_all_hobbies"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View all"
+        android:background="@drawable/btn_origin"
+        android:textColor="@color/white"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
+        android:textSize="13sp"
+        android:visibility="invisible"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView1"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_travel_hobbies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Cities"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/rv_travel_hobbies" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_travel_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

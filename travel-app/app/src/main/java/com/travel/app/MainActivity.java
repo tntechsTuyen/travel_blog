@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import com.travel.app.data.model.User;
 import com.travel.app.view.fragment.FragmentMainHome;
+import com.travel.app.view.fragment.FragmentMainHotelDetail;
+import com.travel.app.view.fragment.FragmentMainTravelCity;
+import com.travel.app.view.fragment.FragmentMainTravelDetail;
 import com.travel.app.view.fragment.FragmentSignIn;
 import com.travel.app.viewmodel.MainViewModel;
 
@@ -23,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private MainViewModel mainViewModel;
-    private Button btnLogin;
-    private FragmentMainHome fragmentMainHome;
+    private FragmentMainHome fragmentMainHome = null;
+    private FragmentMainTravelCity fragmentMainTravelCity = null;
+    private FragmentMainTravelDetail fragmentMainTravelDetail = null;
+    private FragmentMainHotelDetail fragmentMainHotelDetail = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,34 +42,50 @@ public class MainActivity extends AppCompatActivity {
 
     private void init(){
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-        this.btnLogin = findViewById(R.id.btn_login);
-        getTravel();
+//        getTravel();
     }
 
     private void actionView(){
-        this.btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AuthActivity.class));
-            }
-        });
+
     }
 
     private void getTravel(){
-
         mainViewModel.getTravelRepositoryLiveData().observe(this, data -> {
-            System.out.println("--------------------------------------------------------------: ");
             for(int i = 0; i < data.size(); i++){
                 Log.i(TAG, data.get(i).toString());
             }
         });
     }
 
-    private void setFragmentMainHome(){
+    public void setFragmentMainHome(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if(fragmentMainHome == null){
             fragmentMainHome = new FragmentMainHome(MainActivity.this);
         }
         transaction.replace(R.id.layout_content, fragmentMainHome).commitAllowingStateLoss();
+    }
+
+    public void setFragmentMainTravelCity(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if(fragmentMainTravelCity == null){
+            fragmentMainTravelCity = new FragmentMainTravelCity(MainActivity.this);
+        }
+        transaction.replace(R.id.layout_content, fragmentMainTravelCity).commitAllowingStateLoss();
+    }
+
+    public void setFragmentMainTravelDetail(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if(fragmentMainTravelDetail == null){
+            fragmentMainTravelDetail = new FragmentMainTravelDetail(MainActivity.this);
+        }
+        transaction.replace(R.id.layout_content, fragmentMainTravelDetail).commitAllowingStateLoss();
+    }
+
+    public void setFragmentMainHotelDetail(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if(fragmentMainHotelDetail == null){
+            fragmentMainHotelDetail = new FragmentMainHotelDetail(MainActivity.this);
+        }
+        transaction.replace(R.id.layout_content, fragmentMainHotelDetail).commitAllowingStateLoss();
     }
 }

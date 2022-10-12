@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_comment"
+    android:layout_marginTop="8dp"
+    android:padding="8dp">
+
+    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+        android:id="@+id/textViewAwsSo13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="@string/ico_dot_circle"
+        android:textSize="@dimen/ico_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_hotel_meta_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_hotel_meta_name" />
+
+    <TextView
+        android:id="@+id/tv_hotel_meta_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:includeFontPadding="false"
+        android:text="Nên mang gì"
+        android:textSize="@dimen/text_normal"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo13"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+        android:id="@+id/twas_btn_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="@string/ico_caret_down"
+        android:textSize="@dimen/ico_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_hotel_meta_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_hotel_meta_name" />
+
+    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+        android:id="@+id/twas_btn_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ico_caret_up"
+        android:textSize="@dimen/ico_normal"
+        android:includeFontPadding="false"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_hotel_meta_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:text="có gì, chơi gì, có những nhà nghỉ, khách sạn nào, thông tin chi tiết về các nhà nghỉ khách sạn như giá tiền, view, vị trí địa lý,… và phần lưu ý khi tới du lịch như nên mảng đồ gì chơi vào mùa nào tháng nào, chú ý trộ cắp,..."
+        android:textSize="@dimen/text_normal"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/twas_btn_down"
+        app:layout_constraintStart_toStartOf="@+id/textViewAwsSo13"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAwsSo13" />
+</androidx.constraintlayout.widget.ConstraintLayout>
