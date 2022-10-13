@@ -1,11 +1,15 @@
-package com.travel.app.common.view.TextViewAws;
+package com.travel.app.common.view.icon;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
 import androidx.appcompat.widget.AppCompatTextView;
 
+import com.travel.app.R;
+
+@SuppressLint("NewApi")
 public class TextViewAwsRe extends AppCompatTextView {
     public TextViewAwsRe(Context context) {
         super(context);
@@ -23,7 +27,8 @@ public class TextViewAwsRe extends AppCompatTextView {
     }
 
     private void init(){
-        Typeface typeface = Typeface.createFromAsset( getContext().getAssets(), "fonts/fa-regular-400.ttf" );
+//        Typeface typeface = Typeface.createFromAsset( getContext().getAssets(), "fonts/fa-regular-400.ttf" );
+        Typeface typeface = getResources().getFont(R.font.fa_regular);
         setTypeface(typeface);
     }
 }

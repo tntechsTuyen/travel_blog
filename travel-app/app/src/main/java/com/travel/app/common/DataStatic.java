@@ -6,6 +6,7 @@ import lombok.Data;
 public class DataStatic {
 
     public static final String BASE_URL = "http://192.168.1.163:1996/";
+    public static final String STACK_APP = "TRAVEL_APP";
 //    public static final String BASE_URL = "http://192.168.0.4:1996/";
 
     public static class HttpStatus{

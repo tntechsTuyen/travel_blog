@@ -45,7 +45,7 @@
             android:textSize="13sp"
             android:textStyle="italic" />
 
-        <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsSo
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -84,7 +84,7 @@
             android:inputType="textPassword"
             android:textStyle="italic" />
 
-        <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsSo
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

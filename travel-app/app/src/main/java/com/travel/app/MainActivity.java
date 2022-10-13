@@ -3,6 +3,7 @@ package com.travel.app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,11 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.travel.app.common.DataStatic;
+import com.travel.app.common.utils.ViewUtils;
+import com.travel.app.common.view.toolbar.MyToolbar;
 import com.travel.app.data.model.User;
+import com.travel.app.view.dialog.DialogMainMenu;
 import com.travel.app.view.fragment.FragmentMainHome;
 import com.travel.app.view.fragment.FragmentMainHotelDetail;
 import com.travel.app.view.fragment.FragmentMainTravelCity;
@@ -30,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentMainTravelCity fragmentMainTravelCity = null;
     private FragmentMainTravelDetail fragmentMainTravelDetail = null;
     private FragmentMainHotelDetail fragmentMainHotelDetail = null;
+    private MyToolbar toolbar;
+    private DialogMainMenu dialogMainMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +49,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void init(){
         mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        this.toolbar = new MyToolbar(this);
+        this.dialogMainMenu = new DialogMainMenu(this);
 //        getTravel();
     }
 
     private void actionView(){
+        this.toolbar.getTwaMenuMore().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogMainMenu.show();
+            }
+        });
 
+        this.toolbar.getTwaBtnBack().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void getTravel(){
@@ -62,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentMainHome == null){
             fragmentMainHome = new FragmentMainHome(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainHome).commitAllowingStateLoss();
+        transaction.replace(R.id.layout_content, fragmentMainHome);
+        transaction.commitAllowingStateLoss();
     }
 
     public void setFragmentMainTravelCity(){
@@ -70,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentMainTravelCity == null){
             fragmentMainTravelCity = new FragmentMainTravelCity(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainTravelCity).commitAllowingStateLoss();
+        transaction.replace(R.id.layout_content, fragmentMainTravelCity).addToBackStack(DataStatic.STACK_APP);
+        transaction.commitAllowingStateLoss();
     }
 
     public void setFragmentMainTravelDetail(){
@@ -78,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentMainTravelDetail == null){
             fragmentMainTravelDetail = new FragmentMainTravelDetail(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainTravelDetail).commitAllowingStateLoss();
+        transaction.replace(R.id.layout_content, fragmentMainTravelDetail).addToBackStack(DataStatic.STACK_APP);
+        transaction.commitAllowingStateLoss();
     }
 
     public void setFragmentMainHotelDetail(){
@@ -86,6 +110,20 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentMainHotelDetail == null){
             fragmentMainHotelDetail = new FragmentMainHotelDetail(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainHotelDetail).commitAllowingStateLoss();
+        transaction.replace(R.id.layout_content, fragmentMainHotelDetail).addToBackStack(DataStatic.STACK_APP);
+        transaction.commitAllowingStateLoss();
+    }
+
+    public MyToolbar getToolbar(){
+        return this.toolbar;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStackImmediate();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

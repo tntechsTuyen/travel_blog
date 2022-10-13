@@ -38,7 +38,7 @@
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/cardView" />
 
-    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo9"
         app:layout_constraintVertical_bias="0.0" />
 
-    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo10"
         app:layout_constraintVertical_bias="0.0" />
 
-    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.travel.app.common.view.TextViewAws.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

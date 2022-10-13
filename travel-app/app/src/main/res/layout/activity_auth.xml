@@ -38,4 +38,14 @@
             android:orientation="vertical" />
 
     </ScrollView>
+
+    <com.travel.app.common.view.icon.TextViewAwsSo
+        android:id="@+id/twa_btn_back"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="@string/ico_arrow_left"
+        android:textSize="@dimen/ico_large"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

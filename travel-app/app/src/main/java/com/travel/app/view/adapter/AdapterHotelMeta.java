@@ -10,9 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
-import com.travel.app.common.view.TextViewAws.TextViewAwsSo;
+import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.data.model.HotelMeta;
-import com.travel.app.data.model.TravelMeta;
 
 import java.util.List;
 

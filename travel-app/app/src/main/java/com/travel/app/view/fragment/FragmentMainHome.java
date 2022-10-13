@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.travel.app.AuthActivity;
 import com.travel.app.MainActivity;
 import com.travel.app.R;
+import com.travel.app.common.utils.ViewUtils;
 import com.travel.app.data.model.Travel;
 import com.travel.app.view.adapter.AdapterTravel;
 import com.travel.app.view.adapter.AdapterTravelAds;
@@ -124,5 +125,17 @@ public class FragmentMainHome extends Fragment {
 
     public void actionView(){
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ViewUtils.show(this.context.getToolbar().getTwaBtnBack());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ViewUtils.hide(this.context.getToolbar().getTwaBtnBack());
     }
 }
