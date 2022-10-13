@@ -37,6 +37,9 @@ public class User {
     @Column(name = "gender")
     private Integer gender;
 
+    @Column(name = "role")
+    private String role;
+
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
     private Date createdDate;

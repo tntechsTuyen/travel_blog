@@ -40,6 +40,7 @@ public class FragmentMainTravelDetail extends Fragment {
     private List<Hotel> listHotel;
     private List<Comment> listComment;
     private List<TravelMeta> listTravelMeta;
+    private Travel travel = null;
 
     @SuppressLint("ValidFragment")
     public FragmentMainTravelDetail(MainActivity mContext){
@@ -58,44 +59,51 @@ public class FragmentMainTravelDetail extends Fragment {
     public void init(){
 
         this.rvHotel = this.view.findViewById(R.id.rv_travel_hotel);
-        loadHotel();
+        this.listHotel = new ArrayList<>();
         this.adapterTravelHotel = new AdapterTravelHotel(this.context, this.listHotel);
         this.rvHotel.setAdapter(this.adapterTravelHotel);
         this.rvHotel.setLayoutManager(new LinearLayoutManager(context));
 
         this.rvComment = this.view.findViewById(R.id.rv_comment);
-        loadComment();
+        this.listComment = new ArrayList<>();
         this.adapterComment = new AdapterComment(this.context, this.listComment);
         this.rvComment.setAdapter(this.adapterComment);
         this.rvComment.setLayoutManager(new LinearLayoutManager(context));
 
         this.rvTravelMeta = this.view.findViewById(R.id.rv_travel_meta);
-        loadTravelMeta();
+        this.listTravelMeta = new ArrayList<>();
         this.adapterTravelMeta = new AdapterTravelMeta(this.context, this.listTravelMeta);
         this.rvTravelMeta.setAdapter(this.adapterTravelMeta);
         this.rvTravelMeta.setLayoutManager(new LinearLayoutManager(context));
     }
 
+    public void change(Travel travel){
+        if(this.travel == null || !this.travel.getId().equals(travel.getId())){
+            this.travel = travel;
+            loadData();
+        }
+    }
+
+    public void loadData(){
+
+        loadDetail();
+        loadTravelMeta();
+        loadHotel();
+        loadComment();
+    }
+
+    public void loadDetail(){
+
+    }
+
     public void loadHotel(){
-        this.listHotel = new ArrayList<>();
-        this.listHotel.add(new Hotel());
-        this.listHotel.add(new Hotel());
-        this.listHotel.add(new Hotel());
+
     }
 
     public void loadComment(){
-        this.listComment = new ArrayList<>();
-        this.listComment.add(new Comment());
-        this.listComment.add(new Comment());
     }
 
     public void loadTravelMeta(){
-        this.listTravelMeta = new ArrayList<>();
-        this.listTravelMeta.add(new TravelMeta());
-        this.listTravelMeta.add(new TravelMeta());
-        this.listTravelMeta.add(new TravelMeta());
-        this.listTravelMeta.add(new TravelMeta());
-        this.listTravelMeta.add(new TravelMeta());
     }
 
     public void actionView(){

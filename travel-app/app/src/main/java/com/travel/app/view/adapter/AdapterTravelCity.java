@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
+import com.travel.app.data.model.Location;
 import com.travel.app.data.model.Travel;
 
 import java.util.List;
@@ -17,12 +19,12 @@ import java.util.List;
 public class AdapterTravelCity extends RecyclerView.Adapter<AdapterTravelCity.ViewHolder> {
 
     private MainActivity context;
-    private List<String> travels;
+    private List<Location> locations;
     private static final Integer RES_ID = R.layout.item_travel_city;
 
-    public AdapterTravelCity(MainActivity context, List<String> travels) {
+    public AdapterTravelCity(MainActivity context, List<Location> locations) {
         this.context = context;
-        this.travels = travels;
+        this.locations = locations;
     }
 
     @NonNull
@@ -31,35 +33,47 @@ public class AdapterTravelCity extends RecyclerView.Adapter<AdapterTravelCity.Vi
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(RES_ID, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                context.setFragmentMainTravelCity();
-            }
-        });
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.loadDataToView(locations.get(position));
+        holder.actionView(locations.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return travels.size();
+        return locations.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        private View view;
+        private TextView tvName, tvCode;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            this.view = itemView;
+            this.init();
         }
 
-        public void init(){}
+        public void init(){
+            this.tvName = this.view.findViewById(R.id.tv_name);
+            this.tvCode = this.view.findViewById(R.id.tv_code);
+        }
 
-        public void loadDataToView(){
+        public void actionView(Location location){
+            this.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.setFragmentMainTravelCity(location);
+                }
+            });
+        }
 
+        public void loadDataToView(Location location){
+            this.tvName.setText(location.getCity());
+            this.tvCode.setText("(%s)".replaceAll("%s", location.getCode().toString()));
         }
     }
 }

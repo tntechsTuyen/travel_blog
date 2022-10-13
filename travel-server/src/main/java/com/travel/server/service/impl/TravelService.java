@@ -29,7 +29,7 @@ public class TravelService implements ITravelService {
 
     @Override
     public List<Map<String, Object>> getTravelTop() {
-        Pageable pageable = PageRequest.of(0, 10, Sort.by("p.ratePoint").descending());
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("p.ratePoint").descending());
         return travelRepository.findTravelTop(pageable).getContent();
     }
 
@@ -40,8 +40,8 @@ public class TravelService implements ITravelService {
     }
 
     @Override
-    public List<Map<String, Object>> getTravelCity(String city) {
-        return travelRepository.findTravelByCity(city);
+    public List<Map<String, Object>> getTravelLocationCode(Integer locationCode) {
+        return travelRepository.findTravelByLocationCode(locationCode);
     }
 
     @Override

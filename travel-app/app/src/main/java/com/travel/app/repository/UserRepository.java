@@ -5,48 +5,61 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.gson.Gson;
+import com.travel.app.common.DataStatic;
+import com.travel.app.common.response.ApiResponse;
+import com.travel.app.common.utils.RestUtils;
 import com.travel.app.data.model.User;
-import com.travel.app.retrofit.ApiRequest;
+import com.travel.app.retrofit.AuthRequest;
 import com.travel.app.retrofit.RetrofitRequest;
 
-import java.util.List;
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserRepository {
-    private static final String TAG = UserRepository.class.getSimpleName();
-    private final ApiRequest apiRequest;
+    private final AuthRequest authRequest;
 
     public UserRepository(){
-        apiRequest = RetrofitRequest.instance().create(ApiRequest.class);
+        this.authRequest = RetrofitRequest.instance().create(AuthRequest.class);
     }
     
-    public LiveData<List<User>> getData(){
-        final MutableLiveData<List<User>> data = new MutableLiveData<>();
+    public LiveData<ApiResponse<String>> login(User user){
+        MutableLiveData<ApiResponse<String>> data = new MutableLiveData<>();
         try{
-
-            apiRequest.getUser().enqueue(new Callback<List<User>>() {
+            this.authRequest.login(user).enqueue(new Callback<ApiResponse<String>>() {
                 @Override
-                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                    Log.d(TAG, "onResponse response:: " + response);
-                    if (response.body() != null) {
-                        data.setValue(response.body());
-                        Log.d(TAG, "articles total result:: " + response.body());
-                        Log.d(TAG, "size:: " + response.body());
-                    }
+                public void onResponse(Call<ApiResponse<String>> call, Response<ApiResponse<String>> response) {
+                    data.setValue(RestUtils.get(response));
                 }
 
                 @Override
-                public void onFailure(Call<List<User>> call, Throwable t) {
-                    Log.e(TAG, "onFailure "+t.getMessage());
-                    data.setValue(null);
+                public void onFailure(Call<ApiResponse<String>> call, Throwable t) {
+                    Log.e("UserRepository", "onFailure: ", t);
                 }
+
             });
         }catch (Exception e){
-            Log.e(TAG, "Ex: "+e.getMessage());
+            e.printStackTrace();
         }
+        return data;
+    }
+
+    public LiveData<ApiResponse<User>> register(User user){
+        MutableLiveData<ApiResponse<User>> data = new MutableLiveData<>();
+        this.authRequest.register(user).enqueue(new Callback<ApiResponse<User>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                data.setValue(RestUtils.get(response));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+
+            }
+        });
         return data;
     }
 

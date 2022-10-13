@@ -1,6 +1,6 @@
 package com.travel.app.retrofit;
 
-import com.travel.app.common.reponse.ApiResponse;
+import com.travel.app.common.response.ApiResponse;
 import com.travel.app.data.model.Travel;
 import com.travel.app.data.model.User;
 

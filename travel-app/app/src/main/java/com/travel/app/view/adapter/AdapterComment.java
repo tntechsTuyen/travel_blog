@@ -35,7 +35,6 @@ public class AdapterComment extends RecyclerView.Adapter<AdapterComment.ViewHold
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.setFragmentMainTravelDetail();
             }
         });
         return viewHolder;

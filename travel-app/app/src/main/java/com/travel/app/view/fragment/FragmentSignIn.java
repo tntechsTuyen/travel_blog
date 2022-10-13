@@ -1,10 +1,9 @@
 package com.travel.app.view.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +12,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 
 import com.travel.app.AuthActivity;
 import com.travel.app.R;
+import com.travel.app.common.DataStatic;
+import com.travel.app.common.response.ApiResponse;
+import com.travel.app.common.utils.SessionUtils;
+import com.travel.app.data.model.User;
 
 @SuppressLint("ValidFragment")
 public class FragmentSignIn extends Fragment {
@@ -59,7 +63,15 @@ public class FragmentSignIn extends Fragment {
                     Toast.makeText(context, "Username and password not empty", Toast.LENGTH_SHORT).show();
                 }else{
                     //TODO: Request login auth
-                    context.finish();
+                    LiveData<ApiResponse<String>> lvData = context.getAuthViewModel().login(new User(username, password));
+                    lvData.observe(context, data -> {
+                        Toast.makeText(context, data.getMessage(), Toast.LENGTH_SHORT).show();
+                        if(data.getStatus() == DataStatic.HttpStatus.SUCCESS){
+                            SessionUtils.set(context, DataStatic.SESSION.KEY.AUTH, data.getResult());
+                            context.finish();
+                        }
+                    });
+
                 }
             }
         });

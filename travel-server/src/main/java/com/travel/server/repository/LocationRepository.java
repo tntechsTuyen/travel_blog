@@ -8,8 +8,10 @@ import java.util.*;
 
 public interface LocationRepository extends JpaRepository<Location, Integer> {
 
-    @Query("SELECT DISTINCT city " +
-            "FROM Location ")
-    List<String> findDistinctCity();
+    @Query("SELECT city AS city " +
+            ", code AS code " +
+            "FROM Location " +
+            "GROUP BY city, code ")
+    List<Map<String, Object>> findDistinctCity();
 
 }

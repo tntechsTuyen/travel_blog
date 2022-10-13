@@ -78,7 +78,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_travel_name"
         app:layout_constraintTop_toBottomOf="@+id/textViewAwsSo4" />
 
-    <com.travel.app.common.view.icon.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsRe
         android:id="@+id/textViewAwsSo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
         app:layout_constraintStart_toEndOf="@+id/textViewAwsSo"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
 
-    <com.travel.app.common.view.icon.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsRe
         android:id="@+id/textViewAwsSo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
         app:layout_constraintStart_toEndOf="@+id/textViewAwsSo1"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo1" />
 
-    <com.travel.app.common.view.icon.TextViewAwsSo
+    <com.travel.app.common.view.icon.TextViewAwsRe
         android:id="@+id/textViewAwsSo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,4 +152,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo2"
         app:layout_constraintStart_toEndOf="@+id/textViewAwsSo2"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo2" />
+
+
+    <com.travel.app.common.view.icon.TextViewAwsRe
+        android:id="@+id/textViewAwsSo5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:includeFontPadding="false"
+        android:text="@string/ico_star"
+        android:textColor="@color/color_yellow"
+        android:textSize="@dimen/ico_small"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo"
+        app:layout_constraintStart_toEndOf="@+id/tv_travel_total_cmt"
+        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
+
+    <TextView
+        android:id="@+id/tv_travel_rate_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:includeFontPadding="false"
+        android:text="4.5/5"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo5"
+        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo5"
+        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

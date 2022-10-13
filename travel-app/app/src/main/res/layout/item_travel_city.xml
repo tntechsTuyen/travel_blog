@@ -3,14 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_border"
+    android:background="@drawable/bg_comment"
+    android:layout_marginTop="8dp"
     android:padding="8dp">
 
-    <TextView
+    <com.travel.app.common.view.icon.TextViewAwsSo
+        android:id="@+id/textViewAwsSo13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ninh Bình"
-        android:textSize="@dimen/text_normal"
+        android:includeFontPadding="false"
+        android:text="@string/ico_dot_circle"
+        android:textSize="@dimen/ico_normal"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_name"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:includeFontPadding="false"
+        android:text="ABC"
+        android:textSize="@dimen/text_normal"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo13"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:includeFontPadding="false"
+        android:text="1111"
+        android:textSize="@dimen/text_normal"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

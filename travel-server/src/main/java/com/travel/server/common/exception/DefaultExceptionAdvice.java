@@ -1,5 +1,6 @@
 package com.travel.server.common.exception;
 
+import com.travel.server.common.response.ApiResponse;
 import com.travel.server.common.response.CommonResponse;
 import com.travel.server.common.response.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
@@ -14,16 +15,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class DefaultExceptionAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CommonException.class)
-    public ResponseEntity<CommonResponse> handleException(CommonException ce) {
-        CommonResponse response = CommonResponse.of(HttpStatus.BAD_REQUEST.value(), ResponseCode.FAILED, ce.getMessage(), null);
+    public ApiResponse<Object> handleException(CommonException ce) {
+        ApiResponse<Object> response = ApiResponse.of(HttpStatus.BAD_REQUEST, ApiResponse.Code.FAILED, ce.getMessage(), null);
         log.error("Exception###: ",ce);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return response;
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<CommonResponse> handleException(Exception e) {
-        CommonResponse response = CommonResponse.of(HttpStatus.BAD_REQUEST.value(), ResponseCode.FAILED, e.getMessage(), null);
+    public ApiResponse<Object> handleException(Exception e) {
+        ApiResponse<Object> response = ApiResponse.of(HttpStatus.BAD_REQUEST, ApiResponse.Code.FAILED, e.getMessage(), null);
         log.error("Exception###: ",e);
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        return response;
     }
 }

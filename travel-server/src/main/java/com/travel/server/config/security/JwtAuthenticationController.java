@@ -29,7 +29,7 @@ public class JwtAuthenticationController {
 	@Autowired
 	private JwtUserDetailsService userDetailsService;
 
-	@PostMapping(value = "/auth")
+	@PostMapping(value = "/login")
 	public ApiResponse<Object> auth(@RequestBody User user) throws Exception {
 		authenticate(user.getUsername(), user.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());

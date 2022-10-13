@@ -9,15 +9,18 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.travel.app.AuthActivity;
 import com.travel.app.R;
+import com.travel.app.common.DataStatic;
+import com.travel.app.common.utils.SessionUtils;
 
 public class DialogMainMenu {
 
     private Activity context;
     private Dialog dialog;
-    private Button btnSearch, btnTagSetup, btnSignIn;
+    private Button btnSearch, btnTagSetup, btnSignIn, btnSignOut;
 
     public DialogMainMenu(Activity context){
         this.context = context;
@@ -33,6 +36,7 @@ public class DialogMainMenu {
         this.btnSearch = this.dialog.findViewById(R.id.btn_search);
         this.btnTagSetup = this.dialog.findViewById(R.id.btn_tag_setup);
         this.btnSignIn = this.dialog.findViewById(R.id.btn_sign_in);
+        this.btnSignOut = this.dialog.findViewById(R.id.btn_sign_out);
     }
 
     private void actionView(){
@@ -40,6 +44,16 @@ public class DialogMainMenu {
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, AuthActivity.class));
+                hide();
+            }
+        });
+        this.btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SessionUtils.remove(context, DataStatic.SESSION.KEY.AUTH);
+                updateViewAuth();
+                Toast.makeText(context, "Bạn đã đăng xuất khỏi hệ thống", Toast.LENGTH_SHORT).show();
+                hide();
             }
         });
     }
@@ -50,5 +64,18 @@ public class DialogMainMenu {
 
     public void hide(){
         this.dialog.dismiss();
+    }
+
+    public void updateViewAuth(){
+        String auth = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
+        if(auth != null && auth.trim().length() > 0){
+            this.btnTagSetup.setVisibility(View.VISIBLE);
+            this.btnSignOut.setVisibility(View.VISIBLE);
+            this.btnSignIn.setVisibility(View.GONE);
+        }else{
+            this.btnTagSetup.setVisibility(View.GONE);
+            this.btnSignOut.setVisibility(View.GONE);
+            this.btnSignIn.setVisibility(View.VISIBLE);
+        }
     }
 }

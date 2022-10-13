@@ -5,13 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.view.fragment.FragmentSignIn;
 import com.travel.app.view.fragment.FragmentSignUp;
+import com.travel.app.viewmodel.AuthViewModel;
 
 public class AuthActivity extends AppCompatActivity {
+
+    private AuthViewModel authViewModel;
 
     private FragmentSignIn fragmentSignIn;
     private FragmentSignUp fragmentSignUp;
@@ -28,6 +33,7 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void init(){
+        this.authViewModel = ViewModelProviders.of(this).get(AuthViewModel.class);
         this.twaBtnBack = findViewById(R.id.twa_btn_back);
     }
 
@@ -38,6 +44,10 @@ public class AuthActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    public AuthViewModel getAuthViewModel(){
+        return this.authViewModel;
     }
 
     public void setFragmentSignIn(){

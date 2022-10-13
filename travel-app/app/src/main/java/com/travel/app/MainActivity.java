@@ -3,34 +3,27 @@ package com.travel.app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.annotation.SuppressLint;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.TextView;
 
 import com.travel.app.common.DataStatic;
-import com.travel.app.common.utils.ViewUtils;
+import com.travel.app.common.utils.SessionUtils;
 import com.travel.app.common.view.toolbar.MyToolbar;
-import com.travel.app.data.model.User;
+import com.travel.app.data.model.Location;
+import com.travel.app.data.model.Travel;
 import com.travel.app.view.dialog.DialogMainMenu;
 import com.travel.app.view.fragment.FragmentMainHome;
 import com.travel.app.view.fragment.FragmentMainHotelDetail;
 import com.travel.app.view.fragment.FragmentMainTravelCity;
 import com.travel.app.view.fragment.FragmentMainTravelDetail;
-import com.travel.app.view.fragment.FragmentSignIn;
-import com.travel.app.viewmodel.MainViewModel;
-
-import java.util.ArrayList;
+import com.travel.app.viewmodel.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private MainViewModel mainViewModel;
+    private HomeViewModel homeViewModel;
     private FragmentMainHome fragmentMainHome = null;
     private FragmentMainTravelCity fragmentMainTravelCity = null;
     private FragmentMainTravelDetail fragmentMainTravelDetail = null;
@@ -48,10 +41,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init(){
-        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
+        this.homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         this.toolbar = new MyToolbar(this);
         this.dialogMainMenu = new DialogMainMenu(this);
-//        getTravel();
     }
 
     private void actionView(){
@@ -70,39 +62,32 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getTravel(){
-        mainViewModel.getTravelRepositoryLiveData().observe(this, data -> {
-            for(int i = 0; i < data.size(); i++){
-                Log.i(TAG, data.get(i).toString());
-            }
-        });
-    }
-
     public void setFragmentMainHome(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if(fragmentMainHome == null){
             fragmentMainHome = new FragmentMainHome(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainHome);
-        transaction.commitAllowingStateLoss();
+        transaction.replace(R.id.layout_content, fragmentMainHome).commitAllowingStateLoss();
     }
 
-    public void setFragmentMainTravelCity(){
+    public void setFragmentMainTravelCity(Location location){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if(fragmentMainTravelCity == null){
             fragmentMainTravelCity = new FragmentMainTravelCity(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainTravelCity).addToBackStack(DataStatic.STACK_APP);
-        transaction.commitAllowingStateLoss();
+        transaction.replace(R.id.layout_content, fragmentMainTravelCity);
+        fragmentMainTravelCity.changeData(location);
+        transaction.commit();
     }
 
-    public void setFragmentMainTravelDetail(){
+    public void setFragmentMainTravelDetail(Travel travel){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if(fragmentMainTravelDetail == null){
             fragmentMainTravelDetail = new FragmentMainTravelDetail(MainActivity.this);
         }
         transaction.replace(R.id.layout_content, fragmentMainTravelDetail).addToBackStack(DataStatic.STACK_APP);
-        transaction.commitAllowingStateLoss();
+        fragmentMainTravelDetail.change(travel);
+        transaction.commit();
     }
 
     public void setFragmentMainHotelDetail(){
@@ -111,11 +96,15 @@ public class MainActivity extends AppCompatActivity {
             fragmentMainHotelDetail = new FragmentMainHotelDetail(MainActivity.this);
         }
         transaction.replace(R.id.layout_content, fragmentMainHotelDetail).addToBackStack(DataStatic.STACK_APP);
-        transaction.commitAllowingStateLoss();
+        transaction.commit();
     }
 
     public MyToolbar getToolbar(){
         return this.toolbar;
+    }
+
+    public HomeViewModel getHomeViewModel() {
+        return this.homeViewModel;
     }
 
     @Override
@@ -125,5 +114,11 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        this.dialogMainMenu.updateViewAuth();
     }
 }

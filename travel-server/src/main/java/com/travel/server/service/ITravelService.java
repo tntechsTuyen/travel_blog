@@ -10,6 +10,6 @@ public interface ITravelService {
     List<Map<String, Object>> getTravelAds();
     List<Map<String, Object>> getTravelTop();
     List<Map<String, Object>> getTravelHobbies();
-    List<Map<String, Object>> getTravelCity(String city);
+    List<Map<String, Object>> getTravelLocationCode(Integer locationCode);
     Map<String, Object> getTravelDetail(Integer id);
 }

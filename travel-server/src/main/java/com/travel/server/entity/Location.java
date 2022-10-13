@@ -22,6 +22,9 @@ public class Location {
     @Column(name = "latitude")
     private Double latitude;
 
+    @Column(name = "code")
+    private Integer code;
+
     @Column(name = "address")
     private String address;
 

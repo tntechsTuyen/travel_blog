@@ -15,19 +15,13 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/
-      suffix: .jsp
-  jmx:
-    default-domain: read
   jackson:
     time-zone: Asia/Ho_Chi_Minh
     date-format: yyyy/MM/dd HH:mm:ss
 
 # uploading
-data.path: C:/AppServ/www/project/JavaSpring/test/
-data.program: C:/AppServ/www/project/JavaSpring/test/program/
+data:
+  path: C:/AppServ/www/project/JavaSpring/test/
 
 # logging
 logging:

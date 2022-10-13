@@ -40,13 +40,17 @@ public class Travel {
     @Expose
     private Integer totalView;
 
-    @SerializedName("ratePoint")
-    @Expose
-    private Integer ratePoint;
-
     @SerializedName("totalLike")
     @Expose
     private Integer totalLike;
+
+    @SerializedName("totalComment")
+    @Expose
+    private Integer totalComment;
+
+    @SerializedName("ratePoint")
+    @Expose
+    private Integer ratePoint;
 
     @SerializedName("mediaType")
     @Expose
@@ -55,6 +59,26 @@ public class Travel {
     @SerializedName("mediaUrl")
     @Expose
     private String mediaUrl;
+
+    public Integer getTotalComment() {
+        return totalComment;
+    }
+
+    public void setTotalComment(Integer totalComment) {
+        this.totalComment = totalComment;
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    @SerializedName("tagName")
+    @Expose
+    private String tagName;
 
     public Integer getId() {
         return id;

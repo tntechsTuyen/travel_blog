@@ -1,9 +1,9 @@
 package com.travel.server.service;
 
-import java.util.List;
+import java.util.*;
 
 public interface ILocationService {
 
-    List<String> getDistinctNames();
+    List<Map<String, Object>> getDistinct();
 
 }

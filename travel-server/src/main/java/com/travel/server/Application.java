@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.util.TimeZone;
 
 @Slf4j
@@ -28,20 +27,6 @@ public class Application extends SpringBootServletInitializer implements Command
     @PostConstruct
     public void init() {
         TimeZone.setDefault(TimeZone.getTimeZone("GMT+7:00"));
-    }
-
-    @Bean
-    @Primary
-    public TaskScheduler taskScheduler() {
-        ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-        threadPoolTaskScheduler.setPoolSize(10);
-        threadPoolTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
-        return threadPoolTaskScheduler;
-    }
-
-    @RequestMapping("/greeting")
-    public String greeting(HttpServletRequest request) {
-        return "Welcome to notify system!\n--- VN Travel Team ---";
     }
 
     @Override

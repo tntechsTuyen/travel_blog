@@ -19,13 +19,17 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.id AS idPost " +
             ", p.totalView AS totalView " +
             ", p.totalLike AS totalLike " +
+            ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
             ", m.url AS mediaUrl " +
-            ", m.type AS mediaType " +
+            ", m.type AS mediaType" +
+            ", tg.name AS tagName " +
             "FROM Travel t " +
             "INNER JOIN Location l ON t.idLocation = l.id " +
             "INNER JOIN TravelPost tp ON t.id = tp.idTravel " +
             "INNER JOIN Post p ON tp.idPost = p.id " +
+            "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
+            "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
             "WHERE p.type = 'ADS' ")
@@ -40,13 +44,17 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.id AS idPost " +
             ", p.totalView AS totalView " +
             ", p.totalLike AS totalLike " +
+            ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
+            ", tg.name AS tagName " +
             "FROM Travel t " +
             "INNER JOIN Location l ON t.idLocation = l.id " +
             "INNER JOIN TravelPost tp ON t.id = tp.idTravel " +
             "INNER JOIN Post p ON tp.idPost = p.id " +
+            "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
+            "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
             "WHERE p.type = 'POST' ")
@@ -61,14 +69,18 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.id AS idPost " +
             ", p.totalView AS totalView " +
             ", p.totalLike AS totalLike " +
+            ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
+            ", tg.name AS tagName " +
             "FROM Travel t " +
             "INNER JOIN TravelTag tt ON t.id = tt.idTravel " +
             "INNER JOIN Location l ON t.idLocation = l.id " +
             "INNER JOIN TravelPost tp ON t.id = tp.idTravel " +
             "INNER JOIN Post p ON tp.idPost = p.id " +
+            "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
+            "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
             "WHERE p.type = 'POST' " +
@@ -88,19 +100,23 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.id AS idPost " +
             ", p.totalView AS totalView " +
             ", p.totalLike AS totalLike " +
+            ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
+            ", tg.name AS tagName " +
             "FROM Travel t " +
             "INNER JOIN TravelTag tt ON t.id = tt.idTravel " +
             "INNER JOIN Location l ON t.idLocation = l.id " +
             "INNER JOIN TravelPost tp ON t.id = tp.idTravel " +
             "INNER JOIN Post p ON tp.idPost = p.id " +
+            "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
+            "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
             "WHERE p.type = 'POST' " +
-            "AND l.city LIKE :city ")
-    List<Map<String, Object>> findTravelByCity(@Param("city") String city);
+            "AND l.code = :location_code ")
+    List<Map<String, Object>> findTravelByLocationCode(@Param("location_code") Integer locationCode);
 
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
@@ -111,14 +127,18 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.id AS idPost " +
             ", p.totalView AS totalView " +
             ", p.totalLike AS totalLike " +
+            ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
+            ", tg.name AS tagName " +
             "FROM Travel t " +
             "INNER JOIN TravelTag tt ON t.id = tt.idTravel " +
             "INNER JOIN Location l ON t.idLocation = l.id " +
             "INNER JOIN TravelPost tp ON t.id = tp.idTravel " +
             "INNER JOIN Post p ON tp.idPost = p.id " +
+            "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
+            "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
             "WHERE p.type = 'POST' " +

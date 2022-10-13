@@ -29,11 +29,11 @@
         android:id="@+id/btn_view_all_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View all"
         android:background="@drawable/btn_origin"
-        android:textColor="@color/white"
         android:paddingHorizontal="8dp"
         android:paddingVertical="2dp"
+        android:text="View all"
+        android:textColor="@color/white"
         android:textSize="13sp"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView"
@@ -53,25 +53,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="My Hobbies"
+        android:text="Gợi ý của bạn"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/rv_travel_top" />
-
-    <TextView
-        android:id="@+id/btn_view_all_hobbies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View all"
-        android:background="@drawable/btn_origin"
-        android:textColor="@color/white"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="2dp"
-        android:textSize="13sp"
-        android:visibility="invisible"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView1"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_travel_hobbies"
@@ -87,7 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Cities"
+        android:text="Thành phố"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -115,4 +101,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="textView1,rv_travel_hobbies" />
 </androidx.constraintlayout.widget.ConstraintLayout>
