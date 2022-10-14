@@ -38,7 +38,7 @@ public class Post {
     private Integer totalComment;
 
     @Column(name = "rate_point")
-    private Integer ratePoint;
+    private Double ratePoint;
 
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
