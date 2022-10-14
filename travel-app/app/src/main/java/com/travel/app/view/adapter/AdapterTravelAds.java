@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.travel.app.R;
 import com.travel.app.data.model.Travel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.ViewHolder> {
 
     private Activity context;
     private List<Travel> travels;
-    private static final Integer RES_ID = R.layout.item_travel_ads;
+    private static Integer RES_ID = R.layout.item_travel_ads;
 
     public AdapterTravelAds(Activity context, List<Travel> travels) {
         this.context = context;
@@ -51,6 +50,7 @@ public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.View
         private View view;
         private ImageView ivThumb;
         private TextView tvAddress, tvTag, tvName, tvDescription, tvTotalView, tvTotalLike, tvTotalCmt, tvRatePoint;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.view = itemView;
@@ -58,13 +58,13 @@ public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.View
         }
 
         public void init(){
-            this.ivThumb = this.view.findViewById(R.id.iv_travel_thumb);
+            this.ivThumb = this.view.findViewById(R.id.iv_thumb);
             this.tvAddress = this.view.findViewById(R.id.tv_travel_city);
             this.tvTag = this.view.findViewById(R.id.tv_travel_tag);
             this.tvName = this.view.findViewById(R.id.tv_travel_name);
-            this.tvDescription = this.view.findViewById(R.id.tv_travel_description);
-            this.tvTotalView = this.view.findViewById(R.id.tv_travel_total_view);
-            this.tvTotalLike = this.view.findViewById(R.id.tv_travel_total_like);
+            this.tvDescription = this.view.findViewById(R.id.tv_description);
+            this.tvTotalView = this.view.findViewById(R.id.tv_total_view);
+            this.tvTotalLike = this.view.findViewById(R.id.tv_total_like);
             this.tvTotalCmt = this.view.findViewById(R.id.tv_travel_total_cmt);
             this.tvRatePoint = this.view.findViewById(R.id.tv_travel_rate_point);
         }

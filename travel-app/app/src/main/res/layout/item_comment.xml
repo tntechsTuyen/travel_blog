@@ -8,15 +8,16 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
         android:elevation="12dp"
         app:cardCornerRadius="30dp"
+        app:layout_constraintDimensionRatio="h,1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_hotel_thumb"
+            android:id="@+id/iv_thumb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/logo" />
@@ -34,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/cardView">
 
         <TextView
-            android:id="@+id/tv_comment_user"
+            android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
@@ -46,7 +47,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_comment_content"
+            android:id="@+id/tv_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -55,7 +56,7 @@
             android:textSize="@dimen/text_normal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_comment_user" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_user" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.travel.app.common.view.icon.TextViewAwsRe
@@ -70,7 +71,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <TextView
-        android:id="@+id/tv_comment_time"
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"

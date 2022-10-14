@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_travel_thumb"
+            android:id="@+id/iv_thumb"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/bai_dinh" />
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_travel_name" />
 
     <TextView
-        android:id="@+id/tv_travel_description"
+        android:id="@+id/tv_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -88,11 +88,11 @@
         android:textSize="@dimen/ico_small"
         android:textColor="@color/color_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_travel_description"
-        app:layout_constraintTop_toBottomOf="@+id/tv_travel_description" />
+        app:layout_constraintStart_toStartOf="@+id/tv_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
     <TextView
-        android:id="@+id/tv_travel_total_view"
+        android:id="@+id/tv_total_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -113,11 +113,11 @@
         android:textSize="@dimen/ico_small"
         android:textColor="@color/color_yellow"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo"
-        app:layout_constraintStart_toEndOf="@+id/tv_travel_total_view"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_view"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
 
     <TextView
-        android:id="@+id/tv_travel_total_like"
+        android:id="@+id/tv_total_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -138,7 +138,7 @@
         android:textSize="@dimen/ico_small"
         android:textColor="@color/color_yellow"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo"
-        app:layout_constraintStart_toEndOf="@+id/tv_travel_total_like"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_like"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
 
     <TextView

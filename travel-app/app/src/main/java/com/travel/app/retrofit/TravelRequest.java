@@ -21,20 +21,20 @@ public interface TravelRequest {
     @GET("api/travel/top")
     Call<ApiResponse<List<Travel>>> getTop();
 
-    @GET("api/user/travel/hobbies")
+    @GET("api/auth/travel/hobbies")
     Call<ApiResponse<List<Travel>>> getMyHobbies(@Header("Authorization") String token);
 
     @GET("api/travel/city/{code}")
     Call<ApiResponse<List<Travel>>> getByCity(@Path("code") Integer code);
 
     @GET("api/travel/{id}")
-    Call<ApiResponse<Travel>> getDetail(@Path("id") Integer id);
+    Call<ApiResponse<Travel>> getDetail(@Header("Authorization") String token, @Path("id") Integer id);
 
     @GET("api/travel/{id}/hotel")
     Call<ApiResponse<List<Hotel>>> getTravelHotel(@Path("id") Integer id);
 
-    @GET("api/travel/{id}/meta")
-    Call<ApiResponse<List<TravelMeta>>> getTravelMeta(@Path("id") Integer id);
+    @GET("api/travel/{id}/metas")
+    Call<ApiResponse<List<TravelMeta>>> getTravelMetas(@Path("id") Integer id);
 
     @GET("api/travel/{id}/comment")
     Call<ApiResponse<List<Comment>>> getTravelComment(@Path("id") Integer id);

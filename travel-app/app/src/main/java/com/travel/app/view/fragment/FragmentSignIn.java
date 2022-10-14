@@ -3,7 +3,6 @@ package com.travel.app.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class FragmentSignIn extends Fragment {
     }
 
     public void init(){
-        this.etUsername = this.view.findViewById(R.id.et_username);
+        this.etUsername = this.view.findViewById(R.id.et_cmt);
         this.etPassword = this.view.findViewById(R.id.et_password);
         this.btnLogin = this.view.findViewById(R.id.btn_login);
         this.btnRegister = this.view.findViewById(R.id.btn_register);

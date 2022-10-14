@@ -11,6 +11,7 @@ import android.view.View;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.SessionUtils;
 import com.travel.app.common.view.toolbar.MyToolbar;
+import com.travel.app.data.model.Hotel;
 import com.travel.app.data.model.Location;
 import com.travel.app.data.model.Travel;
 import com.travel.app.view.dialog.DialogMainMenu;
@@ -75,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         if(fragmentMainTravelCity == null){
             fragmentMainTravelCity = new FragmentMainTravelCity(MainActivity.this);
         }
-        transaction.replace(R.id.layout_content, fragmentMainTravelCity);
+        transaction.replace(R.id.layout_content, fragmentMainTravelCity).addToBackStack(DataStatic.STACK_APP);
         fragmentMainTravelCity.changeData(location);
         transaction.commit();
     }
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void setFragmentMainHotelDetail(){
+    public void setFragmentMainHotelDetail(Hotel hotel){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if(fragmentMainHotelDetail == null){
             fragmentMainHotelDetail = new FragmentMainHotelDetail(MainActivity.this);
@@ -109,10 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() > 0) {
-            getFragmentManager().popBackStackImmediate();
-        } else {
+        if(getFragmentManager().getBackStackEntryCount() == 0) {
             super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
         }
     }
 

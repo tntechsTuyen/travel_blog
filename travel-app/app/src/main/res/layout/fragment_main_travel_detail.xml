@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iv_travel_thumb"
+        android:id="@+id/iv_thumb"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,8 +25,8 @@
         android:textColor="@color/color_orange"
         android:textSize="@dimen/text_large"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_travel_thumb"
-        app:layout_constraintTop_toTopOf="@+id/iv_travel_thumb" />
+        app:layout_constraintStart_toEndOf="@+id/iv_thumb"
+        app:layout_constraintTop_toTopOf="@+id/iv_thumb" />
 
     <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo"
@@ -37,11 +37,11 @@
         android:text="@string/ico_eye"
         android:textColor="@color/color_yellow"
         android:textSize="@dimen/ico_small"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <TextView
-        android:id="@+id/tv_travel_total_view"
+        android:id="@+id/tv_total_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -59,14 +59,14 @@
         android:layout_marginStart="16dp"
         android:includeFontPadding="false"
         android:text="@string/ico_heart"
-        android:textSize="@dimen/ico_small"
         android:textColor="@color/color_yellow"
+        android:textSize="@dimen/ico_small"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo"
-        app:layout_constraintStart_toEndOf="@+id/tv_travel_total_view"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_view"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
 
     <TextView
-        android:id="@+id/tv_travel_total_like"
+        android:id="@+id/tv_total_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -107,6 +107,31 @@
         app:layout_constraintBottom_toBottomOf="@+id/btn_go_map"
         app:layout_constraintStart_toEndOf="@+id/btn_go_map"
         app:layout_constraintTop_toTopOf="@+id/btn_go_map" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:text="Tràng An là một khu du lịch sinh thái nằm trong Quần thể di sản thế giới Tràng An thuộc tỉnh Ninh Bình. Nơi đây đã được Chính phủ Việt Nam xếp hạng di tích quốc gia đặc biệt quan trọng và UNESCO công nhận là di sản thế giới kép từ năm 2014. Liên khu danh thắng Tràng An – Tam Cốc - Bích Động – cố đô Hoa Lư – rừng đặc dụng Hoa Lư hiện được quy hoạch chung vào Quần thể danh thắng Tràng An, trở thành di sản thế giới kép đầu tiên ở Việt Nam với những giá trị nổi bật về cảnh quan thiên nhiên, lịch sử văn hóa và kiến tạo địa chất và cũng là địa danh được đầu tư để trở thành một khu du lịch tầm cỡ quốc tế."
+        android:textSize="@dimen/text_normal"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/iv_thumb" />
+
+    <TextView
+        android:id="@+id/tv_rate_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="@string/txt_rate_ex"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout7"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
     <LinearLayout
         android:id="@+id/linearLayout7"
@@ -167,30 +192,6 @@
     </LinearLayout>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text="@string/txt_rate_ex"
-        android:textSize="@dimen/text_small"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout7"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout7"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
-
-    <TextView
-        android:id="@+id/tv_travel_description"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:includeFontPadding="false"
-        android:text="Tràng An là một khu du lịch sinh thái nằm trong Quần thể di sản thế giới Tràng An thuộc tỉnh Ninh Bình. Nơi đây đã được Chính phủ Việt Nam xếp hạng di tích quốc gia đặc biệt quan trọng và UNESCO công nhận là di sản thế giới kép từ năm 2014. Liên khu danh thắng Tràng An – Tam Cốc - Bích Động – cố đô Hoa Lư – rừng đặc dụng Hoa Lư hiện được quy hoạch chung vào Quần thể danh thắng Tràng An, trở thành di sản thế giới kép đầu tiên ở Việt Nam với những giá trị nổi bật về cảnh quan thiên nhiên, lịch sử văn hóa và kiến tạo địa chất và cũng là địa danh được đầu tư để trở thành một khu du lịch tầm cỡ quốc tế."
-        android:textSize="@dimen/text_normal"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/iv_travel_thumb" />
-
-    <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -199,7 +200,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_travel_description" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_travel_meta"
@@ -215,7 +216,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Hotel"
+        android:text="Khách sạn quanh đây"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -236,7 +237,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Comment"
+        android:text="Bình luận"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -254,7 +255,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <EditText
-            android:id="@+id/et_username"
+            android:id="@+id/et_cmt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -268,6 +269,7 @@
             android:textStyle="italic" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
+            android:id="@+id/btn_send_cmt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -308,5 +310,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="linearLayout,btn_like"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

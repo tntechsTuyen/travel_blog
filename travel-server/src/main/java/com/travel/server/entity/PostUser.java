@@ -24,8 +24,8 @@ public class PostUser {
     private Integer isRead;
 
     @Column(name = "is_like")
-    private Integer isLike;
+    private Integer isLike = 0;
 
     @Column(name = "rate")
-    private Integer rate;
+    private Integer rate = 0;
 }

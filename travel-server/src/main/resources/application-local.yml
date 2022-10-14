@@ -17,7 +17,9 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
   jackson:
     time-zone: Asia/Ho_Chi_Minh
-    date-format: yyyy/MM/dd HH:mm:ss
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    serialization:
+      write-dates-as-timestamps: true
 
 # uploading
 data:

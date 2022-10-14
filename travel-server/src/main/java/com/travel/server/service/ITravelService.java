@@ -11,5 +11,5 @@ public interface ITravelService {
     List<Map<String, Object>> getTravelTop();
     List<Map<String, Object>> getTravelHobbies();
     List<Map<String, Object>> getTravelLocationCode(Integer locationCode);
-    Map<String, Object> getTravelDetail(Integer id);
+    Map<String, Object> getTravelDetail(Integer id, String type);
 }

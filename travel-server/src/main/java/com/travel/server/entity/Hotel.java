@@ -19,6 +19,12 @@ public class Hotel {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "work")
+    private String work;
+
     @Column(name = "description")
     private String description;
 

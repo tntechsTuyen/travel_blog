@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_hotel_thumb"
+            android:id="@+id/iv_thumb"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -27,14 +27,17 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_hotel_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:includeFontPadding="false"
         android:text="Bai Dinh Hotel"
+        android:ellipsize="end"
+        android:maxLines="1"
         android:textColor="@color/color_orange"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/cardView" />
 
@@ -46,11 +49,11 @@
         android:text="@string/ico_marker"
         android:textColor="@color/color_yellow"
         android:textSize="@dimen/ico_small"
-        app:layout_constraintStart_toStartOf="@+id/tv_hotel_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hotel_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <TextView
-        android:id="@+id/tv_hotel_address"
+        android:id="@+id/tv_address"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -61,7 +64,7 @@
         android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo9"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_hotel_phone"
+        app:layout_constraintStart_toStartOf="@+id/tv_phone"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo9"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -75,10 +78,10 @@
         android:textSize="@dimen/ico_small"
         app:layout_constraintEnd_toEndOf="@+id/textViewAwsSo9"
         app:layout_constraintStart_toStartOf="@+id/textViewAwsSo9"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hotel_address" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_address" />
 
     <TextView
-        android:id="@+id/tv_hotel_phone"
+        android:id="@+id/tv_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
@@ -87,7 +90,7 @@
         android:text="02293868789"
         android:textSize="@dimen/text_small"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo10"
-        app:layout_constraintStart_toStartOf="@+id/tv_hotel_time"
+        app:layout_constraintStart_toStartOf="@+id/tv_work"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo10"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -101,10 +104,10 @@
         android:textSize="@dimen/ico_small"
         app:layout_constraintEnd_toEndOf="@+id/textViewAwsSo10"
         app:layout_constraintStart_toStartOf="@+id/textViewAwsSo10"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hotel_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_phone" />
 
     <TextView
-        android:id="@+id/tv_hotel_time"
+        android:id="@+id/tv_work"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -118,16 +121,15 @@
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo11" />
 
     <TextView
-        android:id="@+id/tv_hotel_distance"
+        android:id="@+id/tv_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="3.5km"
         android:includeFontPadding="false"
+        android:text="3.5km"
         android:textSize="@dimen/text_small"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo12"
@@ -137,8 +139,8 @@
         android:text="@string/ico_road"
         android:textColor="@color/color_green"
         android:textSize="@dimen/ico_small"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_hotel_distance"
-        app:layout_constraintEnd_toStartOf="@+id/tv_hotel_distance"
-        app:layout_constraintTop_toTopOf="@+id/tv_hotel_distance" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_distance"
+        app:layout_constraintEnd_toStartOf="@+id/tv_distance"
+        app:layout_constraintTop_toTopOf="@+id/tv_distance" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

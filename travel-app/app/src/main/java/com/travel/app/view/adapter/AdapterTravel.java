@@ -1,6 +1,5 @@
 package com.travel.app.view.adapter;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,12 +58,12 @@ public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder
         }
 
         public void init(){
-            this.ivThumb = this.view.findViewById(R.id.iv_travel_thumb);
+            this.ivThumb = this.view.findViewById(R.id.iv_thumb);
             this.tvAddress = this.view.findViewById(R.id.tv_travel_city);
             this.tvName = this.view.findViewById(R.id.tv_travel_name);
-            this.tvDescription = this.view.findViewById(R.id.tv_travel_description);
-            this.tvTotalView = this.view.findViewById(R.id.tv_travel_total_view);
-            this.tvTotalLike = this.view.findViewById(R.id.tv_travel_total_like);
+            this.tvDescription = this.view.findViewById(R.id.tv_description);
+            this.tvTotalView = this.view.findViewById(R.id.tv_total_view);
+            this.tvTotalLike = this.view.findViewById(R.id.tv_total_like);
             this.tvTotalCmt = this.view.findViewById(R.id.tv_travel_total_cmt);
             this.tvRatePoint = this.view.findViewById(R.id.tv_travel_rate_point);
         }

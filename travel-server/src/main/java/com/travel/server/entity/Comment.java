@@ -26,7 +26,7 @@ public class Comment {
     private String content;
 
     @Column(name = "id_parent")
-    private String idParent;
+    private Integer idParent;
 
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)

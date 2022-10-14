@@ -57,18 +57,19 @@ public class FragmentMainTravelCity extends Fragment {
         this.adapterTravel = new AdapterTravel(this.context, this.listTravel);
         this.rvTravel.setAdapter(this.adapterTravel);
         this.rvTravel.setLayoutManager(new LinearLayoutManager(context));
-
+        this.tvNameCity = this.view.findViewById(R.id.tv_city_name);
     }
 
     public void changeData(@NonNull Location location){
         if(this.location == null || !this.location.getCode().equals(location.getCode())){
             this.location = location;
-            loadTravel();
         }
     }
 
     public void loadTravel(){
-        this.context.getHomeViewModel().getByCity(this.location.getCode()).observe(context, res -> {
+        String name = this.location.getCity().concat(" (").concat(this.location.getCode().toString()).concat(") ");
+        this.tvNameCity.setText(name);
+        this.context.getHomeViewModel().getTravelByCity(this.location.getCode()).observe(context, res -> {
             if(res.getResult() != null && res.getResult().size() > 0){
                 this.listTravel.clear();
                 this.listTravel.addAll(res.getResult());
@@ -79,5 +80,11 @@ public class FragmentMainTravelCity extends Fragment {
 
     public void actionView(){
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadTravel();
     }
 }

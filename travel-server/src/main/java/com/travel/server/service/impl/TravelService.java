@@ -2,6 +2,7 @@ package com.travel.server.service.impl;
 
 import com.travel.server.config.security.JwtUserDetailsService;
 import com.travel.server.entity.User;
+import com.travel.server.repository.PostRepository;
 import com.travel.server.service.ITravelService;
 import com.travel.server.repository.TravelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class TravelService implements ITravelService {
 
     @Autowired
     private TravelRepository travelRepository;
+
+    @Autowired
+    private PostService postService;
 
     @Autowired
     private JwtUserDetailsService userDetailsService;
@@ -45,7 +49,15 @@ public class TravelService implements ITravelService {
     }
 
     @Override
-    public Map<String, Object> getTravelDetail(Integer id) {
-        return travelRepository.findTravelDetail(id);
+    public Map<String, Object> getTravelDetail(Integer id, String type) {
+        Map<String, Object> data = travelRepository.findTravelDetail(id, type);
+        try{
+            User userLogin = userDetailsService.getUserLogin();
+            Integer idPost = (Integer) data.get("idPost");
+            postService.read(idPost, userLogin.getId());
+        } catch (Exception e){
+
+        }
+        return data;
     }
 }

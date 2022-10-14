@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/iv_hotel_thumb"
+        android:id="@+id/iv_thumb"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_hotel_name"
+        android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -25,8 +25,8 @@
         android:textColor="@color/color_orange"
         android:textSize="@dimen/text_large"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/iv_hotel_thumb"
-        app:layout_constraintTop_toTopOf="@+id/iv_hotel_thumb" />
+        app:layout_constraintStart_toEndOf="@+id/iv_thumb"
+        app:layout_constraintTop_toTopOf="@+id/iv_thumb" />
 
     <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo"
@@ -37,8 +37,8 @@
         android:text="@string/ico_eye"
         android:textColor="@color/color_yellow"
         android:textSize="@dimen/ico_small"
-        app:layout_constraintStart_toStartOf="@+id/tv_hotel_name"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hotel_name" />
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
     <TextView
         android:id="@+id/tv_total_view"
@@ -117,7 +117,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/iv_hotel_thumb" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_thumb" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_hotel_meta"

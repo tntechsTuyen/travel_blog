@@ -53,6 +53,7 @@ public class DialogMainMenu {
                 SessionUtils.remove(context, DataStatic.SESSION.KEY.AUTH);
                 updateViewAuth();
                 Toast.makeText(context, "Bạn đã đăng xuất khỏi hệ thống", Toast.LENGTH_SHORT).show();
+                context.getFragmentManager().popBackStack();
                 hide();
             }
         });

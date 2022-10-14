@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.view.icon.TextViewAwsSo;
+import com.travel.app.data.model.Travel;
 import com.travel.app.data.model.TravelMeta;
 
 import java.util.List;
@@ -32,21 +33,12 @@ public class AdapterTravelMeta extends RecyclerView.Adapter<AdapterTravelMeta.Vi
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(RES_ID, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (viewHolder.isShowContent()) {
-                    viewHolder.hide();
-                } else {
-                    viewHolder.show();
-                }
-            }
-        });
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.loadDataToView(travelMetas.get(position));
     }
 
     @Override
@@ -64,6 +56,7 @@ public class AdapterTravelMeta extends RecyclerView.Adapter<AdapterTravelMeta.Vi
             super(itemView);
             this.view = itemView;
             this.init();
+            this.actionView();
         }
 
         public void init(){
@@ -73,8 +66,22 @@ public class AdapterTravelMeta extends RecyclerView.Adapter<AdapterTravelMeta.Vi
             this.tvMetaName = this.view.findViewById(R.id.tv_travel_meta_name);
         }
 
-        public void loadDataToView(){
+        public void actionView(){
+            this.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isShowContent()) {
+                        hide();
+                    } else {
+                        show();
+                    }
+                }
+            });
+        }
 
+        public void loadDataToView(TravelMeta travelMeta){
+            this.tvMetaName.setText(travelMeta.getName());
+            this.tvMetaContent.setText(travelMeta.getValue());
         }
 
         public void hide(){

@@ -13,6 +13,8 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
             ", t.description AS description " +
+            ", l.longitude AS lon " +
+            ", l.latitude AS lat " +
             ", l.address AS address " +
             ", l.city AS city " +
             ", l.country AS country " +
@@ -21,6 +23,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType" +
             ", tg.name AS tagName " +
@@ -38,6 +41,8 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
             ", t.description AS description " +
+            ", l.longitude AS lon " +
+            ", l.latitude AS lat " +
             ", l.address AS address " +
             ", l.city AS city " +
             ", l.country AS country " +
@@ -46,6 +51,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
             ", tg.name AS tagName " +
@@ -63,6 +69,8 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
             ", t.description AS description " +
+            ", l.longitude AS lon " +
+            ", l.latitude AS lat " +
             ", l.address AS address " +
             ", l.city AS city " +
             ", l.country AS country " +
@@ -71,6 +79,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
             ", tg.name AS tagName " +
@@ -94,6 +103,8 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
             ", t.description AS description " +
+            ", l.longitude AS lon " +
+            ", l.latitude AS lat " +
             ", l.address AS address " +
             ", l.city AS city " +
             ", l.country AS country " +
@@ -102,6 +113,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
             ", tg.name AS tagName " +
@@ -121,6 +133,8 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
             ", t.description AS description " +
+            ", l.longitude AS lon " +
+            ", l.latitude AS lat " +
             ", l.address AS address " +
             ", l.city AS city " +
             ", l.country AS country " +
@@ -129,6 +143,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
             ", tg.name AS tagName " +
@@ -141,7 +156,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
-            "WHERE p.type = 'POST' " +
+            "WHERE p.type = :type " +
             "AND t.id = :id ")
-    Map<String, Object> findTravelDetail(@Param("id") Integer id);
+    Map<String, Object> findTravelDetail(@Param("id") Integer id, @Param("type") String type);
 }

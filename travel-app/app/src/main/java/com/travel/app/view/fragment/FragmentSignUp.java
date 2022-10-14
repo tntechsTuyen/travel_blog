@@ -1,7 +1,6 @@
 package com.travel.app.view.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +42,7 @@ public class FragmentSignUp extends Fragment {
     }
 
     public void init(){
-        this.etUsername = this.view.findViewById(R.id.et_username);
+        this.etUsername = this.view.findViewById(R.id.et_cmt);
         this.etPassword = this.view.findViewById(R.id.et_password);
         this.etRePassword = this.view.findViewById(R.id.et_re_password);
         this.etFullName = this.view.findViewById(R.id.et_full_name);
