@@ -1,7 +1,9 @@
 package com.travel.server.service.impl;
 
+import com.travel.server.config.security.JwtUserDetailsService;
 import com.travel.server.entity.Post;
 import com.travel.server.entity.PostUser;
+import com.travel.server.entity.User;
 import com.travel.server.repository.PostRepository;
 import com.travel.server.repository.PostUserRepository;
 import com.travel.server.service.IPostService;
@@ -18,6 +20,9 @@ public class PostService implements IPostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private JwtUserDetailsService userDetailsService;
 
     @Override
     public PostUser read(Integer idPost, Integer idUser) {
@@ -59,6 +64,8 @@ public class PostService implements IPostService {
 
     @Override
     public PostUser rate(PostUser mPostUser) {
+        User userLogin = userDetailsService.getUserLogin();
+        mPostUser.setIdUser(userLogin.getId());
         PostUser postUser = postUserRepository.findByIdPostAndIdUser(mPostUser.getIdPost(), mPostUser.getIdUser());
         if(postUser == null) {
             postUser = new PostUser();
@@ -72,7 +79,7 @@ public class PostService implements IPostService {
             Post post = opPost.get();
             post.setTotalLike(post.getTotalLike() + 1);
             postRepository.save(post);
-//            postUserRepository.updatePostRatePoint(idPost);
+            postUserRepository.updatePostRatePoint(post.getId());
         }
         return postUser;
     }

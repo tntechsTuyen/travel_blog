@@ -14,7 +14,7 @@ public interface PostUserRepository extends JpaRepository<PostUser, Integer> {
 
     @Modifying
     @Transactional
-    @Query(" UPDATE post " +
+    @Query(" UPDATE Post " +
             " SET ratePoint = ( "+
             "   SELECT AVG(rate) " +
             "   FROM PostUser " +

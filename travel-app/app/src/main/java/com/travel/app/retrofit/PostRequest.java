@@ -22,6 +22,6 @@ public interface PostRequest {
     @POST("api/post/comment")
     Call<ApiResponse<Comment>> postComment(@Header("Authorization") String token, @Body Comment comment);
 
-    @GET("api/post/rate")
-    Call<ApiResponse<PostUser>> postRate(@Body PostUser postUser);
+    @POST("api/post/rate")
+    Call<ApiResponse<PostUser>> postRate(@Header("Authorization") String token, @Body PostUser postUser);
 }

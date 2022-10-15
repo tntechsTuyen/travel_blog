@@ -7,6 +7,7 @@ import com.travel.app.common.response.ApiResponse;
 import com.travel.app.common.utils.RestUtils;
 import com.travel.app.data.model.Comment;
 import com.travel.app.data.model.Location;
+import com.travel.app.data.model.PostUser;
 import com.travel.app.retrofit.LocationRequest;
 import com.travel.app.retrofit.PostRequest;
 import com.travel.app.retrofit.RetrofitRequest;
@@ -51,6 +52,23 @@ public class PostRepository {
 
             @Override
             public void onFailure(Call<ApiResponse<Comment>> call, Throwable t) {
+
+            }
+        });
+        return data;
+    }
+
+    public LiveData<ApiResponse<PostUser>> postRate(String token, PostUser postUser){
+        MutableLiveData<ApiResponse<PostUser>> data = new MutableLiveData<>();
+        token = (token != null & token.trim().length() > 0) ? "Bearer ".concat(token).replaceAll("\"", "") : "";
+        postRequest.postRate(token, postUser).enqueue(new Callback<ApiResponse<PostUser>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<PostUser>> call, Response<ApiResponse<PostUser>> response) {
+                data.setValue(RestUtils.get(response));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<PostUser>> call, Throwable t) {
 
             }
         });

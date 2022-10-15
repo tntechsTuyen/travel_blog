@@ -10,6 +10,7 @@ import com.travel.app.common.response.ApiResponse;
 import com.travel.app.data.model.Comment;
 import com.travel.app.data.model.Hotel;
 import com.travel.app.data.model.Location;
+import com.travel.app.data.model.PostUser;
 import com.travel.app.data.model.Travel;
 import com.travel.app.data.model.TravelMeta;
 import com.travel.app.repository.LocationRepository;
@@ -69,5 +70,9 @@ public class HomeViewModel extends AndroidViewModel {
 
     public LiveData<ApiResponse<Comment>> postComment(String token, Comment comment){
         return this.postRepository.postComment(token, comment);
+    }
+
+    public LiveData<ApiResponse<PostUser>> postRate(String token, PostUser postUser){
+        return this.postRepository.postRate(token, postUser);
     }
 }

@@ -7,4 +7,11 @@ public class PostUser {
     private Integer isRead;
     private Integer isLike;
     private Integer rate;
+
+    public PostUser(){ }
+
+    public PostUser(Integer idPost, Integer rate) {
+        this.idPost = idPost;
+        this.rate = rate;
+    }
 }

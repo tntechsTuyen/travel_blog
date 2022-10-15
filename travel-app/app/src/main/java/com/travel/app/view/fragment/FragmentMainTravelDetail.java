@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ import com.travel.app.view.adapter.AdapterComment;
 import com.travel.app.view.adapter.AdapterTravel;
 import com.travel.app.view.adapter.AdapterTravelHotel;
 import com.travel.app.view.adapter.AdapterTravelMeta;
+import com.travel.app.view.dialog.DialogRate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +48,7 @@ public class FragmentMainTravelDetail extends Fragment {
     private RecyclerView rvHotel, rvComment, rvTravelMeta;
     private ImageView ivThumb;
     private TextView tvName, tvTotalView, tvTotalLike, tvDesc, tvRatePoint, btnGoMap, btnLike;
+    private LinearLayout llRateView;
     private TextViewAwsSo btnSendCmt;
     private EditText etCmt;
     private AdapterTravelHotel adapterTravelHotel;
@@ -100,6 +103,7 @@ public class FragmentMainTravelDetail extends Fragment {
         this.etCmt = this.view.findViewById(R.id.et_cmt);
         this.btnSendCmt = this.view.findViewById(R.id.btn_send_cmt);
         this.grAuth = this.view.findViewById(R.id.gr_auth);
+        this.llRateView = this.view.findViewById(R.id.ll_rate_view);
     }
 
     @Override
@@ -216,6 +220,13 @@ public class FragmentMainTravelDetail extends Fragment {
                         }
                     });
                 }
+            }
+        });
+
+        this.llRateView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DialogRate(context, travel.getId(), context.getHomeViewModel()).show();
             }
         });
     }
