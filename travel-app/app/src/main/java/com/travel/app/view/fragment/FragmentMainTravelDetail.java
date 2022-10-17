@@ -60,13 +60,14 @@ public class FragmentMainTravelDetail extends Fragment {
     private AdapterTravelHotel adapterTravelHotel;
     private AdapterComment adapterComment;
     private AdapterTravelMeta adapterTravelMeta;
-    private List<Hotel> listHotel;
-    private List<Comment> listComment;
-    private List<TravelMeta> listTravelMeta;
+    private List<Hotel> listHotel = new ArrayList<>();
+    private List<Comment> listComment = new ArrayList<>();
+    private List<TravelMeta> listTravelMeta = new ArrayList<>();
     private Travel travel = null;
 
-    public FragmentMainTravelDetail(MainActivity mContext){
+    public FragmentMainTravelDetail(MainActivity mContext, Travel travel){
         this.context = mContext;
+        this.travel = travel;
     }
 
     @Nullable
@@ -81,19 +82,16 @@ public class FragmentMainTravelDetail extends Fragment {
 
     private void init(){
         this.rvHotel = this.view.findViewById(R.id.rv_travel_hotel);
-        this.listHotel = new ArrayList<>();
         this.adapterTravelHotel = new AdapterTravelHotel(this.context, this.listHotel);
         this.rvHotel.setAdapter(this.adapterTravelHotel);
         this.rvHotel.setLayoutManager(new LinearLayoutManager(context));
 
         this.rvComment = this.view.findViewById(R.id.rv_comment);
-        this.listComment = new ArrayList<>();
         this.adapterComment = new AdapterComment(this.context, this.listComment);
         this.rvComment.setAdapter(this.adapterComment);
         this.rvComment.setLayoutManager(new LinearLayoutManager(context));
 
         this.rvTravelMeta = this.view.findViewById(R.id.rv_travel_meta);
-        this.listTravelMeta = new ArrayList<>();
         this.adapterTravelMeta = new AdapterTravelMeta(this.context, this.listTravelMeta);
         this.rvTravelMeta.setAdapter(this.adapterTravelMeta);
         this.rvTravelMeta.setLayoutManager(new LinearLayoutManager(context));
@@ -106,8 +104,8 @@ public class FragmentMainTravelDetail extends Fragment {
         this.tvRatePoint = this.view.findViewById(R.id.tv_rate_point);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
-        this.etCmt = this.view.findViewById(R.id.et_search);
-        this.btnSendCmt = this.view.findViewById(R.id.btn_search);
+        this.etCmt = this.view.findViewById(R.id.et_cmt);
+        this.btnSendCmt = this.view.findViewById(R.id.btn_send_cmt);
         this.grAuth = this.view.findViewById(R.id.gr_auth);
         this.llRateView = this.view.findViewById(R.id.ll_rate_view);
 
@@ -139,42 +137,34 @@ public class FragmentMainTravelDetail extends Fragment {
         loadData();
     }
 
-    public void change(Travel travel){
-        if(this.travel == null || !this.travel.getId().equals(travel.getId())){
-            this.travel = travel;
-        }
-    }
-
     private void loadData(){
 
         loadDetail();
-        loadTravelMeta();
-        loadHotel();
-        loadComment();
     }
 
     private void loadDetail(){
         String token = SessionUtils.get(this.context, DataStatic.SESSION.KEY.AUTH, "");
-        this.context.getHomeViewModel().getDetail(token, this.travel.getId()).observe(context, res -> {
+        this.context.getHomeViewModel().getTravelDetail(token, this.travel.getId()).observe(context, res -> {
             if(res.getResult() != null){
                 this.travel = res.getResult();
                 this.tvName.setText(this.travel.getName());
                 this.tvTotalView.setText(this.travel.getTotalView().toString());
                 this.tvTotalLike.setText(this.travel.getTotalLike().toString());
                 this.tvDesc.setText(this.travel.getDescription());
-                this.tvRatePoint.setText(this.travel.getRatePoint().toString());
-                loadStar(this.travel.getRatePoint());
-
+                this.tvRatePoint.setText(String.format("(%s / %s)", this.travel.getRatePoint().toString(), "5"));
+                loadStar();
+                loadTravelMeta();
+                loadHotel();
+                loadComment();
             }
         });
     }
 
-    private void loadStar(Double ratePoint){
+    public void loadStar(){
         Typeface typeface = context.getResources().getFont(R.font.fa_solid);
-        if(ratePoint > 0){
-            Integer rb = ratePoint.intValue();
-            Double re = ratePoint % 1;
-//            if(rb < 5 && re > 0) lstStar.get(rb).setTypeface(typeface); lstStar.get(rb).setText(getResources().getText(R.string.ico_star_half));
+        if(travel.getRatePoint() > 0){
+            Integer rb = travel.getRatePoint().intValue();
+            Double re = travel.getRatePoint() % 1;
             for(int i = 0; i < rb; i++){
                 lstStar.get(i).setTypeface(typeface);
             }
@@ -182,35 +172,35 @@ public class FragmentMainTravelDetail extends Fragment {
     }
 
     private void loadHotel(){
-        this.adapterTravelHotel.setTravel(this.travel);
-        this.context.getHomeViewModel().getHotelByTravel(this.travel.getId()).observe(context, res -> {
+        this.adapterTravelHotel.setTravel(travel);
+        this.context.getHomeViewModel().getHotelByTravel(travel.getId()).observe(context, res -> {
+            this.listHotel.clear();
             if(res.getResult() != null && res.getResult().size() > 0){
-                this.listHotel.clear();
                 this.listHotel.addAll(res.getResult());
-                this.adapterTravelHotel.notifyDataSetChanged();
             }
+            this.adapterTravelHotel.notifyDataSetChanged();
         });
     }
 
     private void loadComment(){
 
-        this.context.getHomeViewModel().getCommentByTravel(this.travel).observe(context, res -> {
+        this.context.getHomeViewModel().getComment(this.travel.getIdPost()).observe(context, res -> {
+            this.listComment.clear();
             if(res.getResult() != null && res.getResult().size() > 0){
-                this.listComment.clear();
                 this.listComment.addAll(res.getResult());
-                this.adapterComment.notifyDataSetChanged();
             }
+            this.adapterComment.notifyDataSetChanged();
         });
     }
 
     private void loadTravelMeta(){
 
-        this.context.getHomeViewModel().getMetas(this.travel.getId()).observe(context, res -> {
+        this.context.getHomeViewModel().getTravelMetas(this.travel.getId()).observe(context, res -> {
+            this.listTravelMeta.clear();
             if(res.getResult() != null && res.getResult().size() > 0){
-                this.listTravelMeta.clear();
                 this.listTravelMeta.addAll(res.getResult());
-                this.adapterTravelMeta.notifyDataSetChanged();
             }
+            this.adapterTravelMeta.notifyDataSetChanged();
         });
     }
 
@@ -233,7 +223,7 @@ public class FragmentMainTravelDetail extends Fragment {
             public void onClick(View view) {
                 String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
                 PostUser postUser = new PostUser();
-                postUser.setIdPost(travel.getId());
+                postUser.setIdPost(travel.getIdPost());
                 postUser.setIsLike(1);
                 context.getHomeViewModel().postLike(token, postUser).observe(context, res -> {
                     Log.i("postLike", res.getResult().toString());
@@ -247,7 +237,7 @@ public class FragmentMainTravelDetail extends Fragment {
                 String strCmt = etCmt.getText().toString();
                 if(strCmt.length() > 0){
                     String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
-                    Comment comment = new Comment(travel.getId(), strCmt);
+                    Comment comment = new Comment(travel.getIdPost(), strCmt);
                     etCmt.setText("");
                     View v = context.getCurrentFocus();
                     if (v != null) {
@@ -267,7 +257,10 @@ public class FragmentMainTravelDetail extends Fragment {
         this.llRateView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DialogRate(context, travel.getId(), context.getHomeViewModel()).show();
+                String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
+                if(token.length() != 0){
+                    new DialogRate(context, travel.getIdPost(), context.getHomeViewModel()).show();
+                }
             }
         });
     }

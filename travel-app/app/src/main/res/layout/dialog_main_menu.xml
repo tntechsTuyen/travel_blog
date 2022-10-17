@@ -9,7 +9,7 @@
     android:background="@drawable/bg_dialog_main_menu_item">
 
     <Button
-        android:id="@+id/btn_search"
+        android:id="@+id/btn_send_cmt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#dfdfdf"
-        app:layout_constraintTop_toBottomOf="@+id/btn_search"
+        app:layout_constraintTop_toBottomOf="@+id/btn_send_cmt"
         tools:ignore="MissingConstraints" />
 
     <Button

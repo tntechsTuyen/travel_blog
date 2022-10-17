@@ -126,7 +126,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="@string/txt_rate_ex"
         android:textSize="@dimen/text_small"
         app:layout_constraintEnd_toEndOf="@+id/ll_rate_view"
         app:layout_constraintHorizontal_bias="0.496"
@@ -256,7 +255,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <EditText
-            android:id="@+id/et_search"
+            android:id="@+id/et_cmt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -270,7 +269,7 @@
             android:textStyle="italic" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
-            android:id="@+id/btn_search"
+            android:id="@+id/btn_send_cmt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"

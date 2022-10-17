@@ -59,8 +59,8 @@
         android:layout_marginStart="16dp"
         android:includeFontPadding="false"
         android:text="@string/ico_heart"
-        android:textSize="@dimen/ico_small"
         android:textColor="@color/color_yellow"
+        android:textSize="@dimen/ico_small"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo"
         app:layout_constraintStart_toEndOf="@+id/tv_total_view"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
@@ -77,6 +77,57 @@
         app:layout_constraintStart_toEndOf="@+id/textViewAwsSo1"
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo1" />
 
+    <com.travel.app.common.view.icon.TextViewAwsSo
+        android:id="@+id/textViewAwsSo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:text="@string/ico_phone"
+        android:textColor="@color/color_yellow"
+        android:textSize="@dimen/ico_small"
+        app:layout_constraintStart_toStartOf="@+id/textViewAwsSo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAwsSo"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo2"
+        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo2"
+        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo2"
+        tools:visibility="gone" />
+
+    <com.travel.app.common.view.icon.TextViewAwsSo
+        android:id="@+id/textViewAwsSo3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:includeFontPadding="false"
+        android:text="@string/ico_business_time"
+        android:textColor="@color/color_yellow"
+        android:textSize="@dimen/ico_small"
+        app:layout_constraintStart_toStartOf="@+id/textViewAwsSo"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAwsSo2"
+        tools:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_work"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:includeFontPadding="false"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo3"
+        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo3"
+        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo3"
+        tools:visibility="gone" />
+
+
     <TextView
         android:id="@+id/btn_go_map"
         android:layout_width="wrap_content"
@@ -90,7 +141,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/text_normal"
         app:layout_constraintStart_toStartOf="@+id/textViewAwsSo"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAwsSo" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAwsSo3" />
 
     <com.travel.app.common.view.icon.TextViewAwsRe
         android:id="@+id/btn_like"
@@ -137,7 +188,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_hotel_meta">
 
-        <com.travel.app.common.view.icon.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsRe
             android:id="@+id/twa_star_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -146,7 +197,7 @@
             android:textColor="@color/color_green"
             android:textSize="@dimen/ico_big_large" />
 
-        <com.travel.app.common.view.icon.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsRe
             android:id="@+id/twa_star_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,7 +207,7 @@
             android:textColor="@color/color_green"
             android:textSize="@dimen/ico_big_large" />
 
-        <com.travel.app.common.view.icon.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsRe
             android:id="@+id/twa_star_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -166,7 +217,7 @@
             android:textColor="@color/color_green"
             android:textSize="@dimen/ico_big_large" />
 
-        <com.travel.app.common.view.icon.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsRe
             android:id="@+id/twa_star_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -176,21 +227,22 @@
             android:textColor="@color/color_green"
             android:textSize="@dimen/ico_big_large" />
 
-        <com.travel.app.common.view.icon.TextViewAwsSo
+        <com.travel.app.common.view.icon.TextViewAwsRe
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:includeFontPadding="false"
-            android:text="@string/ico_star_half"
+            android:text="@string/ico_star"
             android:textColor="@color/color_green"
             android:textSize="@dimen/ico_big_large" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_rate_point"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:text="@string/txt_rate_ex"
+        android:text=""
         android:textSize="@dimen/text_small"
         app:layout_constraintEnd_toEndOf="@+id/ll_rate_view"
         app:layout_constraintHorizontal_bias="0.496"
@@ -220,7 +272,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <EditText
-            android:id="@+id/et_comment"
+            android:id="@+id/et_cmt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -234,6 +286,7 @@
             android:textStyle="italic" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
+            android:id="@+id/btn_send_cmt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
@@ -274,5 +327,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/gr_auth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="linearLayout,btn_like" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

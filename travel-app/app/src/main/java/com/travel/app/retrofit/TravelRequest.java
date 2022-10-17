@@ -12,8 +12,12 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface TravelRequest {
+
+    @GET("api/travel/list")
+    Call<ApiResponse<List<Travel>>> getList(@Query("s") String search);
 
     @GET("api/travel/ads")
     Call<ApiResponse<List<Travel>>> getAds();
@@ -35,8 +39,5 @@ public interface TravelRequest {
 
     @GET("api/travel/{id}/metas")
     Call<ApiResponse<List<TravelMeta>>> getTravelMetas(@Path("id") Integer id);
-
-    @GET("api/travel/{id}/comment")
-    Call<ApiResponse<List<Comment>>> getTravelComment(@Path("id") Integer id);
 
 }

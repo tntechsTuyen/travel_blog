@@ -83,8 +83,10 @@ public class AdapterTravelHotel extends RecyclerView.Adapter<AdapterTravelHotel.
             this.tvAddress.setText(hotel.getAddress());
             this.tvPhone.setText(hotel.getPhone());
             this.tvWork.setText(hotel.getWork());
-            String strDistance = String.format("%.1f", LocationUtils.distance(travel.getLat(), travel.getLon(), hotel.getLat(), hotel.getLon())).concat("km");
-            this.tvDistance.setText(strDistance);
+            if(travel != null){
+                String strDistance = String.format("%.1f", LocationUtils.distance(travel.getLat(), travel.getLon(), hotel.getLat(), hotel.getLon())).concat("km");
+                this.tvDistance.setText(strDistance);
+            }
         }
 
         public void actionView(Hotel hotel){

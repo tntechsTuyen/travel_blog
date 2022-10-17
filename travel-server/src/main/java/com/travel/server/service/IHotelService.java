@@ -6,4 +6,5 @@ import java.util.Map;
 public interface IHotelService {
 
     List<Map<String, Object>> getHotelByTravel(Integer idTravel, Double distance);
+    Map<String, Object> getHotelDetail(Integer idHotel);
 }

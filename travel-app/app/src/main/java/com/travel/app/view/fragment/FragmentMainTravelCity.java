@@ -37,8 +37,9 @@ public class FragmentMainTravelCity extends Fragment {
     private List<Travel> listTravel;
     private Location location = null;
 
-    public FragmentMainTravelCity(MainActivity mContext){
+    public FragmentMainTravelCity(MainActivity mContext, Location location){
         this.context = mContext;
+        this.location = location;
     }
 
     @Nullable
@@ -58,12 +59,6 @@ public class FragmentMainTravelCity extends Fragment {
         this.rvTravel.setAdapter(this.adapterTravel);
         this.rvTravel.setLayoutManager(new LinearLayoutManager(context));
         this.tvNameCity = this.view.findViewById(R.id.tv_city_name);
-    }
-
-    public void changeData(@NonNull Location location){
-        if(this.location == null || !this.location.getCode().equals(location.getCode())){
-            this.location = location;
-        }
     }
 
     public void loadTravel(){

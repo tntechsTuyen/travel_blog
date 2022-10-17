@@ -47,6 +47,7 @@ public class AdapterHotelMeta extends RecyclerView.Adapter<AdapterHotelMeta.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.loadDataToView(hotelMetas.get(position));
     }
 
     @Override
@@ -64,6 +65,7 @@ public class AdapterHotelMeta extends RecyclerView.Adapter<AdapterHotelMeta.View
             super(itemView);
             this.view = itemView;
             this.init();
+            this.actionView();
         }
 
         public void init(){
@@ -73,8 +75,22 @@ public class AdapterHotelMeta extends RecyclerView.Adapter<AdapterHotelMeta.View
             this.tvMetaName = this.view.findViewById(R.id.tv_hotel_meta_name);
         }
 
-        public void loadDataToView(){
+        public void actionView(){
+            this.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isShowContent()) {
+                        hide();
+                    } else {
+                        show();
+                    }
+                }
+            });
+        }
 
+        public void loadDataToView(HotelMeta hotelMeta){
+            this.tvMetaName.setText(hotelMeta.getName());
+            this.tvMetaContent.setText(hotelMeta.getValue());
         }
 
         public void hide(){

@@ -40,6 +40,9 @@ public class Post {
     @Column(name = "rate_point")
     private Double ratePoint;
 
+    @Column(name = "is_ads")
+    private Integer isAds;
+
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
     private Date createdDate;

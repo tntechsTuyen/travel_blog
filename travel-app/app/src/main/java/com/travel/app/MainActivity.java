@@ -17,8 +17,10 @@ import com.travel.app.data.model.Travel;
 import com.travel.app.view.dialog.DialogMainMenu;
 import com.travel.app.view.fragment.FragmentMainHome;
 import com.travel.app.view.fragment.FragmentMainHotelDetail;
+import com.travel.app.view.fragment.FragmentMainSetting;
 import com.travel.app.view.fragment.FragmentMainTravelCity;
 import com.travel.app.view.fragment.FragmentMainTravelDetail;
+import com.travel.app.view.fragment.FragmentMainTravelSearch;
 import com.travel.app.viewmodel.HomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     private FragmentMainTravelCity fragmentMainTravelCity = null;
     private FragmentMainTravelDetail fragmentMainTravelDetail = null;
     private FragmentMainHotelDetail fragmentMainHotelDetail = null;
+    private FragmentMainTravelSearch fragmentMainTravelSearch = null;
+    private FragmentMainSetting fragmentMainSetting = null;
+
     private MyToolbar toolbar;
     private DialogMainMenu dialogMainMenu;
 
@@ -65,38 +70,42 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFragmentMainHome(){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if(fragmentMainHome == null){
-            fragmentMainHome = new FragmentMainHome(MainActivity.this);
-        }
+        fragmentMainHome = new FragmentMainHome(MainActivity.this);
         transaction.replace(R.id.layout_content, fragmentMainHome).commitAllowingStateLoss();
     }
 
     public void setFragmentMainTravelCity(Location location){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if(fragmentMainTravelCity == null){
-            fragmentMainTravelCity = new FragmentMainTravelCity(MainActivity.this);
-        }
+        fragmentMainTravelCity = new FragmentMainTravelCity(MainActivity.this, location);
         transaction.replace(R.id.layout_content, fragmentMainTravelCity).addToBackStack(DataStatic.STACK_APP);
-        fragmentMainTravelCity.changeData(location);
         transaction.commit();
     }
 
     public void setFragmentMainTravelDetail(Travel travel){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if(fragmentMainTravelDetail == null){
-            fragmentMainTravelDetail = new FragmentMainTravelDetail(MainActivity.this);
-        }
+        fragmentMainTravelDetail = new FragmentMainTravelDetail(MainActivity.this, travel);
         transaction.replace(R.id.layout_content, fragmentMainTravelDetail).addToBackStack(DataStatic.STACK_APP);
-        fragmentMainTravelDetail.change(travel);
         transaction.commit();
     }
 
     public void setFragmentMainHotelDetail(Hotel hotel){
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if(fragmentMainHotelDetail == null){
-            fragmentMainHotelDetail = new FragmentMainHotelDetail(MainActivity.this);
-        }
+        fragmentMainHotelDetail = new FragmentMainHotelDetail(MainActivity.this, hotel);
         transaction.replace(R.id.layout_content, fragmentMainHotelDetail).addToBackStack(DataStatic.STACK_APP);
+        transaction.commit();
+    }
+
+    public void setFragmentMainTravelSearch(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        fragmentMainTravelSearch = new FragmentMainTravelSearch(MainActivity.this);
+        transaction.replace(R.id.layout_content, fragmentMainTravelSearch).addToBackStack(DataStatic.STACK_APP);
+        transaction.commit();
+    }
+
+    public void setFragmentMainSetting(){
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        fragmentMainSetting = new FragmentMainSetting(MainActivity.this);
+        transaction.replace(R.id.layout_content, fragmentMainSetting).addToBackStack(DataStatic.STACK_APP);
         transaction.commit();
     }
 

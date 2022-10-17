@@ -2,7 +2,7 @@ package com.travel.app.view.dialog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,17 +12,19 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.travel.app.AuthActivity;
+import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.SessionUtils;
+import com.travel.app.view.fragment.FragmentMainTravelSearch;
 
 public class DialogMainMenu {
 
-    private Activity context;
+    private MainActivity context;
     private Dialog dialog;
     private Button btnSearch, btnTagSetup, btnSignIn, btnSignOut;
 
-    public DialogMainMenu(Activity context){
+    public DialogMainMenu(MainActivity context){
         this.context = context;
         this.dialog = new Dialog(context);
         this.dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -33,7 +35,7 @@ public class DialogMainMenu {
     }
 
     private void init(){
-        this.btnSearch = this.dialog.findViewById(R.id.btn_search);
+        this.btnSearch = this.dialog.findViewById(R.id.btn_send_cmt);
         this.btnTagSetup = this.dialog.findViewById(R.id.btn_tag_setup);
         this.btnSignIn = this.dialog.findViewById(R.id.btn_sign_in);
         this.btnSignOut = this.dialog.findViewById(R.id.btn_sign_out);
@@ -47,13 +49,30 @@ public class DialogMainMenu {
                 hide();
             }
         });
+
         this.btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SessionUtils.remove(context, DataStatic.SESSION.KEY.AUTH);
                 updateViewAuth();
                 Toast.makeText(context, "Bạn đã đăng xuất khỏi hệ thống", Toast.LENGTH_SHORT).show();
-                context.getFragmentManager().popBackStack();
+                context.setFragmentMainHome();
+                hide();
+            }
+        });
+
+        this.btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.setFragmentMainTravelSearch();
+                hide();
+            }
+        });
+
+        this.btnTagSetup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.setFragmentMainSetting();
                 hide();
             }
         });
@@ -79,4 +98,6 @@ public class DialogMainMenu {
             this.btnSignIn.setVisibility(View.VISIBLE);
         }
     }
+
+
 }

@@ -22,8 +22,8 @@ public class ApiTravelController {
     private IHotelService hotelService;
 
     @GetMapping("/list")
-    public ApiResponse<?> travelList(){
-        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelList());
+    public ApiResponse<?> travelList(@RequestParam(value = "s", required = false, defaultValue = "") String s){
+        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelList(s));
     }
 
     @GetMapping("/ads")
@@ -37,8 +37,8 @@ public class ApiTravelController {
     }
 
     @GetMapping("/{id}")
-    public ApiResponse<?> travelDetail(@PathVariable("id") Integer id, @RequestParam(value = "type", required = false, defaultValue = "POST") String type){
-        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelDetail(id, type));
+    public ApiResponse<?> travelDetail(@PathVariable("id") Integer id){
+        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelDetail(id));
     }
 
     @GetMapping("/city/{code}")
@@ -57,8 +57,8 @@ public class ApiTravelController {
     }
 
     @GetMapping("/hotel/{id}")
-    public ApiResponse<?> hotelDetail(@PathVariable("id") Integer id, @RequestParam(value = "type", required = false, defaultValue = "POST") String type){
-        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelDetail(id, type));
+    public ApiResponse<?> hotelDetail(@PathVariable("id") Integer id){
+        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelDetail(id));
     }
 
 }

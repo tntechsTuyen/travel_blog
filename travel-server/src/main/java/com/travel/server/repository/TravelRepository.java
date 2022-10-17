@@ -34,8 +34,9 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
             "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
-            "LEFT JOIN Media m ON pm.idMedia = m.id")
-    List<Map<String, Object>> findTravelList();
+            "LEFT JOIN Media m ON pm.idMedia = m.id " +
+            "WHERE t.name LIKE %:s%")
+    List<Map<String, Object>> findTravelList(@Param("s") String search);
 
     @Query("SELECT t.id AS id " +
             ", t.name AS name " +
@@ -62,7 +63,7 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
-            "WHERE p.type = 'ADS' ")
+            "WHERE p.isAds = 1 ")
     List<Map<String, Object>> findTravelAds();
 
     @Query("SELECT t.id AS id " +
@@ -183,7 +184,6 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
-            "WHERE p.type = :type " +
-            "AND t.id = :id ")
-    Map<String, Object> findTravelDetail(@Param("id") Integer id, @Param("type") String type);
+            "WHERE t.id = :id ")
+    Map<String, Object> findTravelDetail(@Param("id") Integer id);
 }

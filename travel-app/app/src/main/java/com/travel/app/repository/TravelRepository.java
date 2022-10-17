@@ -29,6 +29,22 @@ public class TravelRepository {
         travelRequest = RetrofitRequest.instance().create(TravelRequest.class);
     }
 
+    public LiveData<ApiResponse<List<Travel>>> getList(String search){
+        MutableLiveData<ApiResponse<List<Travel>>> data = new MutableLiveData<>();
+        travelRequest.getList(search).enqueue(new Callback<ApiResponse<List<Travel>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<Travel>>> call, Response<ApiResponse<List<Travel>>> response) {
+                data.setValue(RestUtils.get(response));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<Travel>>> call, Throwable t) {
+
+            }
+        });
+        return data;
+    }
+
     public LiveData<ApiResponse<List<Travel>>> getAds(){
         MutableLiveData<ApiResponse<List<Travel>>> data = new MutableLiveData<>();
         travelRequest.getAds().enqueue(new Callback<ApiResponse<List<Travel>>>() {

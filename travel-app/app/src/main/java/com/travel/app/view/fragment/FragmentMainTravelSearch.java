@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
+import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.data.model.Location;
 import com.travel.app.data.model.Travel;
 import com.travel.app.view.adapter.AdapterTravel;
@@ -29,9 +32,12 @@ public class FragmentMainTravelSearch extends Fragment {
     private MainActivity context;
     private View view;
     private RecyclerView rvTravel;
+    private EditText etSearch;
+    private TextViewAwsSo btnSearch;
 
     private AdapterTravel adapterTravel;
     private List<Travel> listTravel;
+    private String searchText = "";
 
     public FragmentMainTravelSearch(MainActivity mContext){
         this.context = mContext;
@@ -44,6 +50,7 @@ public class FragmentMainTravelSearch extends Fragment {
         //init view
         this.init();
         this.actionView();
+        loadTravel();
         return this.view;
     }
 
@@ -53,25 +60,34 @@ public class FragmentMainTravelSearch extends Fragment {
         this.adapterTravel = new AdapterTravel(this.context, this.listTravel);
         this.rvTravel.setAdapter(this.adapterTravel);
         this.rvTravel.setLayoutManager(new LinearLayoutManager(context));
+        this.etSearch = this.view.findViewById(R.id.et_search);
+        this.btnSearch = this.view.findViewById(R.id.btn_search);
+
     }
 
     public void loadTravel(){
-//        this.context.getHomeViewModel().getTravelByCity(this.location.getCode()).observe(context, res -> {
-//            if(res.getResult() != null && res.getResult().size() > 0){
-//                this.listTravel.clear();
-//                this.listTravel.addAll(res.getResult());
-//                this.adapterTravel.notifyDataSetChanged();
-//            }
-//        });
+        this.context.getHomeViewModel().getTravelList(searchText).observe(context, res -> {
+            this.listTravel.clear();
+            if(res.getResult() != null && res.getResult().size() > 0){
+                this.listTravel.addAll(res.getResult());
+            }
+            this.adapterTravel.notifyDataSetChanged();
+        });
     }
 
     public void actionView(){
-
+        this.btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, listTravel.size()+"", Toast.LENGTH_SHORT).show();
+                searchText = etSearch.getText().toString().trim();
+                loadTravel();
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        loadTravel();
     }
 }

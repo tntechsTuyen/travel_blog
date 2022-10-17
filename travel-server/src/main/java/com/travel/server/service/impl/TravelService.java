@@ -27,8 +27,8 @@ public class TravelService implements ITravelService {
     private JwtUserDetailsService userDetailsService;
 
     @Override
-    public List<Map<String, Object>> getTravelList() {
-        return travelRepository.findTravelList();
+    public List<Map<String, Object>> getTravelList(String s) {
+        return travelRepository.findTravelList(s);
     }
 
     @Override
@@ -54,8 +54,8 @@ public class TravelService implements ITravelService {
     }
 
     @Override
-    public Map<String, Object> getTravelDetail(Integer id, String type) {
-        Map<String, Object> data = travelRepository.findTravelDetail(id, type);
+    public Map<String, Object> getTravelDetail(Integer id) {
+        Map<String, Object> data = travelRepository.findTravelDetail(id);
         try{
             User userLogin = userDetailsService.getUserLogin();
             Integer idPost = (Integer) data.get("idPost");
