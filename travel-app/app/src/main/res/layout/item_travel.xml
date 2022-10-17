@@ -155,7 +155,7 @@
 
 
     <com.travel.app.common.view.icon.TextViewAwsRe
-        android:id="@+id/textViewAwsSo5"
+        android:id="@+id/twa_star_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -175,7 +175,7 @@
         android:includeFontPadding="false"
         android:text="4.5/5"
         android:textSize="@dimen/text_small"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo5"
-        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo5"
-        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo5" />
+        app:layout_constraintBottom_toBottomOf="@+id/twa_star_1"
+        app:layout_constraintStart_toEndOf="@+id/twa_star_1"
+        app:layout_constraintTop_toTopOf="@+id/twa_star_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

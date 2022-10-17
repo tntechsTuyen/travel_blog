@@ -138,7 +138,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rv_hotel_meta">
 
         <com.travel.app.common.view.icon.TextViewAwsSo
-            android:id="@+id/textViewAwsSo5"
+            android:id="@+id/twa_star_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:includeFontPadding="false"
@@ -147,17 +147,7 @@
             android:textSize="@dimen/ico_big_large" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
-            android:id="@+id/textViewAwsSo6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:includeFontPadding="false"
-            android:text="@string/ico_star"
-            android:textColor="@color/color_green"
-            android:textSize="@dimen/ico_big_large" />
-
-        <com.travel.app.common.view.icon.TextViewAwsSo
-            android:id="@+id/textViewAwsSo7"
+            android:id="@+id/twa_star_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -167,7 +157,17 @@
             android:textSize="@dimen/ico_big_large" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
-            android:id="@+id/textViewAwsSo8"
+            android:id="@+id/twa_star_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:includeFontPadding="false"
+            android:text="@string/ico_star"
+            android:textColor="@color/color_green"
+            android:textSize="@dimen/ico_big_large" />
+
+        <com.travel.app.common.view.icon.TextViewAwsSo
+            android:id="@+id/twa_star_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"

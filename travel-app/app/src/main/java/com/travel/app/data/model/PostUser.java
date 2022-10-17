@@ -14,4 +14,24 @@ public class PostUser {
         this.idPost = idPost;
         this.rate = rate;
     }
+
+    public void setIdPost(Integer idPost) {
+        this.idPost = idPost;
+    }
+
+    public void setIsLike(Integer isLike) {
+        this.isLike = isLike;
+    }
+
+    @Override
+    public String toString() {
+        return "PostUser{" +
+                "id=" + id +
+                ", idPost=" + idPost +
+                ", idUser=" + idUser +
+                ", isRead=" + isRead +
+                ", isLike=" + isLike +
+                ", rate=" + rate +
+                '}';
+    }
 }

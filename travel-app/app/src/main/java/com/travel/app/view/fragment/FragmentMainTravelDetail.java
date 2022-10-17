@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +26,14 @@ import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.SessionUtils;
+import com.travel.app.common.view.icon.TextViewAwsRe;
 import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.data.model.Comment;
 import com.travel.app.data.model.Hotel;
+import com.travel.app.data.model.PostUser;
 import com.travel.app.data.model.Travel;
 import com.travel.app.data.model.TravelMeta;
 import com.travel.app.view.adapter.AdapterComment;
-import com.travel.app.view.adapter.AdapterTravel;
 import com.travel.app.view.adapter.AdapterTravelHotel;
 import com.travel.app.view.adapter.AdapterTravelMeta;
 import com.travel.app.view.dialog.DialogRate;
@@ -38,7 +41,7 @@ import com.travel.app.view.dialog.DialogRate;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressLint({"ValidFragment","NotifyDataSetChanged","SetTextI18n"})
+@SuppressLint({"ValidFragment","NotifyDataSetChanged","SetTextI18n","NewApi"})
 public class FragmentMainTravelDetail extends Fragment {
 
     private static final Integer RES_ID = R.layout.fragment_main_travel_detail;
@@ -47,10 +50,13 @@ public class FragmentMainTravelDetail extends Fragment {
     private Group grAuth;
     private RecyclerView rvHotel, rvComment, rvTravelMeta;
     private ImageView ivThumb;
-    private TextView tvName, tvTotalView, tvTotalLike, tvDesc, tvRatePoint, btnGoMap, btnLike;
+    private TextView tvName, tvTotalView, tvTotalLike, tvDesc, tvRatePoint, btnGoMap;
+    private TextViewAwsRe twaStar1,twaStar2,twaStar3,twaStar4,twaStar5;
+    private List<TextViewAwsRe> lstStar = new ArrayList<>();
     private LinearLayout llRateView;
     private TextViewAwsSo btnSendCmt;
     private EditText etCmt;
+    private TextViewAwsRe btnLike;
     private AdapterTravelHotel adapterTravelHotel;
     private AdapterComment adapterComment;
     private AdapterTravelMeta adapterTravelMeta;
@@ -73,7 +79,7 @@ public class FragmentMainTravelDetail extends Fragment {
         return this.view;
     }
 
-    public void init(){
+    private void init(){
         this.rvHotel = this.view.findViewById(R.id.rv_travel_hotel);
         this.listHotel = new ArrayList<>();
         this.adapterTravelHotel = new AdapterTravelHotel(this.context, this.listHotel);
@@ -100,10 +106,25 @@ public class FragmentMainTravelDetail extends Fragment {
         this.tvRatePoint = this.view.findViewById(R.id.tv_rate_point);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
-        this.etCmt = this.view.findViewById(R.id.et_cmt);
-        this.btnSendCmt = this.view.findViewById(R.id.btn_send_cmt);
+        this.etCmt = this.view.findViewById(R.id.et_search);
+        this.btnSendCmt = this.view.findViewById(R.id.btn_search);
         this.grAuth = this.view.findViewById(R.id.gr_auth);
         this.llRateView = this.view.findViewById(R.id.ll_rate_view);
+
+        initStar();
+    }
+
+    private void initStar(){
+        this.twaStar1 = this.view.findViewById(R.id.twa_star_1);
+        this.twaStar2 = this.view.findViewById(R.id.twa_star_2);
+        this.twaStar3 = this.view.findViewById(R.id.twa_star_3);
+        this.twaStar4 = this.view.findViewById(R.id.twa_star_4);
+        this.twaStar5 = this.view.findViewById(R.id.twa_star_5);
+        lstStar.add(twaStar1);
+        lstStar.add(twaStar2);
+        lstStar.add(twaStar3);
+        lstStar.add(twaStar4);
+        lstStar.add(twaStar5);
     }
 
     @Override
@@ -124,7 +145,7 @@ public class FragmentMainTravelDetail extends Fragment {
         }
     }
 
-    public void loadData(){
+    private void loadData(){
 
         loadDetail();
         loadTravelMeta();
@@ -132,7 +153,7 @@ public class FragmentMainTravelDetail extends Fragment {
         loadComment();
     }
 
-    public void loadDetail(){
+    private void loadDetail(){
         String token = SessionUtils.get(this.context, DataStatic.SESSION.KEY.AUTH, "");
         this.context.getHomeViewModel().getDetail(token, this.travel.getId()).observe(context, res -> {
             if(res.getResult() != null){
@@ -142,11 +163,25 @@ public class FragmentMainTravelDetail extends Fragment {
                 this.tvTotalLike.setText(this.travel.getTotalLike().toString());
                 this.tvDesc.setText(this.travel.getDescription());
                 this.tvRatePoint.setText(this.travel.getRatePoint().toString());
+                loadStar(this.travel.getRatePoint());
+
             }
         });
     }
 
-    public void loadHotel(){
+    private void loadStar(Double ratePoint){
+        Typeface typeface = context.getResources().getFont(R.font.fa_solid);
+        if(ratePoint > 0){
+            Integer rb = ratePoint.intValue();
+            Double re = ratePoint % 1;
+//            if(rb < 5 && re > 0) lstStar.get(rb).setTypeface(typeface); lstStar.get(rb).setText(getResources().getText(R.string.ico_star_half));
+            for(int i = 0; i < rb; i++){
+                lstStar.get(i).setTypeface(typeface);
+            }
+        }
+    }
+
+    private void loadHotel(){
         this.adapterTravelHotel.setTravel(this.travel);
         this.context.getHomeViewModel().getHotelByTravel(this.travel.getId()).observe(context, res -> {
             if(res.getResult() != null && res.getResult().size() > 0){
@@ -157,7 +192,7 @@ public class FragmentMainTravelDetail extends Fragment {
         });
     }
 
-    public void loadComment(){
+    private void loadComment(){
 
         this.context.getHomeViewModel().getCommentByTravel(this.travel).observe(context, res -> {
             if(res.getResult() != null && res.getResult().size() > 0){
@@ -168,7 +203,7 @@ public class FragmentMainTravelDetail extends Fragment {
         });
     }
 
-    public void loadTravelMeta(){
+    private void loadTravelMeta(){
 
         this.context.getHomeViewModel().getMetas(this.travel.getId()).observe(context, res -> {
             if(res.getResult() != null && res.getResult().size() > 0){
@@ -179,7 +214,7 @@ public class FragmentMainTravelDetail extends Fragment {
         });
     }
 
-    public void actionView(){
+    private void actionView(){
         this.btnGoMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,7 +231,13 @@ public class FragmentMainTravelDetail extends Fragment {
         this.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
+                PostUser postUser = new PostUser();
+                postUser.setIdPost(travel.getId());
+                postUser.setIsLike(1);
+                context.getHomeViewModel().postLike(token, postUser).observe(context, res -> {
+                    Log.i("postLike", res.getResult().toString());
+                });
             }
         });
 

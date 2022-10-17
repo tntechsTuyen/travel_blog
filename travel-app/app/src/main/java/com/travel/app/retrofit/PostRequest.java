@@ -22,6 +22,9 @@ public interface PostRequest {
     @POST("api/post/comment")
     Call<ApiResponse<Comment>> postComment(@Header("Authorization") String token, @Body Comment comment);
 
+    @POST("api/post/like")
+    Call<ApiResponse<PostUser>> postLike(@Header("Authorization") String token, @Body PostUser postUser);
+
     @POST("api/post/rate")
     Call<ApiResponse<PostUser>> postRate(@Header("Authorization") String token, @Body PostUser postUser);
 }

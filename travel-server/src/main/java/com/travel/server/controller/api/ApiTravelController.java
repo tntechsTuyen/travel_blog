@@ -21,6 +21,11 @@ public class ApiTravelController {
     @Autowired
     private IHotelService hotelService;
 
+    @GetMapping("/list")
+    public ApiResponse<?> travelList(){
+        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelList());
+    }
+
     @GetMapping("/ads")
     public ApiResponse<?> travelAds(){
         return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelAds());

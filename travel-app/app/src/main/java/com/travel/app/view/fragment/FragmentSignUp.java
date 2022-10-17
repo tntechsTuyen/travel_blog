@@ -3,12 +3,12 @@ package com.travel.app.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -42,7 +42,7 @@ public class FragmentSignUp extends Fragment {
     }
 
     public void init(){
-        this.etUsername = this.view.findViewById(R.id.et_cmt);
+        this.etUsername = this.view.findViewById(R.id.et_search);
         this.etPassword = this.view.findViewById(R.id.et_password);
         this.etRePassword = this.view.findViewById(R.id.et_re_password);
         this.etFullName = this.view.findViewById(R.id.et_full_name);
@@ -69,9 +69,14 @@ public class FragmentSignUp extends Fragment {
                 String fullName = etFullName.getText().toString().trim();
                 String phone = etPhone.getText().toString().trim();
                 String mail = etMail.getText().toString().trim();
-
-                User user = new User(0, username, password, fullName, phone, mail);
-                Log.i("USER_INFO", user.toString());
+                if(password.equals(rePassword)){
+                    User user = new User(0, username, password, fullName, phone, mail);
+                    context.getAuthViewModel().register(user).observe(context, res -> {
+                        if(res.getResult() != null) {
+                            Toast.makeText(context, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }

@@ -22,6 +22,7 @@
     <string name="ico_caret_down">&#xf0d7;</string>
     <string name="ico_caret_up">&#xf0d8;</string>
     <string name="ico_arrow_left">&#xf060;</string>
+    <string name="ico_search">&#xf002;</string>
 
     <string name="app_name">Travel Blog</string>
     <string name="txt_sign_up">Sign Up</string>

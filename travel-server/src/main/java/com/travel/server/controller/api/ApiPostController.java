@@ -31,11 +31,25 @@ public class ApiPostController {
         return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", commentService.findByIdPost(idPost));
     }
 
+    /**
+     * @param comment {idPost, content}
+     * */
     @PostMapping("/comment")
     public ApiResponse<?> postComment(@RequestBody Comment comment){
         return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", commentService.save(comment));
     }
 
+    /**
+     * @param postUser {isLike}
+     * */
+    @PostMapping("/like")
+    public ApiResponse<?> postLike(@RequestBody PostUser postUser){
+        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", postService.like(postUser));
+    }
+
+    /**
+     * @param postUser {rate}
+     * */
     @PostMapping("/rate")
     public ApiResponse<?> postRate(@RequestBody PostUser postUser){
         return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", postService.rate(postUser));

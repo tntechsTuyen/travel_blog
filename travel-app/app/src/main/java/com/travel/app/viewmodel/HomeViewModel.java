@@ -72,6 +72,10 @@ public class HomeViewModel extends AndroidViewModel {
         return this.postRepository.postComment(token, comment);
     }
 
+    public LiveData<ApiResponse<PostUser>> postLike(String token, PostUser postUser){
+        return this.postRepository.postRate(token, postUser);
+    }
+
     public LiveData<ApiResponse<PostUser>> postRate(String token, PostUser postUser){
         return this.postRepository.postRate(token, postUser);
     }

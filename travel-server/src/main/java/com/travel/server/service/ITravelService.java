@@ -7,6 +7,7 @@ import java.util.*;
 
 public interface ITravelService {
 
+    List<Map<String, Object>> getTravelList();
     List<Map<String, Object>> getTravelAds();
     List<Map<String, Object>> getTravelTop();
     List<Map<String, Object>> getTravelHobbies();

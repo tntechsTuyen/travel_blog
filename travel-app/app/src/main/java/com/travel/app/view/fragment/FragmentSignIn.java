@@ -46,7 +46,7 @@ public class FragmentSignIn extends Fragment {
     }
 
     public void init(){
-        this.etUsername = this.view.findViewById(R.id.et_cmt);
+        this.etUsername = this.view.findViewById(R.id.et_search);
         this.etPassword = this.view.findViewById(R.id.et_password);
         this.btnLogin = this.view.findViewById(R.id.btn_login);
         this.btnRegister = this.view.findViewById(R.id.btn_register);

@@ -80,6 +80,7 @@ public class DialogRate {
                 String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
                 PostUser postUser = new PostUser(idPost, rateVal);
                 homeViewModel.postRate(token, postUser);
+                hide();
             }
         });
     }

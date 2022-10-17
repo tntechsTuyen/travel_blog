@@ -27,6 +27,11 @@ public class TravelService implements ITravelService {
     private JwtUserDetailsService userDetailsService;
 
     @Override
+    public List<Map<String, Object>> getTravelList() {
+        return travelRepository.findTravelList();
+    }
+
+    @Override
     public List<Map<String, Object>> getTravelAds() {
         return travelRepository.findTravelAds();
     }

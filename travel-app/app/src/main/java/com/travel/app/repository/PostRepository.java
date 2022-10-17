@@ -58,6 +58,23 @@ public class PostRepository {
         return data;
     }
 
+    public LiveData<ApiResponse<PostUser>> postLike(String token, PostUser postUser){
+        MutableLiveData<ApiResponse<PostUser>> data = new MutableLiveData<>();
+        token = (token != null & token.trim().length() > 0) ? "Bearer ".concat(token).replaceAll("\"", "") : "";
+        postRequest.postLike(token, postUser).enqueue(new Callback<ApiResponse<PostUser>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<PostUser>> call, Response<ApiResponse<PostUser>> response) {
+                data.setValue(RestUtils.get(response));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<PostUser>> call, Throwable t) {
+
+            }
+        });
+        return data;
+    }
+
     public LiveData<ApiResponse<PostUser>> postRate(String token, PostUser postUser){
         MutableLiveData<ApiResponse<PostUser>> data = new MutableLiveData<>();
         token = (token != null & token.trim().length() > 0) ? "Bearer ".concat(token).replaceAll("\"", "") : "";

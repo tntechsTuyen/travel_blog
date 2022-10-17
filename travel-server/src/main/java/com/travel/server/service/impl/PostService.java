@@ -43,18 +43,20 @@ public class PostService implements IPostService {
     }
 
     @Override
-    public PostUser like(Integer idPost, Integer idUser) {
-        PostUser postUser = postUserRepository.findByIdPostAndIdUser(idPost, idUser);
+    public PostUser like(PostUser mPostUser) {
+        User userLogin = userDetailsService.getUserLogin();
+        mPostUser.setIdUser(userLogin.getId());
+        PostUser postUser = postUserRepository.findByIdPostAndIdUser(mPostUser.getIdPost(), mPostUser.getIdUser());
         if(postUser == null) {
             postUser = new PostUser();
-            postUser.setIdPost(idPost);
-            postUser.setIdUser(idUser);
+            postUser.setIdPost(mPostUser.getIdPost());
+            postUser.setIdUser(mPostUser.getIdUser());
         }
 
         if(postUser.getIsLike() == 0){
             postUser.setIsLike(1);
             postUserRepository.save(postUser);
-            Optional<Post> opPost = postRepository.findById(idPost);
+            Optional<Post> opPost = postRepository.findById(mPostUser.getIdUser());
             Post post = opPost.get();
             post.setTotalLike(post.getTotalLike() + 1);
             postRepository.save(post);
