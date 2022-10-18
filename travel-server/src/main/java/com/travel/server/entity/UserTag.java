@@ -21,4 +21,12 @@ public class UserTag {
 
     @Column(name = "id_tag")
     private Integer idTag;
+
+    public UserTag() {
+    }
+
+    public UserTag(Integer idUser, Integer idTag) {
+        this.idUser = idUser;
+        this.idTag = idTag;
+    }
 }

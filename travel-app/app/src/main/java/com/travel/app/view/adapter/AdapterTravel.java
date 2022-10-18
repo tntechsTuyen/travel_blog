@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
+import com.travel.app.common.utils.ImageUtils;
 import com.travel.app.data.model.Travel;
 
 import java.util.List;
@@ -85,6 +86,7 @@ public class AdapterTravel extends RecyclerView.Adapter<AdapterTravel.ViewHolder
             this.tvTotalLike.setText(String.valueOf(travel.getTotalLike()));
             this.tvTotalCmt.setText(String.valueOf(travel.getTotalComment()));
             this.tvRatePoint.setText(String.valueOf(travel.getRatePoint()));
+            ImageUtils.loadUrl(context, this.ivThumb, travel.getMediaUrl());
         }
     }
 }

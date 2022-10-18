@@ -73,7 +73,7 @@ public class AdapterTravelCity extends RecyclerView.Adapter<AdapterTravelCity.Vi
 
         public void loadDataToView(Location location){
             this.tvName.setText(location.getCity());
-            this.tvCode.setText("(%s)".replaceAll("%s", location.getCode().toString()));
+            this.tvCode.setText(String.format("(%s)", location.getCode()));
         }
     }
 }

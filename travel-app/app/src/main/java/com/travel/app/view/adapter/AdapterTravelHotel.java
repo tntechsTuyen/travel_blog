@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
+import com.travel.app.common.utils.ImageUtils;
 import com.travel.app.common.utils.LocationUtils;
 import com.travel.app.data.model.Hotel;
 import com.travel.app.data.model.Travel;
@@ -84,9 +85,10 @@ public class AdapterTravelHotel extends RecyclerView.Adapter<AdapterTravelHotel.
             this.tvPhone.setText(hotel.getPhone());
             this.tvWork.setText(hotel.getWork());
             if(travel != null){
-                String strDistance = String.format("%.1f", LocationUtils.distance(travel.getLat(), travel.getLon(), hotel.getLat(), hotel.getLon())).concat("km");
+                String strDistance = String.format("%.1f km", LocationUtils.distance(travel.getLat(), travel.getLon(), hotel.getLat(), hotel.getLon()));
                 this.tvDistance.setText(strDistance);
             }
+            ImageUtils.loadUrl(context, this.ivThumb, hotel.getMediaUrl());
         }
 
         public void actionView(Hotel hotel){

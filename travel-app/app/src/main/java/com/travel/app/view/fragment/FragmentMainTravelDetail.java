@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
+import com.travel.app.common.utils.ImageUtils;
 import com.travel.app.common.utils.SessionUtils;
 import com.travel.app.common.view.icon.TextViewAwsRe;
 import com.travel.app.common.view.icon.TextViewAwsSo;
@@ -152,6 +153,7 @@ public class FragmentMainTravelDetail extends Fragment {
                 this.tvTotalLike.setText(this.travel.getTotalLike().toString());
                 this.tvDesc.setText(this.travel.getDescription());
                 this.tvRatePoint.setText(String.format("(%s / %s)", this.travel.getRatePoint().toString(), "5"));
+                ImageUtils.loadUrl(context, this.ivThumb, travel.getMediaUrl());
                 loadStar();
                 loadTravelMeta();
                 loadHotel();

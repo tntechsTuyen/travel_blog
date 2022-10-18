@@ -23,7 +23,7 @@ spring:
 
 # uploading
 data:
-  path: C:/AppServ/www/project/JavaSpring/test/
+  path: F:/res/travel/
 
 # logging
 logging:
