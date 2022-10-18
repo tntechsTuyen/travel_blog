@@ -21,8 +21,7 @@
         <ImageView
             android:id="@+id/iv_thumb"
             android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:src="@drawable/bai_dinh" />
+            android:layout_height="80dp" />
     </androidx.cardview.widget.CardView>
 
     <TextView

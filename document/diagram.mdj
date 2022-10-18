@@ -10103,7 +10103,8 @@
 								"$ref": "AAAAAAGDv+LPO8dc5M8="
 							},
 							"name": "phone",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10112,7 +10113,8 @@
 								"$ref": "AAAAAAGDv+LPO8dc5M8="
 							},
 							"name": "work",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10761,7 +10763,8 @@
 								"$ref": "AAAAAAGD47gA0Xc6CJ0="
 							},
 							"name": "id",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10769,7 +10772,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGD47gA0Xc6CJ0="
 							},
-							"name": "id_hotel"
+							"name": "id_hotel",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10777,7 +10781,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGD47gA0Xc6CJ0="
 							},
-							"name": "id_post"
+							"name": "id_post",
+							"type": ""
 						}
 					]
 				}
