@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.utils.ImageUtils;
 import com.travel.app.data.model.Travel;
@@ -18,11 +19,11 @@ import java.util.List;
 
 public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.ViewHolder> {
 
-    private Activity context;
+    private MainActivity context;
     private List<Travel> travels;
     private static Integer RES_ID = R.layout.item_travel_ads;
 
-    public AdapterTravelAds(Activity context, List<Travel> travels) {
+    public AdapterTravelAds(MainActivity context, List<Travel> travels) {
         this.context = context;
         this.travels = travels;
     }
@@ -40,6 +41,7 @@ public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Travel travel = travels.get(position);
         holder.loadDataToView(travel);
+        holder.actionView(travel);
     }
 
     @Override
@@ -80,6 +82,15 @@ public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.View
             this.tvTotalCmt.setText(String.valueOf(travel.getTotalComment()));
             this.tvRatePoint.setText(String.valueOf(travel.getRatePoint()));
             ImageUtils.loadUrl(context, this.ivThumb, travel.getMediaUrl());
+        }
+
+        public void actionView(Travel travel){
+            this.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    context.setFragmentMainTravelDetail(travel);
+                }
+            });
         }
     }
 }
