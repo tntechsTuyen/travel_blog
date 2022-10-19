@@ -74,6 +74,8 @@ public class FragmentSignUp extends Fragment {
                     context.getAuthViewModel().register(user).observe(context, res -> {
                         if(res.getResult() != null) {
                             Toast.makeText(context, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(context, "Đăng ký tài khoản thất bại", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
