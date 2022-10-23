@@ -53,12 +53,21 @@ public class PostService implements IPostService {
             postUser.setIdUser(mPostUser.getIdUser());
         }
 
-        if(postUser.getIsLike() == 0){
+        if(postUser.getIsLike().equals(0)){
+            //Like
             postUser.setIsLike(1);
             postUserRepository.save(postUser);
             Optional<Post> opPost = postRepository.findById(mPostUser.getIdUser());
             Post post = opPost.get();
             post.setTotalLike(post.getTotalLike() + 1);
+            postRepository.save(post);
+        }else{
+            //Unlike
+            postUser.setIsLike(0);
+            postUserRepository.save(postUser);
+            Optional<Post> opPost = postRepository.findById(mPostUser.getIdUser());
+            Post post = opPost.get();
+            post.setTotalLike(post.getTotalLike() - 1);
             postRepository.save(post);
         }
         return postUser;
@@ -74,15 +83,14 @@ public class PostService implements IPostService {
             postUser.setIdPost(mPostUser.getIdPost());
             postUser.setIdUser(mPostUser.getIdUser());
         }
-        if(postUser.getRate() == 0){
+//        if(postUser.getRate() == 0){
             postUser.setRate(mPostUser.getRate());
             postUserRepository.save(postUser);
             Optional<Post> opPost = postRepository.findById(mPostUser.getIdPost());
             Post post = opPost.get();
-            post.setTotalLike(post.getTotalLike() + 1);
-            postRepository.save(post);
             postUserRepository.updatePostRatePoint(post.getId());
-        }
+            postUserRepository.updatePostRateCount(post.getId());
+//        }
         return postUser;
     }
 

@@ -171,10 +171,13 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.rateCount AS rateCount " +
             ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +
             ", tg.name AS tagName " +
+            ", pu.isLike AS isLike " +
+            ", pu.rate AS rate " +
             "FROM Travel t " +
             "INNER JOIN TravelTag tt ON t.id = tt.idTravel " +
             "INNER JOIN Location l ON t.idLocation = l.id " +
@@ -182,8 +185,9 @@ public interface TravelRepository extends JpaRepository<Travel, Integer> {
             "INNER JOIN Post p ON tp.idPost = p.id " +
             "INNER JOIN TravelTag ttg ON t.id = ttg.idTravel " +
             "INNER JOIN Tag tg ON ttg.idTag = tg.id " +
+            "LEFT JOIN PostUser pu ON p.id = pu.idPost AND pu.idUser = :id_user " +
             "LEFT JOIN PostMedia pm ON p.id = pm.idPost AND pm.flag = 'thumb' " +
             "LEFT JOIN Media m ON pm.idMedia = m.id " +
             "WHERE t.id = :id ")
-    Map<String, Object> findTravelDetail(@Param("id") Integer id);
+    Map<String, Object> findTravelDetail(@Param("id") Integer id, @Param("id_user") Integer idUser);
 }

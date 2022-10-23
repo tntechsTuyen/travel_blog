@@ -55,13 +55,14 @@ public class TravelService implements ITravelService {
 
     @Override
     public Map<String, Object> getTravelDetail(Integer id) {
-        Map<String, Object> data = travelRepository.findTravelDetail(id);
+        Map<String, Object> data = null;
         try{
             User userLogin = userDetailsService.getUserLogin();
+            data = travelRepository.findTravelDetail(id, userLogin.getId());
             Integer idPost = (Integer) data.get("idPost");
             postService.read(idPost, userLogin.getId());
         } catch (Exception e){
-
+            data = travelRepository.findTravelDetail(id, null);
         }
         return data;
     }

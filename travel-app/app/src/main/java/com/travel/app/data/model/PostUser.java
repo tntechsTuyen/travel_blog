@@ -23,6 +23,30 @@ public class PostUser {
         this.isLike = isLike;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getIdPost() {
+        return idPost;
+    }
+
+    public Integer getIdUser() {
+        return idUser;
+    }
+
+    public Integer getIsRead() {
+        return isRead;
+    }
+
+    public Integer getIsLike() {
+        return isLike;
+    }
+
+    public Integer getRate() {
+        return rate;
+    }
+
     @Override
     public String toString() {
         return "PostUser{" +

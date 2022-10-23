@@ -19,7 +19,8 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
             ", c.createdDate AS createdDate " +
             "FROM Comment c " +
             "INNER JOIN User u ON c.idUser = u.id " +
-            "WHERE c.idPost = :id_post ")
+            "WHERE c.idPost = :id_post " +
+            "ORDER BY c.createdDate DESC ")
     List<Map<String, Object>> findByIdPost(@Param("id_post") Integer idPost);
 
     @Query("SELECT u.fullName AS fullName " +

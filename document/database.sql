@@ -28,7 +28,7 @@ CREATE TABLE `comment` (
   `id_user` int(11) DEFAULT NULL,
   `content` text DEFAULT NULL,
   `id_parent` int(11) DEFAULT 0,
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -57,7 +57,7 @@ CREATE TABLE `hotel` (
   `work` varchar(254) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `id_location` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -86,7 +86,7 @@ CREATE TABLE `hotel_meta` (
   `name` text DEFAULT NULL,
   `value` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -141,7 +141,7 @@ CREATE TABLE `location` (
   `address` varchar(254) DEFAULT NULL,
   `city` varchar(254) DEFAULT NULL,
   `country` varchar(254) DEFAULT NULL,
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,7 +169,7 @@ CREATE TABLE `media` (
   `type` char(254) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -202,7 +202,7 @@ CREATE TABLE `post` (
   `total_comment` int(11) DEFAULT 0,
   `rate_point` double DEFAULT 0,
   `is_ads` int(11) DEFAULT 0 COMMENT '(0/1)',
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -282,7 +282,7 @@ CREATE TABLE `tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(254) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -309,7 +309,7 @@ CREATE TABLE `travel` (
   `name` varchar(254) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `id_location` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -338,7 +338,7 @@ CREATE TABLE `travel_meta` (
   `name` text NOT NULL,
   `value` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -420,7 +420,7 @@ CREATE TABLE `user` (
   `birth` date DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `role` varchar(254) DEFAULT 'USER',
-  `created_date` varchar(254) NOT NULL DEFAULT current_timestamp(),
+  `created_date` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
@@ -450,7 +450,7 @@ CREATE TABLE `user_meta` (
   `name` text DEFAULT NULL,
   `value` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT current_timestamp(),
+  `created_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;

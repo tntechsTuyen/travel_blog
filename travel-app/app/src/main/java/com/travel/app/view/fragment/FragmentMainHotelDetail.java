@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
@@ -49,7 +50,7 @@ public class FragmentMainHotelDetail extends Fragment {
     private Group grAuth;
     private RecyclerView rvComment, rvHotelMeta;
     private ImageView ivThumb;
-    private TextView tvName, tvTotalView, tvTotalLike, tvRatePoint, tvPhone, tvWork, btnGoMap;
+    private TextView tvName, tvTotalView, tvTotalLike, tvRatePoint, tvRateCount, tvPhone, tvWork, btnGoMap;
     private TextViewAwsRe twaStar1,twaStar2,twaStar3,twaStar4,twaStar5;
     private List<TextViewAwsRe> lstStar = new ArrayList<>();
     private LinearLayout llRateView;
@@ -95,6 +96,7 @@ public class FragmentMainHotelDetail extends Fragment {
         this.tvTotalView = this.view.findViewById(R.id.tv_total_view);
         this.tvTotalLike = this.view.findViewById(R.id.tv_total_like);
         this.tvRatePoint = this.view.findViewById(R.id.tv_rate_point);
+        this.tvRateCount = this.view.findViewById(R.id.tv_rate_count);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
         this.etCmt = this.view.findViewById(R.id.et_cmt);
@@ -143,10 +145,15 @@ public class FragmentMainHotelDetail extends Fragment {
                 this.hotel = res.getResult();
                 this.hotel.setIdPost(this.hotel.getIdPost());
                 this.tvName.setText(this.hotel.getName());
-                this.tvTotalView.setText(this.hotel.getTotalView().toString());
-                this.tvTotalLike.setText(this.hotel.getTotalLike().toString());
-                this.tvRatePoint.setText(String.format("(%s / %s)", res.getResult().getRatePoint().toString(), "5"));
+                this.tvTotalView.setText(hotel.getTotalView().toString());
+                this.tvTotalLike.setText(hotel.getTotalLike().toString());
+                this.tvRatePoint.setText(hotel.getRatePoint().toString());
+                this.tvRateCount.setText(hotel.getRateCount().equals(0) ? "" : String.format("(%d)", hotel.getRateCount()));
                 ImageUtils.loadUrl(context, this.ivThumb, hotel.getMediaUrl());
+                if(this.hotel.getIsLike() != null && this.hotel.getIsLike() == 1) {
+                    Typeface typeface = context.getResources().getFont(R.font.fa_solid);
+                    this.btnLike.setTypeface(typeface);
+                }
                 this.tvPhone.setText(res.getResult().getPhone());
                 this.tvWork.setText(res.getResult().getWork());
                 loadStar();
@@ -158,9 +165,8 @@ public class FragmentMainHotelDetail extends Fragment {
 
     public void loadStar(){
         Typeface typeface = context.getResources().getFont(R.font.fa_solid);
-        if(this.hotel.getRatePoint() > 0){
-            Integer rb = this.hotel.getRatePoint().intValue();
-            Double re = this.hotel.getRatePoint() % 1;
+        if(hotel.getRate() != null && hotel.getRate() > 0){
+            Integer rb = this.hotel.getRate();
             for(int i = 0; i < rb; i++){
                 lstStar.get(i).setTypeface(typeface);
             }
@@ -210,7 +216,24 @@ public class FragmentMainHotelDetail extends Fragment {
                 postUser.setIdPost(hotel.getIdPost());
                 postUser.setIsLike(1);
                 context.getHomeViewModel().postLike(token, postUser).observe(context, res -> {
-                    Log.i("postLike", res.getResult().toString());
+                    Log.i("POST_LIKE", res.getResult().toString());
+                    Integer isLike =  res.getResult().getIsLike();
+                    Integer val;
+                    Typeface typeface;
+                    switch (isLike){
+                        case 1:
+                            typeface = context.getResources().getFont(R.font.fa_solid);
+                            val = 1;
+                            Toast.makeText(context, "Like post", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            typeface = context.getResources().getFont(R.font.fa_regular);
+                            val = -1;
+                            Toast.makeText(context, "Unlike post", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    tvTotalLike.setText(String.format("%d", hotel.getTotalLike() + val));
+                    btnLike.setTypeface(typeface);
                 });
             }
         });
@@ -243,7 +266,7 @@ public class FragmentMainHotelDetail extends Fragment {
             public void onClick(View view) {
                 String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
                 if(token.length() != 0){
-                    new DialogRate(context, hotel.getIdPost(), context.getHomeViewModel()).show();
+                    new DialogRate(context, hotel.getIdPost(), context.getHomeViewModel(), lstStar).show();
                 }
             }
         });

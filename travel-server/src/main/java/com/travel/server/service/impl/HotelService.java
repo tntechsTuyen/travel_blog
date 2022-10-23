@@ -29,7 +29,14 @@ public class HotelService implements IHotelService {
 
     @Override
     public List<Map<String, Object>> getHotelByTravel(Integer idTravel, Double distance) {
-        Map<String, Object> travel = travelRepository.findTravelDetail(idTravel);
+        Integer idUser = null;
+        try{
+            User userLogin = userDetailsService.getUserLogin();
+            idUser = userLogin.getId();
+        } catch (Exception e){
+
+        }
+        Map<String, Object> travel = travelRepository.findTravelDetail(idTravel, idUser);
         Double lat = (Double) travel.get("lat");
         Double lon = (Double) travel.get("lon");
         return hotelRepository.findByTravelArea(lat, lon, distance);

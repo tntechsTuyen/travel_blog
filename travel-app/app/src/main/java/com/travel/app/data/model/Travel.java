@@ -20,12 +20,27 @@ public class Travel {
     private Integer totalLike;
     private Integer totalComment;
     private Double ratePoint;
+    private Integer rateCount;
     private String mediaType;
     private String mediaUrl;
     private String tagName;
+    private Integer isLike;
+    private Integer rate;
 
     public Travel(){
 
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public Integer getIsLike() {
+        return isLike;
+    }
+
+    public Integer getRate() {
+        return rate;
     }
 
     public Integer getId() {

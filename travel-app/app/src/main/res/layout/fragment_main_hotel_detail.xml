@@ -77,6 +77,43 @@
         app:layout_constraintTop_toTopOf="@+id/textViewAwsSo1" />
 
     <com.travel.app.common.view.icon.TextViewAwsSo
+        android:id="@+id/textViewAwsSo5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:includeFontPadding="false"
+        android:text="@string/ico_star"
+        android:textColor="@color/color_yellow"
+        android:textSize="@dimen/ico_small"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo"
+        app:layout_constraintStart_toEndOf="@+id/tv_total_like"
+        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo" />
+
+    <TextView
+        android:id="@+id/tv_rate_point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:includeFontPadding="false"
+        android:text="13.5k"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAwsSo5"
+        app:layout_constraintStart_toEndOf="@+id/textViewAwsSo5"
+        app:layout_constraintTop_toTopOf="@+id/textViewAwsSo5" />
+
+    <TextView
+        android:id="@+id/tv_rate_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:includeFontPadding="false"
+        android:text="(5)"
+        android:textSize="@dimen/text_small"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_rate_point"
+        app:layout_constraintStart_toEndOf="@+id/tv_rate_point"
+        app:layout_constraintTop_toTopOf="@+id/tv_rate_point" />
+
+    <com.travel.app.common.view.icon.TextViewAwsSo
         android:id="@+id/textViewAwsSo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -235,18 +272,6 @@
             android:textColor="@color/color_green"
             android:textSize="@dimen/ico_big_large" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_rate_point"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:text=""
-        android:textSize="@dimen/text_small"
-        app:layout_constraintEnd_toEndOf="@+id/ll_rate_view"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/ll_rate_view"
-        app:layout_constraintTop_toBottomOf="@+id/ll_rate_view" />
 
     <TextView
         android:id="@+id/textView4"

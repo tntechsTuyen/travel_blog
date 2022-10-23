@@ -3,19 +3,17 @@ package com.travel.app.view.fragment;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
-import com.travel.app.AuthActivity;
 import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
@@ -29,7 +27,8 @@ import com.travel.app.view.adapter.AdapterTravelCity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 @SuppressLint({"ValidFragment","NotifyDataSetChanged"})
 public class FragmentMainHome extends Fragment {
@@ -37,7 +36,8 @@ public class FragmentMainHome extends Fragment {
     private static final Integer RES_ID = R.layout.fragment_main_home;
     private MainActivity context;
     private View view;
-    private RecyclerView rvTravelAds, rvTravelTop, rvTravelHobbies, rvTravelCity;
+    private RecyclerView rvTravelTop, rvTravelHobbies, rvTravelCity;
+    private ViewPager vpTravelAds;
     private Group grAuth;
 
     private AdapterTravelAds adapterTravelAds;
@@ -62,12 +62,12 @@ public class FragmentMainHome extends Fragment {
     }
 
     public void init(){
-        this.rvTravelAds = this.view.findViewById(R.id.rv_travel_ads);
+        this.vpTravelAds = this.view.findViewById(R.id.vp_travel_ads);
         this.listTravelAds = new ArrayList<>();
         this.adapterTravelAds = new AdapterTravelAds(this.context, this.listTravelAds);
-        this.rvTravelAds.setAdapter(this.adapterTravelAds);
-        this.rvTravelAds.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
+        this.vpTravelAds.setAdapter(this.adapterTravelAds);
         loadTravelAds();
+        slideAdsLoading();
 
         this.rvTravelTop = this.view.findViewById(R.id.rv_travel_top);
         this.listTravelTop = new ArrayList<>();
@@ -100,6 +100,30 @@ public class FragmentMainHome extends Fragment {
             }
         });
     }
+
+    private void slideAdsLoading(){
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                int max = adapterTravelAds.getCount();
+                int min = 0;
+                if(vpTravelAds.getCurrentItem() >= min && vpTravelAds.getCurrentItem() < max-1){
+                    vpTravelAds.setCurrentItem(vpTravelAds.getCurrentItem()+1);
+                }else{
+                    vpTravelAds.setCurrentItem(0);
+                }
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(runnable);
+            }
+        }, 5000, 5000);
+    }
+
     public void loadTravelTop(){
         this.context.getHomeViewModel().getTops().observe(context, res -> {
             if(res.getResult() != null && res.getResult().size() > 0){

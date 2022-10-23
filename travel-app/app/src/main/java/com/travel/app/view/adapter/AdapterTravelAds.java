@@ -1,6 +1,7 @@
 package com.travel.app.view.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.travel.app.MainActivity;
 import com.travel.app.R;
@@ -17,45 +21,52 @@ import com.travel.app.data.model.Travel;
 
 import java.util.List;
 
-public class AdapterTravelAds extends RecyclerView.Adapter<AdapterTravelAds.ViewHolder> {
+public class AdapterTravelAds extends PagerAdapter {
 
     private MainActivity context;
     private List<Travel> travels;
     private static Integer RES_ID = R.layout.item_travel_ads;
+    private LayoutInflater inflater;
 
     public AdapterTravelAds(MainActivity context, List<Travel> travels) {
         this.context = context;
         this.travels = travels;
     }
 
-    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(RES_ID, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Travel travel = travels.get(position);
-        holder.loadDataToView(travel);
-        holder.actionView(travel);
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return travels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
+        return (view == (ConstraintLayout) object);
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.item_travel_ads, container, false);
+        ViewHolder viewHolder = new ViewHolder(v);
+        viewHolder.loadDataToView(travels.get(position));
+        viewHolder.actionView(travels.get(position));
+        container.addView(v);
+        return v;
+    }
+
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        ((ViewPager) container).removeView((View) object);
+    }
+
+    public class ViewHolder{
         private View view;
         private ImageView ivThumb;
         private TextView tvAddress, tvTag, tvName, tvDescription, tvTotalView, tvTotalLike, tvTotalCmt, tvRatePoint;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public ViewHolder(View itemView) {
             this.view = itemView;
             this.init();
         }

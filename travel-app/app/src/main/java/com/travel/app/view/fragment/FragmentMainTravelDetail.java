@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
@@ -42,7 +43,7 @@ import com.travel.app.view.dialog.DialogRate;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressLint({"ValidFragment","NotifyDataSetChanged","SetTextI18n","NewApi"})
+@SuppressLint({"ValidFragment","NotifyDataSetChanged","SetTextI18n","NewApi", "DefaultLocale"})
 public class FragmentMainTravelDetail extends Fragment {
 
     private static final Integer RES_ID = R.layout.fragment_main_travel_detail;
@@ -51,7 +52,7 @@ public class FragmentMainTravelDetail extends Fragment {
     private Group grAuth;
     private RecyclerView rvHotel, rvComment, rvTravelMeta;
     private ImageView ivThumb;
-    private TextView tvName, tvTotalView, tvTotalLike, tvDesc, tvRatePoint, btnGoMap;
+    private TextView tvName, tvTotalView, tvTotalLike, tvDesc, tvRatePoint, tvRateCount, btnGoMap;
     private TextViewAwsRe twaStar1,twaStar2,twaStar3,twaStar4,twaStar5;
     private List<TextViewAwsRe> lstStar = new ArrayList<>();
     private LinearLayout llRateView;
@@ -103,6 +104,7 @@ public class FragmentMainTravelDetail extends Fragment {
         this.tvTotalLike = this.view.findViewById(R.id.tv_total_like);
         this.tvDesc = this.view.findViewById(R.id.tv_description);
         this.tvRatePoint = this.view.findViewById(R.id.tv_rate_point);
+        this.tvRateCount = this.view.findViewById(R.id.tv_rate_count);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
         this.etCmt = this.view.findViewById(R.id.et_cmt);
@@ -152,8 +154,14 @@ public class FragmentMainTravelDetail extends Fragment {
                 this.tvTotalView.setText(this.travel.getTotalView().toString());
                 this.tvTotalLike.setText(this.travel.getTotalLike().toString());
                 this.tvDesc.setText(this.travel.getDescription());
-                this.tvRatePoint.setText(String.format("(%s / %s)", this.travel.getRatePoint().toString(), "5"));
+                this.tvRatePoint.setText(this.travel.getRatePoint().toString());
+                this.tvRateCount.setText(travel.getRateCount().equals(0) ? "" : String.format("(%d)", travel.getRateCount()));
                 ImageUtils.loadUrl(context, this.ivThumb, travel.getMediaUrl());
+                if(this.travel.getIsLike() != null && this.travel.getIsLike() == 1) {
+                    Typeface typeface = context.getResources().getFont(R.font.fa_solid);
+                    this.btnLike.setTypeface(typeface);
+                }
+
                 loadStar();
                 loadTravelMeta();
                 loadHotel();
@@ -164,9 +172,8 @@ public class FragmentMainTravelDetail extends Fragment {
 
     public void loadStar(){
         Typeface typeface = context.getResources().getFont(R.font.fa_solid);
-        if(travel.getRatePoint() > 0){
-            Integer rb = travel.getRatePoint().intValue();
-            Double re = travel.getRatePoint() % 1;
+        if(travel.getRate() != null && travel.getRate() > 0){
+            Integer rb = travel.getRate();
             for(int i = 0; i < rb; i++){
                 lstStar.get(i).setTypeface(typeface);
             }
@@ -228,7 +235,24 @@ public class FragmentMainTravelDetail extends Fragment {
                 postUser.setIdPost(travel.getIdPost());
                 postUser.setIsLike(1);
                 context.getHomeViewModel().postLike(token, postUser).observe(context, res -> {
-                    Log.i("postLike", res.getResult().toString());
+                    Log.i("POST_LIKE", res.getResult().toString());
+                    Integer isLike =  res.getResult().getIsLike();
+                    Integer val;
+                    Typeface typeface;
+                    switch (isLike){
+                        case 1:
+                            typeface = context.getResources().getFont(R.font.fa_solid);
+                            val = 1;
+                            Toast.makeText(context, "Like post", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            typeface = context.getResources().getFont(R.font.fa_regular);
+                            val = -1;
+                            Toast.makeText(context, "Unlike post", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                    tvTotalLike.setText(String.format("%d", travel.getTotalLike() + val));
+                    btnLike.setTypeface(typeface);
                 });
             }
         });
@@ -261,7 +285,7 @@ public class FragmentMainTravelDetail extends Fragment {
             public void onClick(View view) {
                 String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
                 if(token.length() != 0){
-                    new DialogRate(context, travel.getIdPost(), context.getHomeViewModel()).show();
+                    new DialogRate(context, travel.getIdPost(), context.getHomeViewModel(), lstStar).show();
                 }
             }
         });
