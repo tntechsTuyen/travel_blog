@@ -40,6 +40,9 @@ public class Post {
     @Column(name = "rate_point")
     private Double ratePoint;
 
+    @Column(name = "rate_count")
+    private Integer rateCount;
+
     @Column(name = "is_ads")
     private Integer isAds;
 

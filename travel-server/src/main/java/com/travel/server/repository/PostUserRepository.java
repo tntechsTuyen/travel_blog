@@ -23,4 +23,16 @@ public interface PostUserRepository extends JpaRepository<PostUser, Integer> {
             " )" +
             "WHERE id = :id ")
     int updatePostRatePoint(@Param("id") Integer id);
+
+    @Modifying
+    @Transactional
+    @Query(" UPDATE Post " +
+            " SET rateCount = ( "+
+            "   SELECT COUNT(id) " +
+            "   FROM PostUser " +
+            "   WHERE idPost = :id " +
+            "   AND rate != 0 " +
+            " )" +
+            "WHERE id = :id ")
+    int updatePostRateCount(@Param("id") Integer id);
 }
