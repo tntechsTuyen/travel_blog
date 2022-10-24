@@ -1,14 +1,22 @@
 package com.travel.app;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
 import com.travel.app.common.DataStatic;
+import com.travel.app.common.utils.FileUtils;
+import com.travel.app.common.utils.IntentUtils;
 import com.travel.app.common.utils.SessionUtils;
 import com.travel.app.common.view.toolbar.MyToolbar;
 import com.travel.app.data.model.Hotel;
@@ -23,6 +31,8 @@ import com.travel.app.view.fragment.FragmentMainTravelDetail;
 import com.travel.app.view.fragment.FragmentMainTravelSearch;
 import com.travel.app.viewmodel.HomeViewModel;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -33,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentMainHotelDetail fragmentMainHotelDetail = null;
     private FragmentMainTravelSearch fragmentMainTravelSearch = null;
     private FragmentMainSetting fragmentMainSetting = null;
+    private Fragment fragmentTarget;
 
     private MyToolbar toolbar;
     private DialogMainMenu dialogMainMenu;
@@ -109,6 +120,10 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void setFragmentTarget(Fragment fragmentTarget) {
+        this.fragmentTarget = fragmentTarget;
+    }
+
     public MyToolbar getToolbar(){
         return this.toolbar;
     }
@@ -130,5 +145,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         this.dialogMainMenu.updateViewAuth();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == DataStatic.CODE.CHOOSE_IMAGE) && (resultCode == -1)) {
+            Uri selectedFileUri = data.getData();
+
+            Bitmap bitmap = null;
+
+            try {
+                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedFileUri);
+                Log.d("Data_image", "uri: " + selectedFileUri + ", bitmap: " + bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String selectedFilePath = FileUtils.getPath(this, selectedFileUri);
+            Log.i("FrMainSetting", "Selected File Path:" + selectedFilePath);
+            if(fragmentTarget == null) return;
+            if(fragmentTarget instanceof FragmentMainTravelDetail){
+                ((FragmentMainTravelDetail) fragmentTarget).setAttachFile(selectedFilePath);
+            } else if(fragmentTarget instanceof FragmentMainHotelDetail){
+                ((FragmentMainHotelDetail) fragmentTarget).setAttachFile(selectedFilePath);
+            }
+        }
     }
 }

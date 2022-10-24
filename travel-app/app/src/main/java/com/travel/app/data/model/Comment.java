@@ -9,8 +9,9 @@ public class Comment {
     public int idPost;
     public int idUser;
     public int idParent;
-    public String fullName;
+    public String username;
     public String content;
+    public String mediaUrl;
     public Long createdDate;
 
     public Comment(){}
@@ -37,8 +38,8 @@ public class Comment {
         return idParent;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getUsername() {
+        return username;
     }
 
     public String getContent() {
@@ -47,6 +48,14 @@ public class Comment {
 
     public long getCreatedDate() {
         return createdDate;
+    }
+
+    public String getMediaUrl() {
+        return mediaUrl;
+    }
+
+    public void setIdParent(int idParent) {
+        this.idParent = idParent;
     }
 
     public String getTime(){

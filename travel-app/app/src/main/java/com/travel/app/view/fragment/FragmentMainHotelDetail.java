@@ -27,19 +27,28 @@ import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.ImageUtils;
+import com.travel.app.common.utils.IntentUtils;
+import com.travel.app.common.utils.PermissionUtils;
 import com.travel.app.common.utils.SessionUtils;
+import com.travel.app.common.utils.UriUtils;
 import com.travel.app.common.view.icon.TextViewAwsRe;
 import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.data.model.Comment;
 import com.travel.app.data.model.Hotel;
 import com.travel.app.data.model.HotelMeta;
+import com.travel.app.data.model.Media;
 import com.travel.app.data.model.PostUser;
 import com.travel.app.view.adapter.AdapterComment;
 import com.travel.app.view.adapter.AdapterHotelMeta;
 import com.travel.app.view.dialog.DialogRate;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 @SuppressLint({"ValidFragment","NewApi"})
 public class FragmentMainHotelDetail extends Fragment {
@@ -50,11 +59,11 @@ public class FragmentMainHotelDetail extends Fragment {
     private Group grAuth;
     private RecyclerView rvComment, rvHotelMeta;
     private ImageView ivThumb;
-    private TextView tvName, tvTotalView, tvTotalLike, tvRatePoint, tvRateCount, tvPhone, tvWork, btnGoMap;
+    private TextView tvName, tvTotalView, tvTotalLike, tvRatePoint, tvRateCount, tvPhone, tvWork, tvAttachFile, btnGoMap;
     private TextViewAwsRe twaStar1,twaStar2,twaStar3,twaStar4,twaStar5;
     private List<TextViewAwsRe> lstStar = new ArrayList<>();
-    private LinearLayout llRateView;
-    private TextViewAwsSo btnSendCmt;
+    private LinearLayout llRateView, llAttachFile;
+    private TextViewAwsSo btnSendCmt, btnFile, twaBtnRemoveAttachFile;
     private EditText etCmt;
     private TextViewAwsRe btnLike;
     private AdapterComment adapterComment;
@@ -62,6 +71,7 @@ public class FragmentMainHotelDetail extends Fragment {
     private List<Comment> listComment = new ArrayList<>();
     private List<HotelMeta> listHotelMeta = new ArrayList<>();
     private Hotel hotel;
+    private Comment commentReply;
 
     @SuppressLint("ValidFragment")
     public FragmentMainHotelDetail(MainActivity mContext, Hotel hotel){
@@ -87,7 +97,7 @@ public class FragmentMainHotelDetail extends Fragment {
         this.rvHotelMeta.setLayoutManager(new LinearLayoutManager(context));
 
         this.rvComment = this.view.findViewById(R.id.rv_comment);
-        this.adapterComment = new AdapterComment(this.context, this.listComment);
+        this.adapterComment = new AdapterComment(this.context, this.listComment, this);
         this.rvComment.setAdapter(this.adapterComment);
         this.rvComment.setLayoutManager(new LinearLayoutManager(context));
 
@@ -97,13 +107,16 @@ public class FragmentMainHotelDetail extends Fragment {
         this.tvTotalLike = this.view.findViewById(R.id.tv_total_like);
         this.tvRatePoint = this.view.findViewById(R.id.tv_rate_point);
         this.tvRateCount = this.view.findViewById(R.id.tv_rate_count);
+        this.tvAttachFile = this.view.findViewById(R.id.tv_attach_file);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
         this.etCmt = this.view.findViewById(R.id.et_cmt);
         this.btnSendCmt = this.view.findViewById(R.id.btn_send_cmt);
+        this.btnFile = this.view.findViewById(R.id.btn_file);
         this.tvPhone = this.view.findViewById(R.id.tv_phone);
         this.tvWork = this.view.findViewById(R.id.tv_work);
-
+        this.llAttachFile = this.view.findViewById(R.id.ll_attach_file);
+        this.twaBtnRemoveAttachFile = this.view.findViewById(R.id.twa_btn_remove_attach_file);
         this.grAuth = this.view.findViewById(R.id.gr_auth);
         this.llRateView = this.view.findViewById(R.id.ll_rate_view);
         initStar();
@@ -126,6 +139,7 @@ public class FragmentMainHotelDetail extends Fragment {
     public void onResume() {
         super.onResume();
         String token = SessionUtils.get(this.context, DataStatic.SESSION.KEY.AUTH, "");
+        this.context.setFragmentTarget(this);
         if(token != null && token.trim().length() > 0){
             this.grAuth.setVisibility(View.VISIBLE);
         }else{
@@ -241,23 +255,11 @@ public class FragmentMainHotelDetail extends Fragment {
         this.btnSendCmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String strCmt = etCmt.getText().toString();
-                if(strCmt.length() > 0){
-                    String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
-                    Comment comment = new Comment(hotel.getIdPost(), strCmt);
-                    etCmt.setText("");
-                    View v = context.getCurrentFocus();
-                    if (v != null) {
-                        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                    }
-
-                    context.getHomeViewModel().postComment(token, comment).observe(context, res -> {
-                        if(res.getResult() != null){
-                            loadComment();
-                        }
-                    });
-                }
+                String strCmt = etCmt.getText().toString().trim();
+                String strAttach = tvAttachFile.getText().toString().trim();
+                String token = SessionUtils.get(context, DataStatic.SESSION.KEY.AUTH, "");
+                if(strCmt.length() == 0) return;
+                postComment(token, strCmt, strAttach);
             }
         });
 
@@ -270,5 +272,58 @@ public class FragmentMainHotelDetail extends Fragment {
                 }
             }
         });
+
+        this.btnFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(PermissionUtils.readExternalStorage(context)){
+                    IntentUtils.chooseImage(context, IntentUtils.FRAGMENT.TRAVEL_DETAIL);
+                }
+            }
+        });
+
+        this.twaBtnRemoveAttachFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvAttachFile.setText("");
+                llAttachFile.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    public void postComment(String token, String strCmt, String pathFile){
+        if(strCmt.length() > 0){
+            Comment comment = new Comment(hotel.getIdPost(), strCmt);
+            if(commentReply != null){
+                comment.setIdParent(commentReply.getId());
+            }
+            etCmt.setText("");
+            tvAttachFile.setText("");
+            llAttachFile.setVisibility(View.GONE);
+            View v = context.getCurrentFocus();
+            if (v != null) {
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+            context.getHomeViewModel().postComment(token, comment, pathFile, this);
+
+        }
+    }
+
+    public void setCommentReply(Comment commentReply) {
+        this.commentReply = commentReply;
+        String cmt = etCmt.getText().toString();
+        if(cmt.contains("@")){
+            String cmtArr[] = cmt.split(" ");
+            cmtArr[0] = String.format("@%s", this.commentReply.getUsername(), cmt);
+            etCmt.setText(cmtArr.toString());
+        }else{
+            etCmt.setText(String.format("@%s %s", this.commentReply.getUsername(), cmt));
+        }
+    }
+
+    public void setAttachFile(String path){
+        this.llAttachFile.setVisibility(View.VISIBLE);
+        this.tvAttachFile.setText(path);
     }
 }

@@ -25,6 +25,7 @@
         <javax.servlet>3.0.1</javax.servlet>
         <org.mariadb.jdbc>2.0.3</org.mariadb.jdbc>
         <io.jsonwebtoken>0.9.1</io.jsonwebtoken>
+        <commons.io.version>2.4</commons.io.version>
     </properties>
 
     <dependencies>
@@ -90,6 +91,24 @@
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
             <version>${org.mariadb.jdbc}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.4.0</version>
         </dependency>
     </dependencies>
 

@@ -10,6 +10,10 @@ spring:
     username: root
     password: 12345678
     driver-class-name: org.mariadb.jdbc.Driver
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
   jpa:
     open-in-view: false
     properties:

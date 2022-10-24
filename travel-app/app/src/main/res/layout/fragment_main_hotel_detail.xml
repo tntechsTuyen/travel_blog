@@ -278,22 +278,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Comment"
+        android:text="Bình luận"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/ll_rate_view" />
 
     <LinearLayout
+        android:id="@+id/ll_attach_file"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        <com.travel.app.common.view.icon.TextViewAwsSo
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:text="@string/ico_link"
+            android:textSize="@dimen/ico_small" />
+
+        <TextView
+            android:id="@+id/tv_attach_file"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="9"
+            android:textSize="@dimen/text_small" />
+
+        <com.travel.app.common.view.icon.TextViewAwsSo
+            android:id="@+id/twa_btn_remove_attach_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ico_times_circle"
+            android:textColor="@color/color_orange"
+            android:textSize="@dimen/ico_small" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="2dp"
         android:background="@drawable/bg_et_comment"
         android:orientation="horizontal"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/ll_attach_file">
 
         <EditText
             android:id="@+id/et_cmt"
@@ -310,6 +345,16 @@
             android:textStyle="italic" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
+            android:id="@+id/btn_file"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="@string/ico_link"
+            android:textSize="15sp" />
+
+        <com.travel.app.common.view.icon.TextViewAwsSo
             android:id="@+id/btn_send_cmt"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -320,6 +365,7 @@
             android:textColor="@color/color_blue"
             android:textSize="15sp" />
     </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_comment"

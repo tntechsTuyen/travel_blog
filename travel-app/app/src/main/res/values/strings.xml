@@ -23,6 +23,8 @@
     <string name="ico_caret_up">&#xf0d8;</string>
     <string name="ico_arrow_left">&#xf060;</string>
     <string name="ico_search">&#xf002;</string>
+    <string name="ico_link">&#xf0c1;</string>
+    <string name="ico_times_circle">&#xf057;</string>
 
     <string name="app_name">Travel Blog</string>
     <string name="txt_sign_up">Sign Up</string>
@@ -36,4 +38,5 @@
     <string name="txt_birth_day">Birth day</string>
     <string name="txt_submit">Submit</string>
     <string name="txt_rate_ex">(4.5/5)</string>
+    <string name="reply">Reply</string>
 </resources>

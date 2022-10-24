@@ -9,7 +9,7 @@ import java.util.*;
 
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
-    @Query("SELECT u.fullName AS fullName " +
+    @Query("SELECT u.username AS username " +
             ", c.content AS content " +
             ", c.id AS id " +
             ", c.idPost AS idPost " +
@@ -17,8 +17,10 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
             ", c.content AS content " +
             ", c.idParent AS idParent " +
             ", c.createdDate AS createdDate " +
+            ", m.url AS mediaUrl " +
             "FROM Comment c " +
             "INNER JOIN User u ON c.idUser = u.id " +
+            "LEFT JOIN Media m ON c.idMedia = m.id " +
             "WHERE c.idPost = :id_post " +
             "ORDER BY c.createdDate DESC ")
     List<Map<String, Object>> findByIdPost(@Param("id_post") Integer idPost);

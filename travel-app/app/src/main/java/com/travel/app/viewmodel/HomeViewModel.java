@@ -1,6 +1,7 @@
 package com.travel.app.viewmodel;
 
 import android.app.Application;
+import android.app.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -35,7 +36,7 @@ public class HomeViewModel extends AndroidViewModel {
         super(application);
         this.travelRepository = new TravelRepository();
         this.locationRepository = new LocationRepository();
-        this.postRepository = new PostRepository();
+        this.postRepository = new PostRepository(application.getApplicationContext());
         this.hotelRepository = new HotelRepository();
         this.settingRepository = new SettingRepository();
     }
@@ -96,8 +97,8 @@ public class HomeViewModel extends AndroidViewModel {
         return this.settingRepository.postTagUpdate(token, idTags);
     }
 
-    public LiveData<ApiResponse<Comment>> postComment(String token, Comment comment){
-        return this.postRepository.postComment(token, comment);
+    public void postComment(String token, Comment comment, String partFile, Fragment fragment){
+        this.postRepository.postComment(token, comment, partFile, fragment);
     }
 
     public LiveData<ApiResponse<PostUser>> postLike(String token, PostUser postUser){

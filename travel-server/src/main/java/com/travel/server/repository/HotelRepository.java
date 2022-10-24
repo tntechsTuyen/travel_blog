@@ -50,6 +50,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
             ", p.totalLike AS totalLike " +
             ", p.totalComment AS totalComment " +
             ", p.ratePoint AS ratePoint " +
+            ", p.rateCount AS rateCount " +
             ", p.createdDate AS createdDate " +
             ", m.url AS mediaUrl " +
             ", m.type AS mediaType " +

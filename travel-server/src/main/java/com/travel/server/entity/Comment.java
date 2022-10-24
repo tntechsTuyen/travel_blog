@@ -28,6 +28,9 @@ public class Comment {
     @Column(name = "id_parent")
     private Integer idParent;
 
+    @Column(name = "id_media")
+    private Integer idMedia;
+
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
     private Date createdDate;

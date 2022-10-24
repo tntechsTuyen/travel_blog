@@ -15,6 +15,7 @@ public class ImageUtils {
             url = String.format("%s%s", DataStatic.BASE_URL, url);
             Glide.with(context)
                     .load(url)
+                    .error(R.drawable.no_image_available)
                     .thumbnail(0.2f)
                     .dontAnimate()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

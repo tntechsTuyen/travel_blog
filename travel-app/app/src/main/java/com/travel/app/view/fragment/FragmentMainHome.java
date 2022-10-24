@@ -121,7 +121,7 @@ public class FragmentMainHome extends Fragment {
             public void run() {
                 handler.post(runnable);
             }
-        }, 5000, 5000);
+        }, 10000, 10000);
     }
 
     public void loadTravelTop(){
