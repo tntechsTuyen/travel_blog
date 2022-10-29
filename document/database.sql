@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `travel_blog` /*!40100 DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci */;
+USE `travel_blog`;
 -- MySQL dump 10.13  Distrib 8.0.28, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: travel_blog
@@ -28,9 +30,10 @@ CREATE TABLE `comment` (
   `id_user` int(11) DEFAULT NULL,
   `content` text DEFAULT NULL,
   `id_parent` int(11) DEFAULT 0,
-  `created_date` datetime DEFAULT NULL,
+  `id_media` int(11) DEFAULT 0,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +42,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (10,1,1,'a1',0,'2022-10-14 16:49:31'),(11,1,1,'a2',0,'2022-10-14 16:49:39'),(12,1,1,'a3',0,'2022-10-14 16:49:54'),(13,2,1,'ssaaa',0,'2022-10-17 08:43:31'),(14,19,1,'qwqwwqw',0,'2022-10-17 10:48:05'),(15,19,1,'qwqqq',0,'2022-10-17 10:56:18'),(16,5,1,'Test',0,'2022-10-18 13:04:36');
+INSERT INTO `comment` VALUES (10,1,1,'a1',0,0,'2022-10-14 16:49:31'),(11,1,1,'a2',0,0,'2022-10-14 16:49:39'),(12,1,1,'a3',0,0,'2022-10-14 16:49:54'),(13,2,1,'ssaaa',0,0,'2022-10-17 08:43:31'),(14,19,1,'qwqwwqw',0,0,'2022-10-17 10:48:05'),(15,19,1,'qwqqq',0,0,'2022-10-17 10:56:18'),(16,5,1,'Test',0,0,'2022-10-18 13:04:36'),(17,2,1,'@admin 111111',0,0,'2022-10-24 10:06:38'),(18,2,1,'test',0,45,'2022-10-24 14:44:59'),(19,2,1,'sadsadasd',0,46,'2022-10-24 15:16:40'),(20,2,1,'ttttt',0,47,'2022-10-24 15:18:10'),(21,2,1,'sadasd',0,48,'2022-10-24 15:18:58'),(22,2,1,'Test image',1,50,'2022-10-24 15:37:03'),(23,2,1,'11111',0,51,'2022-10-24 15:38:04'),(24,2,1,'qqqqq',0,52,'2022-10-24 15:38:32'),(25,2,1,'aaaaa',0,53,'2022-10-24 15:40:30'),(26,2,1,'a21321',0,54,'2022-10-24 15:44:55'),(27,2,1,'1',0,55,'2022-10-24 16:09:36'),(28,2,1,'aacc',0,56,'2022-10-24 16:13:01'),(29,2,1,'tte',0,57,'2022-10-24 16:25:34'),(30,2,1,'@admin test',25,58,'2022-10-24 16:33:13'),(31,2,1,'@admin haha',30,59,'2022-10-24 16:36:35'),(32,47,1,'testing',0,60,'2022-10-24 16:52:56');
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +60,7 @@ CREATE TABLE `hotel` (
   `work` varchar(254) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `id_location` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -86,7 +89,7 @@ CREATE TABLE `hotel_meta` (
   `name` text DEFAULT NULL,
   `value` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -113,7 +116,7 @@ CREATE TABLE `hotel_post` (
   `id_hotel` int(11) DEFAULT NULL,
   `id_post` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +144,7 @@ CREATE TABLE `location` (
   `address` varchar(254) DEFAULT NULL,
   `city` varchar(254) DEFAULT NULL,
   `country` varchar(254) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -169,9 +172,9 @@ CREATE TABLE `media` (
   `type` char(254) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -180,7 +183,7 @@ CREATE TABLE `media` (
 
 LOCK TABLES `media` WRITE;
 /*!40000 ALTER TABLE `media` DISABLE KEYS */;
-INSERT INTO `media` VALUES (1,'static/media/bai_dinh_travel.png','image',1,'Chùa Bái Đính - Tràng An','2022-10-11 11:39:58'),(2,'static/media/ba_be_travel.png','image',1,'Vườn quốc gia Ba Bể','2022-10-11 11:39:58'),(3,'static/media/cuc_phuong_travel.png','image',1,'Vườn Quốc Gia Cúc Phương','2022-10-11 11:39:58'),(4,'static/media/ben_thanh_travel.png','image',1,'Chợ Bến Thành','2022-10-11 11:39:58'),(5,'static/media/nha_tho_duc_ba_travel.png','image',1,'Nhà thờ Đức Bà','2022-10-11 11:39:58'),(6,'static/media/yen_tu_travel.png','image',1,'Legacy Yên Tử','2022-10-11 11:39:58'),(7,'static/media/asia_park_travel.png','image',1,'Asia Park - Công viên Châu Á','2022-10-11 11:39:58'),(8,'static/media/ba_na_hill_travel.png','image',1,'Bà Nà Hill','2022-10-11 11:39:58'),(9,'static/media/suoi_tien_travel.png','image',1,'Công viên văn hóa Suối Tiên','2022-10-11 11:39:58'),(10,'static/media/bai_dinh_hotel.png','image',1,'Bai Dinh Hotel','2022-10-11 11:39:58'),(11,'static/media/bai_dinh_garden_resort_hotel.png','image',1,'Bai Dinh Garden Resort & Spa Ninh Binh','2022-10-11 11:39:58'),(12,'static/media/ninh_binh_hotel.png','image',1,'Ninh Bình Mountain','2022-10-11 11:39:58'),(13,'static/media/dinh_doc_lap_travel.png','image',1,'Dinh Độc Lập','2022-10-18 10:46:46'),(14,'static/media/dia_dao_cu_chi_travel.png','image',1,'Địa đạo Củ Chi','2022-10-18 10:46:46'),(15,'static/media/3d_artinus_travel.png','image',1,'Khu triển lãm tranh 3D Artinus','2022-10-18 10:46:46'),(16,'static/media/dam_sen_travel.png','image',1,'Công viên nước Đầm Sen','2022-10-18 10:46:46'),(17,'static/media/lien_an_saigon_hotel.png','image',1,'Lien An Saigon Hotel','2022-10-18 10:46:46'),(18,'static/media/renaissance_riverside_hotel.png','image',1,'Renaissance Riverside Sài Gòn','2022-10-18 10:46:46'),(19,'static/media/cochin_zen_hotel.png','image',1,'Khách sạn Cochin Zen','2022-10-18 10:46:46'),(20,'static/media/central_palace_hotel_saigon.png','image',1,'Central Palace Hotel Saigon','2022-10-18 10:46:46'),(21,'static/media/bao_sang_motel.png','image',1,'Bảo Sang Motel','2022-10-18 10:46:46'),(22,'static/media/anh_viet_motel.png','image',1,'Anh Việt Motel','2022-10-18 10:46:46'),(23,'static/media/bin_bin_hotel_4.png','image',1,'Bin Bin Hotel 4','2022-10-18 10:46:46'),(24,'static/media/bin_bin_hotel_2.png','image',1,'Bin Bin Hotel 2','2022-10-18 10:46:46'),(25,'static/media/bin_bin_hotel_7.png','image',1,'Bin Bin Hotel 7','2022-10-18 10:46:46'),(26,'static/media/eva_adam_hotel.png','image',1,'Eva Adam Hotel','2022-10-18 10:46:46'),(27,'static/media/linh_dan_hotel.png','image',1,'Linh Đan Hotel','2022-10-18 10:46:46'),(28,'static/media/nhu_quynh_hotel.png','image',1,'Như Quỳnh Hotel','2022-10-18 10:46:46'),(29,'static/media/brown_bean_hotel.png','image',1,'Brown Bean Hotel','2022-10-18 10:46:46'),(30,'static/media/origo_hotel.png','image',1,'Origo Hotel','2022-10-18 10:46:46'),(31,'static/media/minh_toan_galaxy_hotel.png','image',1,'Minh Toàn Galaxy Hotel','2022-10-18 10:46:46'),(32,'static/media/the_blossom_resort_da_nang.png','image',1,'The Blossom Resort Đà Nẵng','2022-10-18 10:46:46'),(33,'static/media/mercure_french_village_bana_hills_1.png','image',1,'Mercure French Village Bana Hills 1','2022-10-18 10:46:46'),(34,'static/media/mercure_french_village_bana_hills_7.png','image',1,'Mercure French Village Bana Hills 7','2022-10-18 10:46:46'),(35,'static/media/hong_gam_motel.png','image',1,'Hồng Gấm Motel','2022-10-18 10:46:46'),(36,'static/media/homstay_hai_dang.png','image',1,'Homstay Hải Đăng','2022-10-18 10:46:46'),(37,'static/media/hoa_lan_homestay.png','image',1,'Hoa Lan Homestay','2022-10-18 10:46:46'),(38,'static/media/quynh_mai_homestay.png','image',1,'Quynh Mai Homestay','2022-10-18 10:46:46'),(39,'static/media/chi_hoa_homestay.png','image',1,'Chi Hòa Homestay','2022-10-18 10:46:46'),(40,'static/media/new_world_saigon_hotel.png','image',1,'New World Saigon Hotel','2022-10-18 10:46:46'),(41,'static/media/alagon_plus_hotel_spa.png','image',1,'Alagon Plus Hotel & Spa','2022-10-18 10:46:46'),(42,'static/media/paradise_saigon_boutique_hotel_spa.png','image',1,'Paradise Saigon Boutique Hotel & Spa','2022-10-18 10:46:46'),(43,'static/media/a&em_art_hotel.png','image',1,'A&Em Art Hotel','2022-10-18 10:46:46'),(44,'static/media/winsuites_saigon_luxury_boutique_hotel.png','image',1,'WINSUITES SAIGON - LUXURY BOUTIQUE HOTEL','2022-10-18 10:46:46');
+INSERT INTO `media` VALUES (1,'static/media/bai_dinh_travel.png','image',1,'Chùa Bái Đính - Tràng An','2022-10-11 11:39:58'),(2,'static/media/ba_be_travel.png','image',1,'Vườn quốc gia Ba Bể','2022-10-11 11:39:58'),(3,'static/media/cuc_phuong_travel.png','image',1,'Vườn Quốc Gia Cúc Phương','2022-10-11 11:39:58'),(4,'static/media/ben_thanh_travel.png','image',1,'Chợ Bến Thành','2022-10-11 11:39:58'),(5,'static/media/nha_tho_duc_ba_travel.png','image',1,'Nhà thờ Đức Bà','2022-10-11 11:39:58'),(6,'static/media/yen_tu_travel.png','image',1,'Legacy Yên Tử','2022-10-11 11:39:58'),(7,'static/media/asia_park_travel.png','image',1,'Asia Park - Công viên Châu Á','2022-10-11 11:39:58'),(8,'static/media/ba_na_hill_travel.png','image',1,'Bà Nà Hill','2022-10-11 11:39:58'),(9,'static/media/suoi_tien_travel.png','image',1,'Công viên văn hóa Suối Tiên','2022-10-11 11:39:58'),(10,'static/media/bai_dinh_hotel.png','image',1,'Bai Dinh Hotel','2022-10-11 11:39:58'),(11,'static/media/bai_dinh_garden_resort_hotel.png','image',1,'Bai Dinh Garden Resort & Spa Ninh Binh','2022-10-11 11:39:58'),(12,'static/media/ninh_binh_hotel.png','image',1,'Ninh Bình Mountain','2022-10-11 11:39:58'),(13,'static/media/dinh_doc_lap_travel.png','image',1,'Dinh Độc Lập','2022-10-18 10:46:46'),(14,'static/media/dia_dao_cu_chi_travel.png','image',1,'Địa đạo Củ Chi','2022-10-18 10:46:46'),(15,'static/media/3d_artinus_travel.png','image',1,'Khu triển lãm tranh 3D Artinus','2022-10-18 10:46:46'),(16,'static/media/dam_sen_travel.png','image',1,'Công viên nước Đầm Sen','2022-10-18 10:46:46'),(17,'static/media/lien_an_saigon_hotel.png','image',1,'Lien An Saigon Hotel','2022-10-18 10:46:46'),(18,'static/media/renaissance_riverside_hotel.png','image',1,'Renaissance Riverside Sài Gòn','2022-10-18 10:46:46'),(19,'static/media/cochin_zen_hotel.png','image',1,'Khách sạn Cochin Zen','2022-10-18 10:46:46'),(20,'static/media/central_palace_hotel_saigon.png','image',1,'Central Palace Hotel Saigon','2022-10-18 10:46:46'),(21,'static/media/bao_sang_motel.png','image',1,'Bảo Sang Motel','2022-10-18 10:46:46'),(22,'static/media/anh_viet_motel.png','image',1,'Anh Việt Motel','2022-10-18 10:46:46'),(23,'static/media/bin_bin_hotel_4.png','image',1,'Bin Bin Hotel 4','2022-10-18 10:46:46'),(24,'static/media/bin_bin_hotel_2.png','image',1,'Bin Bin Hotel 2','2022-10-18 10:46:46'),(25,'static/media/bin_bin_hotel_7.png','image',1,'Bin Bin Hotel 7','2022-10-18 10:46:46'),(26,'static/media/eva_adam_hotel.png','image',1,'Eva Adam Hotel','2022-10-18 10:46:46'),(27,'static/media/linh_dan_hotel.png','image',1,'Linh Đan Hotel','2022-10-18 10:46:46'),(28,'static/media/nhu_quynh_hotel.png','image',1,'Như Quỳnh Hotel','2022-10-18 10:46:46'),(29,'static/media/brown_bean_hotel.png','image',1,'Brown Bean Hotel','2022-10-18 10:46:46'),(30,'static/media/origo_hotel.png','image',1,'Origo Hotel','2022-10-18 10:46:46'),(31,'static/media/minh_toan_galaxy_hotel.png','image',1,'Minh Toàn Galaxy Hotel','2022-10-18 10:46:46'),(32,'static/media/the_blossom_resort_da_nang.png','image',1,'The Blossom Resort Đà Nẵng','2022-10-18 10:46:46'),(33,'static/media/mercure_french_village_bana_hills_1.png','image',1,'Mercure French Village Bana Hills 1','2022-10-18 10:46:46'),(34,'static/media/mercure_french_village_bana_hills_7.png','image',1,'Mercure French Village Bana Hills 7','2022-10-18 10:46:46'),(35,'static/media/hong_gam_motel.png','image',1,'Hồng Gấm Motel','2022-10-18 10:46:46'),(36,'static/media/homstay_hai_dang.png','image',1,'Homstay Hải Đăng','2022-10-18 10:46:46'),(37,'static/media/hoa_lan_homestay.png','image',1,'Hoa Lan Homestay','2022-10-18 10:46:46'),(38,'static/media/quynh_mai_homestay.png','image',1,'Quynh Mai Homestay','2022-10-18 10:46:46'),(39,'static/media/chi_hoa_homestay.png','image',1,'Chi Hòa Homestay','2022-10-18 10:46:46'),(40,'static/media/new_world_saigon_hotel.png','image',1,'New World Saigon Hotel','2022-10-18 10:46:46'),(41,'static/media/alagon_plus_hotel_spa.png','image',1,'Alagon Plus Hotel & Spa','2022-10-18 10:46:46'),(42,'static/media/paradise_saigon_boutique_hotel_spa.png','image',1,'Paradise Saigon Boutique Hotel & Spa','2022-10-18 10:46:46'),(43,'static/media/a&em_art_hotel.png','image',1,'A&Em Art Hotel','2022-10-18 10:46:46'),(44,'static/media/winsuites_saigon_luxury_boutique_hotel.png','image',1,'WINSUITES SAIGON - LUXURY BOUTIQUE HOTEL','2022-10-18 10:46:46'),(45,'static/media//2022/10/24/IMG_20221024_110604.jpg','image',1,NULL,'2022-10-24 14:44:59'),(46,'static/media/2022/10/24/20221024031639936.jpg','image',1,NULL,'2022-10-24 15:16:40'),(47,'static/media/2022/10/24/20221024031810267.jpg','image',1,NULL,'2022-10-24 15:18:10'),(48,'static/media/2022/10/24/20221024031858184.jpg','image',1,NULL,'2022-10-24 15:18:58'),(49,'','image',1,NULL,'2022-10-24 15:36:16'),(50,'static/media/2022/10/24/20221024033703649.png','image',1,NULL,'2022-10-24 15:37:03'),(51,'static/media/2022/10/24/20221024033804219.jpg','image',1,NULL,'2022-10-24 15:38:04'),(52,'static/media/2022/10/24/20221024033832533.jpg','image',1,NULL,'2022-10-24 15:38:32'),(53,'static/media/2022/10/24/20221024034005554.jpg','image',1,NULL,'2022-10-24 15:40:30'),(54,'static/media/2022/10/24/20221024034455056.jpg','image',1,NULL,'2022-10-24 15:44:55'),(55,'static/media/2022/10/24/20221024040935769.jpg','image',1,NULL,'2022-10-24 16:09:36'),(56,'static/media/2022/10/24/20221024041301294.jpg','image',1,NULL,'2022-10-24 16:13:01'),(57,'static/media/2022/10/24/20221024042533755.jpg','image',1,NULL,'2022-10-24 16:25:33'),(58,'static/media/2022/10/24/20221024043313726.jpg','image',1,NULL,'2022-10-24 16:33:13'),(59,'static/media/2022/10/24/20221024043635164.jpg','image',1,NULL,'2022-10-24 16:36:35'),(60,'static/media/2022/10/24/20221024045256039.jpg','image',1,NULL,'2022-10-24 16:52:56');
 /*!40000 ALTER TABLE `media` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -201,10 +204,11 @@ CREATE TABLE `post` (
   `total_like` int(11) DEFAULT 0,
   `total_comment` int(11) DEFAULT 0,
   `rate_point` double DEFAULT 0,
+  `rate_count` int(11) DEFAULT 0,
   `is_ads` int(11) DEFAULT 0 COMMENT '(0/1)',
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,7 +217,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
-INSERT INTO `post` VALUES (1,'Chùa Bái Đính - Tràng An','Tràng An là một khu du lịch sinh thái nằm trong Quần thể di sản thế giới Tràng An thuộc tỉnh Ninh Bình. Nơi đây đã được Chính phủ Việt Nam xếp hạng di tích quốc gia đặc biệt quan trọng và UNESCO công nhận là di sản thế giới kép từ năm 2014. Liên khu danh thắng Tràng An – Tam Cốc - Bích Động – cố đô Hoa Lư – rừng đặc dụng Hoa Lư hiện được quy hoạch chung vào Quần thể danh thắng Tràng An, trở thành di sản thế giới kép đầu tiên ở Việt Nam với những giá trị nổi bật về cảnh quan thiên nhiên, lịch sử văn hóa và kiến tạo địa chất và cũng là địa danh được đầu tư để trở thành một khu du lịch tầm cỡ quốc tế.','POST',1,2,0,3,3.5,1,'2022-10-11 11:32:05'),(2,'Vườn quốc gia Ba Bể','Vườn quốc gia Ba Bể là một vườn quốc gia, rừng đặc dụng, khu du lịch sinh thái của Việt Nam, nằm trên địa phận tỉnh Bắc Kạn, với trung tâm là hồ Ba Bể. Vườn quốc gia Ba Bể được thành lập theo Quyết định số 83/TTg ngày 10 tháng 11 năm năm 1992 của Thủ tướng Chính phủ','POST',1,1,1,1,4,1,'2022-10-11 11:32:05'),(3,'Vườn Quốc Gia Cúc Phương','Vườn Quốc gia Cúc Phương là một khu bảo tồn thiên nhiên, khu rừng đặc dụng nằm trên địa phận ranh giới 3 khu vực Tây Bắc Bộ, đồng bằng sông Hồng và Bắc Trung Bộ thuộc 3 tỉnh: Ninh Bình, Hòa Bình, Thanh Hóa. Vườn quốc gia này có hệ động thực vật phong phú đa dạng mang đặc trưng rừng mưa nhiệt đới.','POST',1,1,0,0,0,1,'2022-10-11 11:32:05'),(4,'Chợ Bến Thành','Chợ Bến Thành là một ngôi chợ nằm tại quận 1, Thành phố Hồ Chí Minh. Chợ được khởi công xây dựng từ năm 1912, hình ảnh đồng hồ ở cửa nam của ngôi chợ này được xem là biểu tượng không chính thức của Thành phố Hồ Chí Minh.','POST',1,1,0,0,0,0,'2022-10-11 11:32:05'),(5,'Nhà thờ Đức Bà','Nhà thờ chính tòa Đức Bà Sài Gòn, thường được gọi tắt là Nhà thờ Đức Bà, là nhà thờ chính tòa của Tổng giáo phận Thành phố Hồ Chí Minh','POST',1,1,0,1,0,0,'2022-10-11 11:32:05'),(6,'Legacy Yên Tử','Legacy Yên Tử được tọa lạc tại khu di tích và danh thắng Yên Tử, TP Uông Bí, Quảng Ninh – nơi được mệnh danh là cái nôi của Phật giáo Việt Nam, điểm đến lý tưởng để du lịch tâm linh.','POST',1,0,0,0,0,0,'2022-10-11 11:32:05'),(7,'Asia Park - Công viên Châu Á','Công viên giải trí có vòng đu quay khổng lồ & trò tàu lượn khác và khu vực vui chơi theo chủ đề các nước Châu Á.','POST',1,0,0,0,0,0,'2022-10-11 11:32:05'),(8,'Bà Nà Hill','Bà Nà là quần thể du lịch nghỉ dưỡng toạ lạc tại khu vực thuộc dãy Trường Sơn nằm ở xã Hoà Ninh, Huyện Hòa Vang, cách trung tâm Đà Nẵng khoảng 25km về phía Tây Nam. Toàn bộ quần thể du lịch nghỉ dưỡng nằm trên đỉnh Núi Chúa có độ cao 1489 m so với mực nước biển.','POST',1,0,0,0,0,0,'2022-10-11 11:32:05'),(9,'Công viên văn hóa Suối Tiên','Khu Du lịch Văn hóa Suối Tiên là một công viên liên hợp vui chơi giải trí kết hợp truyền thống các yếu tố văn hóa - lịch sử - tâm linh. Tọa lạc tại 120 Xa lộ Hà Nội, Phường Tân Phú, Thành phố Thủ Đức, Thành phố Hồ Chí Minh.','POST',1,0,0,0,0,0,'2022-10-11 11:32:05'),(19,'Bai Dinh Hotel','http://www.baidinhhotel.com/','POST',1,1,0,2,0,0,'2022-10-17 10:25:45'),(20,'Bai Dinh Garden Resort & Spa Ninh Binh','http://baidinhgardenresort.com/','POST',1,1,0,0,0,0,'2022-10-17 10:25:45'),(21,'Ninh Bình Mountain','N/A','POST',1,1,0,0,0,0,'2022-10-17 10:25:45'),(22,'Dinh Độc Lập','Dinh Độc Lập hay Hội trường Thống Nhất là một công trình kiến trúc, tòa nhà ở Thành phố Hồ Chí Minh. Đây từng là nơi ở và làm việc của Tổng thống Việt Nam Cộng hòa. Hiện nay, dinh đã được Chính phủ Việt Nam xếp hạng là di tích quốc gia đặc biệt.','POST',1,0,0,0,0,0,'2022-10-18 10:40:51'),(23,'Địa đạo Củ Chi','Địa đạo Củ Chi là một hệ thống phòng thủ trong lòng đất ở huyện Củ Chi, cách Thành phố Hồ Chí Minh 70 km về hướng tây-bắc. Hệ thống này được quân kháng chiến Việt Minh và Mặt trận Dân tộc Giải phóng miền Nam Việt Nam đào trong thời kỳ Chiến tranh Đông Dương và Chiến tranh Việt Nam','POST',1,0,0,0,0,0,'2022-10-18 10:40:51'),(24,'Khu triển lãm tranh 3D Artinus','Artinus 3D Art Gallery là bảo tàng mỹ thuật kinh doanh xoay quanh chủ đề vật thể 3 chiều Object và 3D painting xuất hiện lần đầu tiên tại Việt Nam. Đến với Artinus các bạn sẽ được trải nghiệm tham quan và lưu giữ những khoảnh khắc độc đáo. Đắm chìm vào thế giới ảo giác như hội họa, lập thể, nội thất… với từng cung bậc cảm xúc lúc trầm, lúc bổng, lúc sợ hãi và đầy kinh ngạc không thua kém các bảo tàng tranh 3D nổi tiếng trên thế giới.','POST',1,0,0,0,0,0,'2022-10-18 10:40:51'),(25,'Công viên nước Đầm Sen','Công viên nước Đầm Sen ra đời từ năm 1998, trở thành điểm đến quen thuộc của người dân địa phương và các tỉnh, thành phía Nam khi đặt chân đến TP.HCM. Bên cạnh khu công viên nước là khu vực công viên văn hóa Đầm Sen (hay còn gọi là Đầm Sen khô) tạo nên một quần thể giải trí lên gần 50 ha với gần 40 trò chơi cho cả nhà.\r\n\r\nMặc dù ra đời đã lâu nhưng đây vẫn là công viên nước giải trí hầu như duy nhất tại trung tâm TP.HCM. Vì vậy mỗi dịp cuối tuần hay vào hè, đây là một trong những điểm \"hot\" khi các gia đình đưa con em đến vui chơi, giải trí. ','POST',1,0,0,0,0,0,'2022-10-18 10:40:51'),(29,'Lien An Saigon Hotel','http://www.lienansaigonhotel.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(30,'Renaissance Riverside Sài Gòn','https://www.marriott.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(31,'Khách sạn Cochin Zen','http://cochinsaigonhotels.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(32,'Central Palace Hotel Saigon','http://www.centralpalacesaigon.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(33,'Bảo Sang Motel','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(34,'Anh Việt Motel','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(35,'Bin Bin Hotel 4','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(36,'Bin Bin Hotel 2','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(37,'Bin Bin Hotel 7','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(38,'Eva Adam Hotel','http://evaadamhotel.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(39,'Linh Đan Hotel','https://linhdanhotel.business.site/?utm_source=gmb&utm_medium=referral','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(40,'Như Quỳnh Hotel','N/A','POST',1,1,0,0,0,0,'2022-10-18 10:44:04'),(41,'Brown Bean Hotel','https://www.booking.com/hotel/vn/brown-bean-da-nang.vi.html','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(42,'Origo Hotel','http://origohotel.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(43,'Minh Toàn Galaxy Hotel','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(44,'The Blossom Resort Đà Nẵng','https://www.theblossomhotels.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(45,'Mercure French Village Bana Hills 1','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(46,'Mercure French Village Bana Hills 7','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(47,'Hồng Gấm Motel','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(48,'Homstay Hải Đăng','N/A','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(49,'Hoa Lan Homestay','http://dili.com.vn/','POST',1,1,0,0,0,0,'2022-10-18 10:44:04'),(50,'Quynh Mai Homestay','https://www.facebook.com/Nhanghibabe?ref=hl','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(51,'Chi Hòa Homestay','https://www.fb.com/chi.nongnguyen','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(52,'New World Saigon Hotel','https://saigon.newworldhotels.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(53,'Alagon Plus Hotel & Spa',NULL,'POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(54,'Paradise Saigon Boutique Hotel & Spa','http://www.paradisesaigonhotel.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(55,'A&Em Art Hotel','https://www.a-emhotels.com/en/hotels/aem-art-hotel-in-ho-chi-minh/?partner=7280&utm_source=google&utm_medium=gmb&utm_campaign=web_link','POST',1,0,0,0,0,0,'2022-10-18 10:44:04'),(56,'WINSUITES SAIGON - LUXURY BOUTIQUE HOTEL','http://www.winsuitessaigon.com/','POST',1,0,0,0,0,0,'2022-10-18 10:44:04');
+INSERT INTO `post` VALUES (1,'Chùa Bái Đính - Tràng An','Tràng An là một khu du lịch sinh thái nằm trong Quần thể di sản thế giới Tràng An thuộc tỉnh Ninh Bình. Nơi đây đã được Chính phủ Việt Nam xếp hạng di tích quốc gia đặc biệt quan trọng và UNESCO công nhận là di sản thế giới kép từ năm 2014. Liên khu danh thắng Tràng An – Tam Cốc - Bích Động – cố đô Hoa Lư – rừng đặc dụng Hoa Lư hiện được quy hoạch chung vào Quần thể danh thắng Tràng An, trở thành di sản thế giới kép đầu tiên ở Việt Nam với những giá trị nổi bật về cảnh quan thiên nhiên, lịch sử văn hóa và kiến tạo địa chất và cũng là địa danh được đầu tư để trở thành một khu du lịch tầm cỡ quốc tế.','POST',1,2,0,3,3.5,0,1,'2022-10-11 11:32:05'),(2,'Vườn quốc gia Ba Bể','Vườn quốc gia Ba Bể là một vườn quốc gia, rừng đặc dụng, khu du lịch sinh thái của Việt Nam, nằm trên địa phận tỉnh Bắc Kạn, với trung tâm là hồ Ba Bể. Vườn quốc gia Ba Bể được thành lập theo Quyết định số 83/TTg ngày 10 tháng 11 năm năm 1992 của Thủ tướng Chính phủ','POST',1,1,1,16,4,0,1,'2022-10-11 11:32:05'),(3,'Vườn Quốc Gia Cúc Phương','Vườn Quốc gia Cúc Phương là một khu bảo tồn thiên nhiên, khu rừng đặc dụng nằm trên địa phận ranh giới 3 khu vực Tây Bắc Bộ, đồng bằng sông Hồng và Bắc Trung Bộ thuộc 3 tỉnh: Ninh Bình, Hòa Bình, Thanh Hóa. Vườn quốc gia này có hệ động thực vật phong phú đa dạng mang đặc trưng rừng mưa nhiệt đới.','POST',1,1,0,0,0,0,1,'2022-10-11 11:32:05'),(4,'Chợ Bến Thành','Chợ Bến Thành là một ngôi chợ nằm tại quận 1, Thành phố Hồ Chí Minh. Chợ được khởi công xây dựng từ năm 1912, hình ảnh đồng hồ ở cửa nam của ngôi chợ này được xem là biểu tượng không chính thức của Thành phố Hồ Chí Minh.','POST',1,1,0,0,0,0,0,'2022-10-11 11:32:05'),(5,'Nhà thờ Đức Bà','Nhà thờ chính tòa Đức Bà Sài Gòn, thường được gọi tắt là Nhà thờ Đức Bà, là nhà thờ chính tòa của Tổng giáo phận Thành phố Hồ Chí Minh','POST',1,1,0,1,0,0,0,'2022-10-11 11:32:05'),(6,'Legacy Yên Tử','Legacy Yên Tử được tọa lạc tại khu di tích và danh thắng Yên Tử, TP Uông Bí, Quảng Ninh – nơi được mệnh danh là cái nôi của Phật giáo Việt Nam, điểm đến lý tưởng để du lịch tâm linh.','POST',1,0,0,0,0,0,0,'2022-10-11 11:32:05'),(7,'Asia Park - Công viên Châu Á','Công viên giải trí có vòng đu quay khổng lồ & trò tàu lượn khác và khu vực vui chơi theo chủ đề các nước Châu Á.','POST',1,0,0,0,0,0,0,'2022-10-11 11:32:05'),(8,'Bà Nà Hill','Bà Nà là quần thể du lịch nghỉ dưỡng toạ lạc tại khu vực thuộc dãy Trường Sơn nằm ở xã Hoà Ninh, Huyện Hòa Vang, cách trung tâm Đà Nẵng khoảng 25km về phía Tây Nam. Toàn bộ quần thể du lịch nghỉ dưỡng nằm trên đỉnh Núi Chúa có độ cao 1489 m so với mực nước biển.','POST',1,0,0,0,0,0,0,'2022-10-11 11:32:05'),(9,'Công viên văn hóa Suối Tiên','Khu Du lịch Văn hóa Suối Tiên là một công viên liên hợp vui chơi giải trí kết hợp truyền thống các yếu tố văn hóa - lịch sử - tâm linh. Tọa lạc tại 120 Xa lộ Hà Nội, Phường Tân Phú, Thành phố Thủ Đức, Thành phố Hồ Chí Minh.','POST',1,0,0,0,0,0,0,'2022-10-11 11:32:05'),(19,'Bai Dinh Hotel','http://www.baidinhhotel.com/','POST',1,1,0,2,0,0,0,'2022-10-17 10:25:45'),(20,'Bai Dinh Garden Resort & Spa Ninh Binh','http://baidinhgardenresort.com/','POST',1,1,0,0,0,0,0,'2022-10-17 10:25:45'),(21,'Ninh Bình Mountain','N/A','POST',1,1,0,0,0,0,0,'2022-10-17 10:25:45'),(22,'Dinh Độc Lập','Dinh Độc Lập hay Hội trường Thống Nhất là một công trình kiến trúc, tòa nhà ở Thành phố Hồ Chí Minh. Đây từng là nơi ở và làm việc của Tổng thống Việt Nam Cộng hòa. Hiện nay, dinh đã được Chính phủ Việt Nam xếp hạng là di tích quốc gia đặc biệt.','POST',1,0,0,0,0,0,0,'2022-10-18 10:40:51'),(23,'Địa đạo Củ Chi','Địa đạo Củ Chi là một hệ thống phòng thủ trong lòng đất ở huyện Củ Chi, cách Thành phố Hồ Chí Minh 70 km về hướng tây-bắc. Hệ thống này được quân kháng chiến Việt Minh và Mặt trận Dân tộc Giải phóng miền Nam Việt Nam đào trong thời kỳ Chiến tranh Đông Dương và Chiến tranh Việt Nam','POST',1,0,0,0,0,0,0,'2022-10-18 10:40:51'),(24,'Khu triển lãm tranh 3D Artinus','Artinus 3D Art Gallery là bảo tàng mỹ thuật kinh doanh xoay quanh chủ đề vật thể 3 chiều Object và 3D painting xuất hiện lần đầu tiên tại Việt Nam. Đến với Artinus các bạn sẽ được trải nghiệm tham quan và lưu giữ những khoảnh khắc độc đáo. Đắm chìm vào thế giới ảo giác như hội họa, lập thể, nội thất… với từng cung bậc cảm xúc lúc trầm, lúc bổng, lúc sợ hãi và đầy kinh ngạc không thua kém các bảo tàng tranh 3D nổi tiếng trên thế giới.','POST',1,0,0,0,0,0,0,'2022-10-18 10:40:51'),(25,'Công viên nước Đầm Sen','Công viên nước Đầm Sen ra đời từ năm 1998, trở thành điểm đến quen thuộc của người dân địa phương và các tỉnh, thành phía Nam khi đặt chân đến TP.HCM. Bên cạnh khu công viên nước là khu vực công viên văn hóa Đầm Sen (hay còn gọi là Đầm Sen khô) tạo nên một quần thể giải trí lên gần 50 ha với gần 40 trò chơi cho cả nhà.\r\n\r\nMặc dù ra đời đã lâu nhưng đây vẫn là công viên nước giải trí hầu như duy nhất tại trung tâm TP.HCM. Vì vậy mỗi dịp cuối tuần hay vào hè, đây là một trong những điểm \"hot\" khi các gia đình đưa con em đến vui chơi, giải trí. ','POST',1,0,0,0,0,0,0,'2022-10-18 10:40:51'),(29,'Lien An Saigon Hotel','http://www.lienansaigonhotel.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(30,'Renaissance Riverside Sài Gòn','https://www.marriott.com/','POST',1,1,0,0,0,0,0,'2022-10-18 10:44:04'),(31,'Khách sạn Cochin Zen','http://cochinsaigonhotels.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(32,'Central Palace Hotel Saigon','http://www.centralpalacesaigon.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(33,'Bảo Sang Motel','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(34,'Anh Việt Motel','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(35,'Bin Bin Hotel 4','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(36,'Bin Bin Hotel 2','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(37,'Bin Bin Hotel 7','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(38,'Eva Adam Hotel','http://evaadamhotel.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(39,'Linh Đan Hotel','https://linhdanhotel.business.site/?utm_source=gmb&utm_medium=referral','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(40,'Như Quỳnh Hotel','N/A','POST',1,1,0,0,0,0,0,'2022-10-18 10:44:04'),(41,'Brown Bean Hotel','https://www.booking.com/hotel/vn/brown-bean-da-nang.vi.html','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(42,'Origo Hotel','http://origohotel.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(43,'Minh Toàn Galaxy Hotel','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(44,'The Blossom Resort Đà Nẵng','https://www.theblossomhotels.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(45,'Mercure French Village Bana Hills 1','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(46,'Mercure French Village Bana Hills 7','N/A','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(47,'Hồng Gấm Motel','N/A','POST',1,1,0,1,0,0,0,'2022-10-18 10:44:04'),(48,'Homstay Hải Đăng','N/A','POST',1,1,0,0,0,0,0,'2022-10-18 10:44:04'),(49,'Hoa Lan Homestay','http://dili.com.vn/','POST',1,1,0,0,0,0,0,'2022-10-18 10:44:04'),(50,'Quynh Mai Homestay','https://www.facebook.com/Nhanghibabe?ref=hl','POST',1,1,0,0,0,0,0,'2022-10-18 10:44:04'),(51,'Chi Hòa Homestay','https://www.fb.com/chi.nongnguyen','POST',1,1,0,0,0,0,0,'2022-10-18 10:44:04'),(52,'New World Saigon Hotel','https://saigon.newworldhotels.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(53,'Alagon Plus Hotel & Spa',NULL,'POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(54,'Paradise Saigon Boutique Hotel & Spa','http://www.paradisesaigonhotel.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(55,'A&Em Art Hotel','https://www.a-emhotels.com/en/hotels/aem-art-hotel-in-ho-chi-minh/?partner=7280&utm_source=google&utm_medium=gmb&utm_campaign=web_link','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04'),(56,'WINSUITES SAIGON - LUXURY BOUTIQUE HOTEL','http://www.winsuitessaigon.com/','POST',1,0,0,0,0,0,0,'2022-10-18 10:44:04');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +234,7 @@ CREATE TABLE `post_media` (
   `id_media` int(11) NOT NULL,
   `flag` char(254) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -258,7 +262,7 @@ CREATE TABLE `post_user` (
   `is_like` int(11) DEFAULT NULL,
   `rate` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +271,7 @@ CREATE TABLE `post_user` (
 
 LOCK TABLES `post_user` WRITE;
 /*!40000 ALTER TABLE `post_user` DISABLE KEYS */;
-INSERT INTO `post_user` VALUES (4,1,1,1,0,3),(5,1,5,1,0,0),(6,2,1,1,0,4),(7,1,2,1,0,4),(8,1,3,1,0,0),(9,1,19,1,0,0),(10,1,21,1,0,0),(11,1,20,1,0,0),(12,1,4,1,0,0),(13,1,49,1,0,0),(14,1,40,1,0,0);
+INSERT INTO `post_user` VALUES (4,1,1,1,0,3),(5,1,5,1,0,0),(6,2,1,1,0,4),(7,1,2,1,0,4),(8,1,3,1,0,0),(9,1,19,1,0,0),(10,1,21,1,0,0),(11,1,20,1,0,0),(12,1,4,1,0,0),(13,1,49,1,0,0),(14,1,40,1,0,0),(15,1,50,1,0,0),(16,1,30,1,0,0),(17,1,48,1,0,0),(18,1,51,1,0,0),(19,1,47,1,0,0);
 /*!40000 ALTER TABLE `post_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +286,7 @@ CREATE TABLE `tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(254) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -309,7 +313,7 @@ CREATE TABLE `travel` (
   `name` varchar(254) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `id_location` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -338,7 +342,7 @@ CREATE TABLE `travel_meta` (
   `name` text NOT NULL,
   `value` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -420,7 +424,7 @@ CREATE TABLE `user` (
   `birth` date DEFAULT NULL,
   `gender` int(11) DEFAULT NULL,
   `role` varchar(254) DEFAULT 'USER',
-  `created_date` varchar(254) DEFAULT NULL,
+  `created_date` varchar(254) NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
@@ -450,7 +454,7 @@ CREATE TABLE `user_meta` (
   `name` text DEFAULT NULL,
   `value` text DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
+  `created_date` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -488,6 +492,40 @@ LOCK TABLES `user_tag` WRITE;
 INSERT INTO `user_tag` VALUES (2,1,1);
 /*!40000 ALTER TABLE `user_tag` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'travel_blog'
+--
+/*!50003 DROP FUNCTION IF EXISTS `DISTANCE` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `DISTANCE`(lat1 DOUBLE, lon1 DOUBLE, lat2 DOUBLE, lon2 DOUBLE) RETURNS double
+BEGIN
+	DECLARE distance DOUBLE;
+	SET distance = 6366 * 2 *
+    atan2(
+      sqrt(
+        SIN((RADIANS(lat1) - RADIANS(lat2)) / 2) * SIN((RADIANS(lat1) - RADIANS(lat2)) / 2) + COS(RADIANS(lat2)) * COS(RADIANS(lat1)) * SIN((RADIANS(lon1) - RADIANS(lon2)) / 2) * SIN((RADIANS(lon1) - RADIANS(lon2)) / 2)    
+      ),
+      sqrt(
+        1 - SIN((RADIANS(lat1) - RADIANS(lat2)) / 2) * SIN((RADIANS(lat1) - RADIANS(lat2)) / 2) + COS(RADIANS(lat2)) * COS(RADIANS(lat1)) * SIN((RADIANS(lon1) - RADIANS(lon2)) / 2) * SIN((RADIANS(lon1) - RADIANS(lon2)) / 2)
+      )
+    );
+	
+	RETURN distance;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -498,4 +536,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-18 13:38:35
+-- Dump completed on 2022-10-29  8:44:52

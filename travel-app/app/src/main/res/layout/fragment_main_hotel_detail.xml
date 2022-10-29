@@ -264,6 +264,7 @@
             android:textSize="@dimen/ico_big_large" />
 
         <com.travel.app.common.view.icon.TextViewAwsRe
+            android:id="@+id/twa_star_5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
