@@ -2,6 +2,7 @@ package com.travel.server.controller;
 
 import com.travel.server.common.response.ApiResponse;
 import com.travel.server.config.security.JwtUserDetailsService;
+import com.travel.server.service.IFirebaseService;
 import com.travel.server.service.ILocationService;
 import com.travel.server.service.ITravelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ApiController {
     @Autowired
     private ILocationService locationService;
 
+    @Autowired
+    private IFirebaseService firebaseService;
+
     @GetMapping("/user/travel/hobbies")
     public ApiResponse<?> travelHobbies(){
         return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", travelService.getTravelHobbies());
@@ -35,6 +39,13 @@ public class ApiController {
     @GetMapping("/location")
     public ApiResponse<?> location(){
         return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", locationService.getDistinct());
+    }
+
+    @PostMapping("/mess/test")
+    public ApiResponse<?> messTest(@RequestParam("access_token") String accessToken){
+        String deviceId = "eKDlkgrJUT0:APA91bF4sBOuH1WOzNwUcLNrrT2OUMSuHlt7oiLQw25-QdfCa6hfGkCNYTKqLo4sUGC_RC1VCsB543uYAdH9zmMcZiJidKVXzEmUs120CdGNZvNqyqjWSRgzl2CboUCp8DI5BZmqs6jP";
+        System.out.println("accessToken: "+accessToken);
+        return ApiResponse.of(HttpStatus.OK, ApiResponse.Code.SUCCESS, "Load data successful", firebaseService.sendAccessToken(deviceId, accessToken));
     }
 
     /**

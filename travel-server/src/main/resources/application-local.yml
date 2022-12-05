@@ -37,3 +37,7 @@ logging:
 
 jwt:
   secret: travel-blog
+
+firebase:
+  api: https://fcm.googleapis.com/fcm/send
+  key: AAAA782Bqpo:APA91bFzRzSwxyEBUHavVGmetCnneQg95o13-urr92y5pW2ZpbQylhXLXSGW3CXRFb50Mm4a4X-RJI1AKBlYOleuEIQk3PWe6N84a1F0-dMDyzRH38qgC9QPFmZmFVfO3CblDJiooNL6

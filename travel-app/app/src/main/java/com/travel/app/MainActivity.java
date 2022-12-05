@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.FileUtils;
 import com.travel.app.common.utils.IntentUtils;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         this.homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         this.toolbar = new MyToolbar(this);
         this.dialogMainMenu = new DialogMainMenu(this);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->{
+            Log.i(TAG, "Device token id: "+instanceIdResult.getToken());
+        });
     }
 
     private void actionView(){
@@ -166,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             Log.i("FrMainSetting", "Selected File Path:" + selectedFilePath);
             if(fragmentTarget == null) return;
             if(fragmentTarget instanceof FragmentMainTravelDetail){
-                ((FragmentMainTravelDetail) fragmentTarget).setAttachFile(selectedFilePath);
+                    ((FragmentMainTravelDetail) fragmentTarget).setAttachFile(selectedFilePath);
             } else if(fragmentTarget instanceof FragmentMainHotelDetail){
                 ((FragmentMainHotelDetail) fragmentTarget).setAttachFile(selectedFilePath);
             }
