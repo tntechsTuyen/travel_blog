@@ -11,13 +11,15 @@ public class User {
     private String fullName;
     private String phone;
     private String email;
+    private String deviceId;
 
     public User() {
     }
 
-    public User(String username, String password){
+    public User(String username, String password, String deviceId){
         this.username = username;
         this.password = password;
+        this.deviceId = deviceId;
     }
 
     public User(Integer id, String username, String password, String fullName, String phone, String email) {

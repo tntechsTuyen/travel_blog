@@ -14,7 +14,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model){
-        mailService.sendMail();
+//        mailService.sendMail();
         return "index";
     }
 

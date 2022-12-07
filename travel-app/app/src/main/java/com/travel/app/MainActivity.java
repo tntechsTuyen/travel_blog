@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.FileUtils;
 import com.travel.app.common.utils.IntentUtils;
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         this.homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         this.toolbar = new MyToolbar(this);
         this.dialogMainMenu = new DialogMainMenu(this);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult ->{
+            SessionUtils.set(this, DataStatic.SESSION.KEY.DEVICE_ID, instanceIdResult.getToken());
+        });
     }
 
     private void actionView(){

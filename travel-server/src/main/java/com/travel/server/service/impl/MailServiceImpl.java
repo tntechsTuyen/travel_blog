@@ -13,12 +13,12 @@ public class MailServiceImpl implements IMailService {
     private JavaMailSender emailSender;
 
     @Override
-    public void sendMail() {
+    public void sendMail(String to, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("tuyen.cntt.k13a@gmail.com");
-        message.setTo("tuyen.vietko.soft@gmail.com");
-        message.setSubject("Test subject");
-        message.setText("New request");
+        message.setTo(to);
+        message.setSubject("[NO REPLY] Authorization Verify");
+        message.setText(content);
         emailSender.send(message);
     }
 }

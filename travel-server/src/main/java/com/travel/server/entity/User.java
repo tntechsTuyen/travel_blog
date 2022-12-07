@@ -4,13 +4,7 @@ import com.travel.server.common.utils.CryptoUtils;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.persistence.*;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 @Data
@@ -50,6 +44,9 @@ public class User {
     @CreationTimestamp
     @Column(name = "created_date", updatable = false)
     private Date createdDate;
+
+    @Transient
+    private String deviceId = "";
 
     public void encryptData(User user){
         try {
