@@ -49,7 +49,18 @@ public class JwtUserDetailsService implements UserDetailsService {
 				.getPrincipal();
 		String username = userDetails.getUsername();
 		User userLogin = userRepository.findByUsername(username);
+		userLogin.decryptData();
 		userLogin.setPassword("");
+		return userLogin;
+	}
+
+	public User updateUser(User user){
+		User userLogin = getUserLogin();
+		if(user.getPassword() != null && user.getPassword().trim().length() > 0){
+			userLogin.setPassword(CryptoUtils.BCrypt(user.getPassword()));
+		}
+		userLogin.encryptData(user);
+		userRepository.save(userLogin);
 		return userLogin;
 	}
 }

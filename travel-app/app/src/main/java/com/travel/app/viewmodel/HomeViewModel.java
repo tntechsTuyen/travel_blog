@@ -98,7 +98,8 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
     public void postComment(String token, Comment comment, String partFile, Fragment fragment){
-        this.postRepository.postComment(token, comment, partFile, fragment);
+        if(partFile != null && partFile.trim().length() > 0) this.postRepository.postComment(token, comment, partFile, fragment);
+        else this.postRepository.postComment(token, comment, fragment);
     }
 
     public LiveData<ApiResponse<PostUser>> postLike(String token, PostUser postUser){

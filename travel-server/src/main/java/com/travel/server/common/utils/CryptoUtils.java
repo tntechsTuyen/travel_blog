@@ -1,9 +1,14 @@
 package com.travel.server.common.utils;
 
+import org.apache.commons.codec.binary.Hex;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.crypto.*;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
+import java.security.*;
+import java.util.Base64;
 
 /**
  * @author ionio.dev
@@ -33,5 +38,30 @@ public class CryptoUtils {
     public static String BCrypt(String str){
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(str);
+    }
+
+    public static class AES{
+        public static String encrypt(String input) throws Exception {
+            String key = "bad8deadcafef00d";
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+
+            byte[] original = cipher
+                    .doFinal(Base64.getDecoder().decode(input.getBytes()));
+            return new String(original).trim();
+        }
+
+        public static String decrypt(String data) throws Exception{
+            String key = "bad8deadcafef00d";
+            SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+
+            cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
+
+            byte[] original = Base64.getEncoder().encode(cipher.doFinal(data.getBytes()));
+            return new String(original);
+        }
     }
 }

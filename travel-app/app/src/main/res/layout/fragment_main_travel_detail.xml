@@ -314,7 +314,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ll_attach_file">
 
         <EditText
-            android:id="@+id/et_cmt"
+            android:id="@+id/et_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="10"
@@ -338,7 +338,7 @@
             android:textSize="15sp" />
 
         <com.travel.app.common.view.icon.TextViewAwsSo
-            android:id="@+id/btn_send_cmt"
+            android:id="@+id/btn_search"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"

@@ -9,7 +9,7 @@
     android:background="@drawable/bg_dialog_main_menu_item">
 
     <Button
-        android:id="@+id/btn_send_cmt"
+        android:id="@+id/btn_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#dfdfdf"
-        app:layout_constraintTop_toBottomOf="@+id/btn_send_cmt"
+        app:layout_constraintTop_toBottomOf="@+id/btn_search"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -52,6 +52,27 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        android:id="@+id/btn_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="Thông tin cá nhân"
+        android:textAllCaps="false"
+        android:textColor="#333333"
+        android:textSize="@dimen/text_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#dfdfdf"
+        app:layout_constraintTop_toBottomOf="@+id/btn_profile"
+        tools:ignore="MissingConstraints" />
+
+    <Button
         android:id="@+id/btn_sign_in"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,7 +83,7 @@
         android:textSize="@dimen/text_normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line2" />
+        app:layout_constraintTop_toBottomOf="@+id/line4" />
 
     <View
         android:id="@+id/line3"

@@ -63,14 +63,19 @@ public class PostRepository {
         });
         return data;
     }
-    /*
-    public LiveData<ApiResponse<Comment>> postComment(String token, Comment comment, MultipartBody.Part partFile){
+
+    public LiveData<ApiResponse<Comment>> postComment(String token, Comment comment, Fragment fragment){
         MutableLiveData<ApiResponse<Comment>> data = new MutableLiveData<>();
         token = (token != null & token.trim().length() > 0) ? "Bearer ".concat(token).replaceAll("\"", "") : "";
-        postRequest.postComment(token, comment.getIdPost(), comment.getIdParent(), comment.getContent(), partFile).enqueue(new Callback<ApiResponse<Comment>>() {
+        postRequest.postComment(token, comment.getIdPost(), comment.getIdParent(), comment.getContent()).enqueue(new Callback<ApiResponse<Comment>>() {
             @Override
             public void onResponse(Call<ApiResponse<Comment>> call, Response<ApiResponse<Comment>> response) {
                 data.setValue(RestUtils.get(response));
+                if(fragment instanceof FragmentMainTravelDetail){
+                    ((FragmentMainTravelDetail) fragment).loadComment();
+                }else if(fragment instanceof FragmentMainHotelDetail){
+                    ((FragmentMainHotelDetail) fragment).loadComment();
+                }
             }
 
             @Override
@@ -80,7 +85,7 @@ public class PostRepository {
         });
         return data;
     }
-    */
+
 
     public void postComment(String token, Comment comment, String path, Fragment fragment){
         try{
@@ -89,7 +94,9 @@ public class PostRepository {
             up.addParameter("id_post", comment.getIdPost()+"");
             up.addParameter("id_parent", comment.getIdParent()+"");
             up.addParameter("content", comment.getContent());
-            if(path != null && path.length() > 0) up.addFileToUpload(path, "file");
+            if(path != null && !path.equals("") && path.trim().length() > 0){
+                up.addFileToUpload(path, "file");
+            }
 
             up.setUtf8Charset();
             up.addHeader("Authorization", String.format("Bearer %s", token).replaceAll("\"", ""));
@@ -130,6 +137,7 @@ public class PostRepository {
             });
             up.setMaxRetries(2);
             up.startUpload();
+
         }catch (Exception e){
             e.printStackTrace();
         }

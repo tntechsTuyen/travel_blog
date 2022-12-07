@@ -63,4 +63,38 @@ public class UserRepository {
         return data;
     }
 
+    public LiveData<ApiResponse<User>> info(String token){
+        token = "Bearer ".concat(token).replaceAll("\"", "");
+        MutableLiveData<ApiResponse<User>> data = new MutableLiveData<>();
+        this.authRequest.userInfo(token).enqueue(new Callback<ApiResponse<User>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                data.setValue(RestUtils.get(response));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+
+            }
+        });
+        return data;
+    }
+
+    public LiveData<ApiResponse<User>> update(String token, User user){
+        token = "Bearer ".concat(token).replaceAll("\"", "");
+        MutableLiveData<ApiResponse<User>> data = new MutableLiveData<>();
+        this.authRequest.userUpdate(token, user).enqueue(new Callback<ApiResponse<User>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                data.setValue(RestUtils.get(response));
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+
+            }
+        });
+        return data;
+    }
+
 }

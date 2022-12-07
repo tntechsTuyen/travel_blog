@@ -19,4 +19,10 @@ public interface AuthRequest {
 
     @POST("register")
     Call<ApiResponse<User>> register(@Body User user);
+
+    @GET("api/auth/info")
+    Call<ApiResponse<User>> userInfo(@Header("Authorization") String token);
+
+    @POST("api/auth/update")
+    Call<ApiResponse<User>> userUpdate(@Header("Authorization") String token, @Body User user);
 }

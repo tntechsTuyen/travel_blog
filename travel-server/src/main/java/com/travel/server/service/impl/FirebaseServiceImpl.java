@@ -22,7 +22,6 @@ public class FirebaseServiceImpl implements IFirebaseService {
         firebaseMessageDTO.setTo(deviceTokenId);
         firebaseMessageDTO.getData().setAccessToken(accessToken);
         String result = httpRequestService.post(api, firebaseMessageDTO);
-        System.out.println("Result Firebase Api: "+result);
         return result;
     }
 }

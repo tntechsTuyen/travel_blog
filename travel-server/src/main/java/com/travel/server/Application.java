@@ -1,6 +1,8 @@
 package com.travel.server;
 
+import com.travel.server.service.IMailService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,6 +17,9 @@ import java.util.TimeZone;
 @RestController
 public class Application extends SpringBootServletInitializer implements CommandLineRunner {
 
+    @Autowired
+    private IMailService mailService;
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
@@ -26,6 +31,7 @@ public class Application extends SpringBootServletInitializer implements Command
 
     @Override
     public void run(String... args) throws Exception {
+        mailService.sendMail();
     }
 
 }

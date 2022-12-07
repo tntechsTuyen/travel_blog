@@ -4,12 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,13 +26,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.travel.app.MainActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
-import com.travel.app.common.utils.FileUtils;
 import com.travel.app.common.utils.ImageUtils;
 import com.travel.app.common.utils.IntentUtils;
 import com.travel.app.common.utils.PermissionUtils;
 import com.travel.app.common.utils.SessionUtils;
 import com.travel.app.common.utils.StringUtils;
-import com.travel.app.common.utils.UriUtils;
 import com.travel.app.common.view.icon.TextViewAwsRe;
 import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.data.model.Comment;
@@ -49,15 +43,8 @@ import com.travel.app.view.adapter.AdapterTravelHotel;
 import com.travel.app.view.adapter.AdapterTravelMeta;
 import com.travel.app.view.dialog.DialogRate;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 @SuppressLint({"ValidFragment","NotifyDataSetChanged","SetTextI18n","NewApi", "DefaultLocale"})
 public class FragmentMainTravelDetail extends Fragment {
@@ -126,9 +113,9 @@ public class FragmentMainTravelDetail extends Fragment {
         this.tvAttachFile = this.view.findViewById(R.id.tv_attach_file);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
-        this.etCmt = this.view.findViewById(R.id.et_cmt);
+        this.etCmt = this.view.findViewById(R.id.et_username);
         this.btnFile = this.view.findViewById(R.id.btn_file);
-        this.btnSendCmt = this.view.findViewById(R.id.btn_send_cmt);
+        this.btnSendCmt = this.view.findViewById(R.id.btn_search);
         this.grAuth = this.view.findViewById(R.id.gr_auth);
         this.llRateView = this.view.findViewById(R.id.ll_rate_view);
         this.llAttachFile = this.view.findViewById(R.id.ll_attach_file);

@@ -1,8 +1,6 @@
 package com.travel.app.view.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -13,16 +11,16 @@ import android.widget.Toast;
 
 import com.travel.app.AuthActivity;
 import com.travel.app.MainActivity;
+import com.travel.app.ProfileActivity;
 import com.travel.app.R;
 import com.travel.app.common.DataStatic;
 import com.travel.app.common.utils.SessionUtils;
-import com.travel.app.view.fragment.FragmentMainTravelSearch;
 
 public class DialogMainMenu {
 
     private MainActivity context;
     private Dialog dialog;
-    private Button btnSearch, btnTagSetup, btnSignIn, btnSignOut;
+    private Button btnSearch, btnTagSetup, btnProfile, btnSignIn, btnSignOut;
 
     public DialogMainMenu(MainActivity context){
         this.context = context;
@@ -35,13 +33,20 @@ public class DialogMainMenu {
     }
 
     private void init(){
-        this.btnSearch = this.dialog.findViewById(R.id.btn_send_cmt);
+        this.btnSearch = this.dialog.findViewById(R.id.btn_search);
         this.btnTagSetup = this.dialog.findViewById(R.id.btn_tag_setup);
         this.btnSignIn = this.dialog.findViewById(R.id.btn_sign_in);
         this.btnSignOut = this.dialog.findViewById(R.id.btn_sign_out);
+        this.btnProfile = this.dialog.findViewById(R.id.btn_profile);
     }
 
     private void actionView(){
+        this.btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context.startActivity(new Intent(context, ProfileActivity.class));
+            }
+        });
         this.btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,10 +96,12 @@ public class DialogMainMenu {
         if(auth != null && auth.trim().length() > 0){
             this.btnTagSetup.setVisibility(View.VISIBLE);
             this.btnSignOut.setVisibility(View.VISIBLE);
+            this.btnProfile.setVisibility(View.VISIBLE);
             this.btnSignIn.setVisibility(View.GONE);
         }else{
             this.btnTagSetup.setVisibility(View.GONE);
             this.btnSignOut.setVisibility(View.GONE);
+            this.btnProfile.setVisibility(View.GONE);
             this.btnSignIn.setVisibility(View.VISIBLE);
         }
     }

@@ -24,9 +24,8 @@ public interface PostRequest {
     @GET("api/post/{id_post}/comments")
     Call<ApiResponse<List<Comment>>> getComments(@Path("id_post") Integer id);
 
-    @Multipart
     @POST("api/post/comment")
-    Call<ApiResponse<Comment>> postComment(@Header("Authorization") String token, @Query("id_post") Integer idPost, @Query("id_parent") Integer idParent, @Query("content") String content, @Part MultipartBody.Part file);
+    Call<ApiResponse<Comment>> postComment(@Header("Authorization") String token, @Query("id_post") Integer idPost, @Query("id_parent") Integer idParent, @Query("content") String content);
 
     @POST("api/post/like")
     Call<ApiResponse<PostUser>> postLike(@Header("Authorization") String token, @Body PostUser postUser);

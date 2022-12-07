@@ -30,25 +30,18 @@ import com.travel.app.common.utils.ImageUtils;
 import com.travel.app.common.utils.IntentUtils;
 import com.travel.app.common.utils.PermissionUtils;
 import com.travel.app.common.utils.SessionUtils;
-import com.travel.app.common.utils.UriUtils;
 import com.travel.app.common.view.icon.TextViewAwsRe;
 import com.travel.app.common.view.icon.TextViewAwsSo;
 import com.travel.app.data.model.Comment;
 import com.travel.app.data.model.Hotel;
 import com.travel.app.data.model.HotelMeta;
-import com.travel.app.data.model.Media;
 import com.travel.app.data.model.PostUser;
 import com.travel.app.view.adapter.AdapterComment;
 import com.travel.app.view.adapter.AdapterHotelMeta;
 import com.travel.app.view.dialog.DialogRate;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 @SuppressLint({"ValidFragment","NewApi"})
 public class FragmentMainHotelDetail extends Fragment {
@@ -110,8 +103,8 @@ public class FragmentMainHotelDetail extends Fragment {
         this.tvAttachFile = this.view.findViewById(R.id.tv_attach_file);
         this.btnGoMap = this.view.findViewById(R.id.btn_go_map);
         this.btnLike = this.view.findViewById(R.id.btn_like);
-        this.etCmt = this.view.findViewById(R.id.et_cmt);
-        this.btnSendCmt = this.view.findViewById(R.id.btn_send_cmt);
+        this.etCmt = this.view.findViewById(R.id.et_username);
+        this.btnSendCmt = this.view.findViewById(R.id.btn_search);
         this.btnFile = this.view.findViewById(R.id.btn_file);
         this.tvPhone = this.view.findViewById(R.id.tv_phone);
         this.tvWork = this.view.findViewById(R.id.tv_work);

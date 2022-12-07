@@ -42,7 +42,7 @@ public class FragmentSignUp extends Fragment {
     }
 
     public void init(){
-        this.etUsername = this.view.findViewById(R.id.et_cmt);
+        this.etUsername = this.view.findViewById(R.id.et_username);
         this.etPassword = this.view.findViewById(R.id.et_password);
         this.etRePassword = this.view.findViewById(R.id.et_re_password);
         this.etFullName = this.view.findViewById(R.id.et_full_name);
