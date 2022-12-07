@@ -38,7 +38,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 		//Encode password
 		mUser.setPassword(CryptoUtils.BCrypt(mUser.getPassword()));
-
+		mUser.encryptData(mUser);
 		//Save data
 		userRepository.save(mUser);
 		return mUser;

@@ -92,8 +92,8 @@ public class FragmentSignIn extends Fragment {
                 super.onAuthenticationFailed();
             }
         });
-        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("GFG")
-                .setDescription("Use your fingerprint to login ").setNegativeButtonText("Cancel").build();
+        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder().setTitle("Đăng nhập sinh trắc")
+                .setDescription("Sử dụng vân tay của bạn để đăng nhập").setNegativeButtonText("Hủy bỏ").build();
         ivFingerPrint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
